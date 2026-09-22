@@ -109,7 +109,7 @@ public class HeadToMatch : EventBase
         
         PlayerChar.Move(vec);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
 
         PlayerChar.StateMachine.Initialize(PlayerChar.IdleState); // enable movement
         

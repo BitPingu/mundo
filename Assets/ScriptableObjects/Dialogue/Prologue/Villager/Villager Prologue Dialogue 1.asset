@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Jordan
-    line: Mornin' Ely! You're lookin' tired. Sleep late?
+    line: Mornin', Ely! You're lookin' tired. Slept late?
     reaction: 
     choices: []
     redirectDialogueIndex: -1

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Alice
-    line: Hey, sleepy head! What kept you in?
+    line: Hey, sleepyhead! What kept you in?
     reaction: 
     choices: []
     redirectDialogueIndex: -1

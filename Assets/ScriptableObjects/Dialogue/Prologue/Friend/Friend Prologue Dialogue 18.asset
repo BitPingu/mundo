@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Alice
-    line: Looks like we've taken care of all the slimes in this area! Let's report
-      back to the chief.
+    line: Hm? What's that sound?
     reaction: 
     choices: []
     redirectDialogueIndex: -1

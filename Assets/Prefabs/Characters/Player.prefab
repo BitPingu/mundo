@@ -858,7 +858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charName: Ely
   _portraits:
-  - sprite: {fileID: 21300000, guid: bc736d0f683124dbf9a4d3d376a80e62, type: 3}
+  - sprite: {fileID: 21300000, guid: 6bdb489f06e8241b0af7c299c8c7d4c9, type: 3}
     reaction: 
   voiceSound: {fileID: 8300000, guid: fb638b115793a403a950f41ef22ee07e, type: 3}
   voicePitch: 0.4

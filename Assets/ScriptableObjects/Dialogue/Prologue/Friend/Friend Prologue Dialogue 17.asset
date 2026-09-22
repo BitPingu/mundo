@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Alice
-    line: Phew! That was a close one!
+    line: Phew, that was a close one!
     reaction: 
     choices: []
     redirectDialogueIndex: -1

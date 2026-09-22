@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Alice
-    line: Oh look! There's an enemy Slime!
+    line: Oh, look! There's an enemy slime!
     reaction: 
     choices: []
     redirectDialogueIndex: -1

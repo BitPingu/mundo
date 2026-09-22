@@ -14,18 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Mom
-    line: Morning dear! Did you sleep well?
+    line: Morning, dear! Did you sleep well?
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Mom
     line: Alice was just here looking for you. You have a sparring match with her
-      today right?
+      today, right?
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Mom
-    line: Just be careful okay? I don't want to see either of you getting hurt.
+    line: Just be careful, okay? I don't want to see either of you getting hurt.
     reaction: 
     choices: []
     redirectDialogueIndex: -1

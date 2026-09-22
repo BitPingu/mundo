@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Alice
-    line: Oh no! It's an ambush!
+    line: Oh no, it's an ambush!
     reaction: surprised
     choices: []
     redirectDialogueIndex: -1

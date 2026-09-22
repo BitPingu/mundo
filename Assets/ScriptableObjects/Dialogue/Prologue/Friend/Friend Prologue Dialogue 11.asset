@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Alice
-    line: We did it! Let's look around to see if there's anymore we can find.
+    line: We did it! Let's keep on going.
     reaction: 
     choices: []
     redirectDialogueIndex: -1

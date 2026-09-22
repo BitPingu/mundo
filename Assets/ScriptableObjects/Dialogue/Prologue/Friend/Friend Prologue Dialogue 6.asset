@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Alice
-    line: Wow Ely! I can't believe we were given our first assignment by the chief!
+    line: Wow, Ely! I can't believe we were given our first assignment by the chief!
     reaction: 
     choices: []
     redirectDialogueIndex: -1

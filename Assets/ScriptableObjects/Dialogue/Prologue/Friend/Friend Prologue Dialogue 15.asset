@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Alice
-    line: Oh look! A treasure chest!
+    line: Oh, look! A treasure chest!
     reaction: 
     choices: []
     redirectDialogueIndex: -1

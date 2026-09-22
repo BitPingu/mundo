@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Evelyn
-    line: Hi Ely! Beautiful day for your match today right?
+    line: Hi, Ely! Beautiful day for your match today, right?
     reaction: 
     choices: []
     redirectDialogueIndex: -1

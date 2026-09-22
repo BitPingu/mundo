@@ -29,18 +29,19 @@ MonoBehaviour:
     choices: []
     redirectDialogueIndex: -1
   - charName: Chief Vandham
-    line: With how many roaming around the area, it'll threaten the very safety of
-      our village.
+    line: With so many roaming around the area, they'll threaten the very safety
+      of our village.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Chief Vandham
-    line: I want you two to work together to take them out.
+    line: I want you two to investigate the forest and find out where they're coming
+      from.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Alice
-    line: Really chief? Are you sure? But why choose us?
+    line: Really, Chief? Are you sure? But why choose us?
     reaction: 
     choices: []
     redirectDialogueIndex: -1

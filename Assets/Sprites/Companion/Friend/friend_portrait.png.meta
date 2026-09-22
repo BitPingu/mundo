@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5dc42a9bc0d1a47089ebcb7d6a8fbf51
+guid: 1f5c3935b8a98445190d9c9148a34172
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2986548021365175387
-    second: fiona_portrait 1_0
+      213: -6625014952358948899
+    second: friend_portrait_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fiona_portrait 1_0
+      name: friend_portrait_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5ab02e1e566ad86d0800000000000000
-      internalID: -2986548021365175387
+      spriteID: ddf4efc60083f04a0800000000000000
+      internalID: -6625014952358948899
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      fiona_portrait 1_0: -2986548021365175387
+      friend_portrait_0: -6625014952358948899
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

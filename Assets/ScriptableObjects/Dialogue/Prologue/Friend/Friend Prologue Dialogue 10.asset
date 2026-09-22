@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Alice
-    line: What are you doing? We can't leave the slime here!
+    line: What are you doing? We can't let it get away!
     reaction: surprised
     choices: []
     redirectDialogueIndex: -1

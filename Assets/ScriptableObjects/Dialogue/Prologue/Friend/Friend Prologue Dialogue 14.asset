@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Alice
-    line: Oh! Level up! I'm feeling much stronger now!
+    line: Oh, level up! I'm feeling much stronger now!
     reaction: 
     choices: []
     redirectDialogueIndex: -1

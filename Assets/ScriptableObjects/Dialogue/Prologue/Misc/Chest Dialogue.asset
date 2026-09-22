@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: 
-    line: Obtained a potion.
+    line: Obtained a Potion.
     reaction: 
     choices: []
     redirectDialogueIndex: -1

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Billy
-    line: Good luck Ely!
+    line: Good luck, Ely!
     reaction: 
     choices: []
     redirectDialogueIndex: -1
