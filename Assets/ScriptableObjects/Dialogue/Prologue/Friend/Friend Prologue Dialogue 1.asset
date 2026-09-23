@@ -19,6 +19,11 @@ MonoBehaviour:
     choices: []
     redirectDialogueIndex: -1
   - charName: Alice
+    line: Did you forget? Our sparring match is today!
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Alice
     line: Let's hurry! We have to meet with the chief at the training grounds.
     reaction: 
     choices: []

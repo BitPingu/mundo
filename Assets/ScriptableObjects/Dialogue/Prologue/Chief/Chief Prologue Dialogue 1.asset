@@ -19,7 +19,7 @@ MonoBehaviour:
     choices: []
     redirectDialogueIndex: -1
   - charName: Chief Vandham
-    line: Let's see how much you two have improved.
+    line: I shall commence the sparring match between Ely and Alice.
     reaction: 
     choices: []
     redirectDialogueIndex: -1

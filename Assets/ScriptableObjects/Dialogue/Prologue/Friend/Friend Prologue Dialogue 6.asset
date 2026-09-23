@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Alice
-    line: Wow, Ely! I can't believe we were given our first assignment by the chief!
+    line: Wow, Ely! Our first mission!
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Alice
-    line: But before we head out, let's make sure to upgrade our equipment and rest.
+    line: But before we head out, let's make sure we are fully prepared.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
