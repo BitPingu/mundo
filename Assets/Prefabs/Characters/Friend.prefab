@@ -696,11 +696,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charName: Alice
   _portraits:
-  - sprite: {fileID: 21300000, guid: 1f5c3935b8a98445190d9c9148a34172, type: 3}
+  - sprite: {fileID: 21300000, guid: 367b383abb86a4777b787aceeafbf3af, type: 3}
     reaction: 
-  - sprite: {fileID: 21300000, guid: 9cbd722838a224dd1a54dfd9511fa8e0, type: 3}
+  - sprite: {fileID: 21300000, guid: 242d9ee763cb046a6b47ccef8a330900, type: 3}
     reaction: surprised
-  - sprite: {fileID: 21300000, guid: 1aec973db401c4397be69c6e3e4d4e03, type: 3}
+  - sprite: {fileID: 21300000, guid: 8917847ed41b54c2faeb769fea74c79f, type: 3}
     reaction: hurt
   voiceSound: {fileID: 8300000, guid: fb638b115793a403a950f41ef22ee07e, type: 3}
   voicePitch: 0.67
@@ -711,6 +711,7 @@ MonoBehaviour:
   MaxHealth: 20
   Strength: 4
   HBar: {fileID: 2643750145137607703}
+  target: {fileID: 0}
   _hitSound: {fileID: 8300000, guid: c9c39983af9d441278cf44370e151cf1, type: 3}
   _maxExp: 100
   EBar: {fileID: 8792345666785891725}

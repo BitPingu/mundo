@@ -99,14 +99,18 @@ public class PartyBase : FighterBase
         // call base class
         base.Damage(damageAmount);
 
-        if (CurrentHealth <= 0 && IsSparring)
+        if (CurrentHealth <= 0)
         {
-            StartCoroutine(Defeat());
+            if (IsSparring)
+                StartCoroutine(Defeat());
+            else
+                StartCoroutine(Die());
         }
     }
 
     public IEnumerator Defeat()
     {
+        // for sparring matches
         yield return new WaitForSeconds(1.5f);
         Anim.Rebind();
         Anim.enabled = false;
@@ -121,6 +125,17 @@ public class PartyBase : FighterBase
 
         string text = charName + " was defeated!";
         DialogueController.Instance.BattleDialogue(this, text, false);
+
+        // set dead anim
+        Anim.Rebind();
+        Anim.SetTrigger("Dead");
+
+        // Die
+        foreach (FighterBase ally in Allies)
+            ally.Allies.Remove(this);
+        CurrentOpponent.Opponents.Remove(this);
+        foreach (FighterBase opponent in CurrentOpponent.Allies)
+            opponent.Opponents.Remove(this);
     }
 
     public void GainExperience(int amount)

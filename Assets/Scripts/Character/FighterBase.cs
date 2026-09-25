@@ -109,18 +109,21 @@ public class FighterBase : CharacterBase
     {
         yield return new WaitForSeconds(1f);
 
-        if (GetComponent<PartyBase>() && CurrentOpponent.CurrentHealth == 0)
+        if (CurrentOpponent.CurrentHealth == 0)
         {
             yield return new WaitForSeconds(2f);
 
-            // exp
-            List<FighterBase> party = CurrentOpponent.Opponents;
-            foreach (PartyBase ally in party)
+            if (GetComponent<PartyBase>())
             {
-                ally.GainExperience(40);
-                yield return new WaitForSeconds(1.5f);
-                if (ally.LeveledUp)
+                // exp
+                List<FighterBase> party = CurrentOpponent.Opponents;
+                foreach (PartyBase ally in party)
+                {
+                    ally.GainExperience(40);
                     yield return new WaitForSeconds(1.5f);
+                    if (ally.LeveledUp)
+                        yield return new WaitForSeconds(1.5f);
+                }
             }
 
             if (CurrentOpponent.Allies.Count == 0)
