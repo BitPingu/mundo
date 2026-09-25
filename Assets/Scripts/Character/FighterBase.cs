@@ -26,6 +26,7 @@ public class FighterBase : CharacterBase
 
     // UI
     public Bar HBar;
+    public SpriteRenderer target;
 
     [SerializeField] private AudioClip _hitSound;
 
@@ -57,27 +58,64 @@ public class FighterBase : CharacterBase
             Move(Vector2.zero);
     }
 
-    protected virtual IEnumerator CallAttack()
+    protected virtual void CallAttack()
     {
         // battle dialogue
         string text = charName + " attacks " + CurrentOpponent.charName + "!";
         DialogueController.Instance.BattleDialogue(this, text, false);
 
         StartCoroutine(Attack());
+    }
 
-        yield return new WaitForSeconds(1.5f);
+    protected virtual IEnumerator Attack()
+    {
+        Vector3 attackDir = (CurrentOpponent.transform.position - transform.position).normalized;
+        Vector3 attackPos = CurrentOpponent.transform.position - (attackDir*1.5f);
+
+        IsAttacking = true;
+
+        // go to opponent
+        float _distance = Vector2.Distance(CurrentOpponent.transform.position, transform.position);
+        while (_distance > 0.7f)
+        {
+            _distance = Vector2.Distance(CurrentOpponent.transform.position, transform.position);
+            Move(CurrentOpponent.transform.position - transform.position);
+            yield return new WaitForFixedUpdate();
+        }
+
+        Anim.SetTrigger("Attack");
+        yield return new WaitForSeconds(.1f);
+
+        // damage
+        CurrentOpponent.Damage(Strength);
+
+        // return to pos
+        _distance = Vector2.Distance(attackPos, transform.position);
+        while (_distance > 0.1f)
+        {
+            _distance = Vector2.Distance(attackPos, transform.position);
+            Move(attackPos - transform.position);
+            yield return new WaitForFixedUpdate();
+        }
+
+        Move(Vector2.zero);
+
+        IsAttacking = false;
+
+        StartCoroutine(AttackFinish());
+    }
+
+    private IEnumerator AttackFinish()
+    {
+        yield return new WaitForSeconds(1f);
 
         if (GetComponent<PartyBase>() && CurrentOpponent.CurrentHealth == 0)
         {
             yield return new WaitForSeconds(2f);
 
             // exp
-            GetComponent<PartyBase>().GainExperience(40);
-            yield return new WaitForSeconds(1.5f);
-            if (GetComponent<PartyBase>().LeveledUp)
-                yield return new WaitForSeconds(1.5f);
-
-            foreach (PartyBase ally in Allies)
+            List<FighterBase> party = CurrentOpponent.Opponents;
+            foreach (PartyBase ally in party)
             {
                 ally.GainExperience(40);
                 yield return new WaitForSeconds(1.5f);
@@ -141,42 +179,6 @@ public class FighterBase : CharacterBase
                 }
             }
         }
-    }
-
-    protected virtual IEnumerator Attack()
-    {
-        Vector3 attackDir = (CurrentOpponent.transform.position - transform.position).normalized;
-        Vector3 attackPos = CurrentOpponent.transform.position - (attackDir*1.5f);
-
-        IsAttacking = true;
-
-        // go to opponent
-        float _distance = Vector2.Distance(CurrentOpponent.transform.position, transform.position);
-        while (_distance > 0.7f)
-        {
-            _distance = Vector2.Distance(CurrentOpponent.transform.position, transform.position);
-            Move(CurrentOpponent.transform.position - transform.position);
-            yield return new WaitForFixedUpdate();
-        }
-
-        Anim.SetTrigger("Attack");
-        yield return new WaitForSeconds(.1f);
-
-        // damage
-        CurrentOpponent.Damage(Strength);
-
-        // return to pos
-        _distance = Vector2.Distance(attackPos, transform.position);
-        while (_distance > 0.1f)
-        {
-            _distance = Vector2.Distance(attackPos, transform.position);
-            Move(attackPos - transform.position);
-            yield return new WaitForFixedUpdate();
-        }
-
-        Move(Vector2.zero);
-
-        IsAttacking = false;
     }
 
     public virtual void Damage(int damageAmount)

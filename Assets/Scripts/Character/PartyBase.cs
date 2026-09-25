@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,6 +41,27 @@ public class PartyBase : FighterBase
                 // show HUD
                 BattleHUD.SetActive(true);
 
+                // multiple enemies
+                if (CurrentOpponent.Allies.Count > 0)
+                {
+                    // target icon
+                    CurrentOpponent.target.enabled = true;
+
+                    if (Input.Right || Input.Left)
+                    {
+                        CurrentOpponent.target.enabled = false;
+
+                        // target selected opponent
+                        CurrentOpponent = CurrentOpponent.Allies[0];
+                        foreach (FighterBase ally in Allies)
+                        {
+                            ally.SetCurrentOpponent(CurrentOpponent);
+                        }
+
+                        CurrentOpponent.target.enabled = true;
+                    }
+                }
+
                 // battle dialogue
                 if (!_battlePrompt)
                 {
@@ -53,14 +73,14 @@ public class PartyBase : FighterBase
                 // attack
                 if (Input.E)
                 {
-                    StartCoroutine(CallAttack());
+                    CallAttack();
                     EndTurn();
                 }
             }
             else
             {
                 // act as enemy
-                StartCoroutine(CallAttack());
+                CallAttack();
                 BattleTurn = false;
             }
         }
@@ -70,6 +90,7 @@ public class PartyBase : FighterBase
     {
         BattleTurn = false;
         _battlePrompt = false;
+        CurrentOpponent.target.enabled = false;
         BattleHUD.SetActive(false);
     }
 

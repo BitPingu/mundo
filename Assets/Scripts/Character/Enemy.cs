@@ -125,7 +125,7 @@ public class Enemy : FighterBase
                 }                
             }
 
-            StartCoroutine(CallAttack());
+            CallAttack();
             BattleTurn = false;
         }
     }

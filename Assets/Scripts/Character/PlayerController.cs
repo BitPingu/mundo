@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour
     public bool E { get; set; }
     public bool Q { get; set; }
 
+    public bool Left { get; set; }
+    public bool Right { get; set; } 
+
     private void Update()
     {
         // horizontal and vertical input
@@ -17,6 +20,10 @@ public class PlayerController : MonoBehaviour
         // key inputs
         E = Input.GetKeyDown(KeyCode.E);
         Q = Input.GetKeyDown(KeyCode.Q);
+
+        // enemy targeting
+        Left = Input.GetKeyDown(KeyCode.LeftArrow);
+        Right = Input.GetKeyDown(KeyCode.RightArrow);
     }
 }
 
