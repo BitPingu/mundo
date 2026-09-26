@@ -4,8 +4,7 @@ using UnityEngine;
 public class Enemy : FighterBase
 {
     public float SightRadius;
-    public LayerMask playerLayer;
-    [SerializeField] private Vector2 _spawnPoint;
+    public Vector3 SpawnPoint;
     [SerializeField] private float _spawnRange = 3f;
     private Vector2 _curDir, _curPoint;
     private float _moveCounter, _waitCounter, _waitTime;
@@ -17,7 +16,7 @@ public class Enemy : FighterBase
         base.Start();
 
         // set spawn
-        transform.position = _spawnPoint;
+        transform.position = SpawnPoint;
 
         // set wait time
         _waitCounter = _minWaitTime;
@@ -26,7 +25,7 @@ public class Enemy : FighterBase
     public void SetRandomDir()
     {
         // choose random point from spawn
-        _curPoint = _spawnPoint + Random.insideUnitCircle * _spawnRange;
+        _curPoint = (Vector2)SpawnPoint + Random.insideUnitCircle * _spawnRange;
 
         // direction to point
         _curDir.x = _curPoint.x - transform.position.x;

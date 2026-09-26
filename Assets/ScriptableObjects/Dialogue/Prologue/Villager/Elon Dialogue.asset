@@ -10,11 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6a0ebe69b3164f6e91f94a88da27730, type: 3}
-  m_Name: Villager Prologue Dialogue 2
+  m_Name: Elon Dialogue
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Evelyn
-    line: Hi, Ely! Beautiful day for your match today, right?
+  - charName: Elon
+    line: The power of science is amazing!
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Elon
+    line: You can now use AI to write an entire game for you!
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: 
+    line: (No AI was used in making this game.)
     reaction: 
     choices: []
     redirectDialogueIndex: -1

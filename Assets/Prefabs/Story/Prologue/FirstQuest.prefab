@@ -59,3 +59,5 @@ MonoBehaviour:
   _chestDialogue: {fileID: 11400000, guid: 4703ec5f1568143c7b118f96bfe57103, type: 2}
   _ambushDialogue: {fileID: 11400000, guid: f2a3a277ce8404446bd5ba283e55a17c, type: 2}
   _afterAmbushDialogue: {fileID: 11400000, guid: 2b7bb45d47dbd470c9172fd80bd103f3, type: 2}
+  _travellerDialogue: {fileID: 11400000, guid: 7fa5e897410a94c699ea2d3283ce47ff, type: 2}
+  _vinesDialogue: {fileID: 11400000, guid: f7f685e18e0a548418e50c2e46aeb00b, type: 2}

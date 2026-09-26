@@ -33,7 +33,9 @@ public class Companion : PartyBase
 
     public void Join(Player player)
     {
+        player.Party.Add(this);
         player.Allies.Add(this);
+        Party.Add(player);
         Allies.Add(player);
         Leader = player;
         Debug.Log(name + " joins the party!");
@@ -41,7 +43,9 @@ public class Companion : PartyBase
 
     public void Leave(Player player)
     {
+        player.Party.Remove(this);
         player.Allies.Remove(this);
+        Party.Remove(player);
         Allies.Remove(player);
         Leader = null;
         Debug.Log(name + " left the party!");

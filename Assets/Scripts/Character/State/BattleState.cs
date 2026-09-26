@@ -63,6 +63,20 @@ public class BattleState : StateBase
         // reset conditions
         _fighter.CurrentTurn = 0;
         _fighter.BattleTurn = false;
+
+        // TODO: revive party here?
+        if (_fighter.GetComponent<PartyBase>() && _fighter.CurrentHealth > 0)
+        {
+            foreach (PartyBase member in _fighter.GetComponent<PartyBase>().Party)
+            {
+                if (member.CurrentHealth <= 0)
+                {
+                    _fighter.GetComponent<PartyBase>().Allies.Add(member);
+                    member.Anim.SetTrigger("Dead");
+                    member.StateMachine.Initialize(member.IdleState);
+                }
+            }
+        }
     }
 
     public override void FrameUpdate()

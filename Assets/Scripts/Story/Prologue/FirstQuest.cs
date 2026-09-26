@@ -9,14 +9,21 @@ public class FirstQuest : EventBase
     public Villager Mom { get; set; }
     public Villager Chief { get; set; }
     public Villager Shopkeeper { get; set; }
+    public Villager Traveller { get; set; }
     public Enemy SlimeChar { get; set; }
     public Enemy SlimeChar1 { get; set; }
     public Enemy SlimeChar2 { get; set; }
     public GameObject HouseIndoor { get; set; }
     public GameObject Chest { get; set; }
+    public GameObject Vines { get; set; }
+    public Destination EncounterTrigger { get; set; }
+    public Destination AmbushTrigger { get; set; }
     [SerializeField] private GameObject _reactIcon;
-    [SerializeField] private Dialogue _friendDialogue, _chiefDialogue, _momDialogue, _shopkeeperDialogue, _slimeDialogue, _friendDialogue2, _outBoundsDialogue, _slimeDialogue2, _afterBattleDialogue, _friendDialogue3, _chestDialogue, _ambushDialogue, _afterAmbushDialogue;
-    private bool _encounter, _outBounds, _firstSlimeDefeat, _slimeDialogue2Active, _findChest, _encounter2;
+    [SerializeField] private Dialogue _friendDialogue, _chiefDialogue, _momDialogue, _shopkeeperDialogue, 
+        _slimeDialogue, _friendDialogue2, _outBoundsDialogue, _slimeDialogue2, _afterBattleDialogue, 
+        _friendDialogue3, _chestDialogue, _ambushDialogue, _afterAmbushDialogue, _travellerDialogue,
+        _vinesDialogue;
+    private bool _encounter, _outBounds, _firstSlimeDefeat, _ambushSlimeDefeat, _findChest, _ambush, _vines;
     private int _inPos;
 
     private void Start()
@@ -34,6 +41,7 @@ public class FirstQuest : EventBase
         Mom.CurrentDialogue = _momDialogue;
         Chief.CurrentDialogue = _chiefDialogue;
         Shopkeeper.CurrentDialogue = _shopkeeperDialogue;
+        Traveller.CurrentDialogue = _travellerDialogue;
 
         // reset chief position
         Chief.transform.position = new Vector2(18.49f, -41.73f);
@@ -42,15 +50,20 @@ public class FirstQuest : EventBase
         // reset mom position
         Mom.transform.position = new Vector3(.73f,-43.48f,0);
         Mom.Sprite.flipX = false;
+
+        // available quests
+        Vector2 iconPos = new Vector2(Traveller.transform.position.x, Traveller.transform.position.y+1f);
+        GameObject _activeIcon = Instantiate(_reactIcon, iconPos, Quaternion.identity, Traveller.transform);
+        _activeIcon.GetComponent<React>().Mute = true;
     }
 
     private void Update()
     {
         // first enemy slime encounter
-        if (SlimeChar)
+        if (EncounterTrigger.Reached && !_firstSlimeDefeat)
         {
-            float slimeDistance = Vector2.Distance(SlimeChar.transform.position, PlayerChar.transform.position);
-            if (!_encounter && slimeDistance < 3f && !DialogueController.Instance.IsDialogueActive)
+            float slimeDistance = Vector2.Distance(SlimeChar.SpawnPoint, PlayerChar.transform.position);
+            if (!_encounter && !DialogueController.Instance.IsDialogueActive)
             {
                 PlayerChar.StateMachine.End(); // stop movement
                 Friend.StateMachine.End(); // stop movement
@@ -65,7 +78,7 @@ public class FirstQuest : EventBase
 
                 _encounter = true;
             }
-            if (_encounter && slimeDistance > 5f && PlayerChar.StateMachine.CurrentState == PlayerChar.IdleState)
+            if (_encounter && slimeDistance > 7f && PlayerChar.StateMachine.CurrentState == PlayerChar.IdleState)
             {
                 PlayerChar.StateMachine.End(); // stop movement
 
@@ -91,10 +104,9 @@ public class FirstQuest : EventBase
         }
 
         // ambush
-        if (SlimeChar1 && SlimeChar2)
+        if (AmbushTrigger.Reached && !_ambushSlimeDefeat)
         {
-            float slimeDistance = Vector2.Distance(SlimeChar1.transform.position, PlayerChar.transform.position);
-            if (!_encounter2 && slimeDistance < 2.5f)
+            if (!_ambush)
             {
                 PlayerChar.StateMachine.End(); // stop movement
                 Friend.StateMachine.End(); // stop movement
@@ -111,13 +123,24 @@ public class FirstQuest : EventBase
                 StartCoroutine(MoveSlime(SlimeChar1, new Vector2(PlayerChar.transform.position.x-1.6f, PlayerChar.transform.position.y+.5f)));
                 StartCoroutine(MoveSlime(SlimeChar2, new Vector2(Friend.transform.position.x+1.6f, Friend.transform.position.y-.3f)));
 
-                _encounter2 = true;
+                _ambush = true;
             }
             if (_inPos == 2)
             {
                 _inPos = -1;
 
                 StartCoroutine(AmbushReact());
+            }
+        }
+
+        // vines
+        if (!_vines)
+        {
+            float vinesDistance = Vector2.Distance(Vines.transform.position, PlayerChar.transform.position);
+            if (vinesDistance < 3f)
+            {
+                SecondaryDialogueController.Instance.StartDialogue(_vinesDialogue, new List<CharacterBase>{Friend});
+                _vines = true;
             }
         }
     }
@@ -151,7 +174,7 @@ public class FirstQuest : EventBase
     {
         player.Face(SlimeChar);
 
-        Vector3 returnPos = SlimeChar.transform.position;
+        Vector3 returnPos = SlimeChar.SpawnPoint;
 
         // go back
         float _distance = Vector2.Distance(returnPos, player.transform.position);
@@ -199,22 +222,22 @@ public class FirstQuest : EventBase
 
         // start dialogue
         DialogueController.Instance.StartDialogue(_slimeDialogue2, new List<CharacterBase>{Friend});
-        _slimeDialogue2Active = true;
+        _ambushSlimeDefeat = true;
     }
 
     private IEnumerator DelayAnimStop()
     {
         yield return new WaitForSeconds(.4f);
-        if (_slimeDialogue2Active)
+        if (_ambushSlimeDefeat)
             Friend.Anim.enabled = false;
     }
 
     private void SlimeDefeat2()
     {
-        if (!_slimeDialogue2Active)
+        if (!_ambushSlimeDefeat)
             return;
         
-        _slimeDialogue2Active = false;
+        _ambushSlimeDefeat = false;
 
         Friend.SpeakAfterBattle = true;
         Friend.CurrentDialogue = _friendDialogue3;
@@ -256,7 +279,7 @@ public class FirstQuest : EventBase
 
     private void Ambush()
     {
-        if (!_encounter2 || (SlimeChar1 == null && SlimeChar2 == null))
+        if (!_ambush || (SlimeChar1 == null && SlimeChar2 == null))
             return;
         
         PlayerChar.StateMachine.Initialize(PlayerChar.IdleState);

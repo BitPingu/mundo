@@ -1,10 +1,13 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerController))]
 public class PartyBase : FighterBase
 {
+    public List<PartyBase> Party = new List<PartyBase>();
+
     public PlayerController Input { get; set; }
 
     // stats
@@ -136,6 +139,7 @@ public class PartyBase : FighterBase
         CurrentOpponent.Opponents.Remove(this);
         foreach (FighterBase opponent in CurrentOpponent.Allies)
             opponent.Opponents.Remove(this);
+        Opponents.Clear();
     }
 
     public void GainExperience(int amount)

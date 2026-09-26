@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2747284ce7b114015a96483482bfcaee
+guid: e8f621b010c4240b5b6facbf65034eec
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2466188639796166283
-    second: player_portrait 1_0
+      213: -1516479222023209826
+    second: traveller_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_portrait 1_0
+      name: traveller_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 0
-        width: 31
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 11
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b8e77206089a93220800000000000000
-      internalID: 2466188639796166283
+      spriteID: e9cbb06ae2264fae0800000000000000
+      internalID: -1516479222023209826
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 9aa3e7cca002f46f3a72c3e49fcc3f8f
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      player_portrait 1_0: 2466188639796166283
+      traveller_0: -1516479222023209826
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
