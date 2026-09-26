@@ -76,19 +76,21 @@ public class DialogueController : MonoBehaviour
         DisplayCurrentLine();
     }
 
-    public void BattleDialogue(FighterBase fighter, string text, bool prompt)
+    public void BattleDialogue(FighterBase fighter, string text, string reaction)
     {
         // show dialogue
         ShowDialogueUI(true);
 
         // set info
-        if (prompt)
-            SetCharInfo("", fighter.portraits);
-        else
-            SetCharInfo("", new Dictionary<string, Sprite>{[""] = _defaultPortrait});
+        _currentDialogue = new DialogueLine
+        {
+            line = text,
+            reaction = reaction.Equals("") ? "hide" : reaction.Equals("show") ? "" : reaction
+        };
+        SetCharInfo("", fighter.portraits);
 
         // set dialogue
-        SetDialogueText(text);
+        SetDialogueText(_currentDialogue.line);
 
         _continueImage.enabled = false;
     }
@@ -174,10 +176,16 @@ public class DialogueController : MonoBehaviour
     private void SetCharInfo(string charName, Dictionary<string, Sprite> portraits)
     {
         _nameText.text = charName;
-        if (_currentDialogue != null)
+        if (portraits.ContainsKey(_currentDialogue.reaction))
+        {
             _portraitImage.sprite = portraits[_currentDialogue.reaction];
+            _portraitImage.color = Color.white;
+        }
         else
-            _portraitImage.sprite = portraits[""];
+        {
+            _portraitImage.sprite = null;
+            _portraitImage.color = Color.clear;
+        }
     }
 
     private void SetDialogueText(string text)

@@ -861,6 +861,8 @@ MonoBehaviour:
   _portraits:
   - sprite: {fileID: 21300000, guid: 2747284ce7b114015a96483482bfcaee, type: 3}
     reaction: 
+  - sprite: {fileID: 21300000, guid: be9dbc659e7ed45ad8aae57b5cb1149c, type: 3}
+    reaction: tired
   voiceSound: {fileID: 8300000, guid: fb638b115793a403a950f41ef22ee07e, type: 3}
   voicePitch: 0.4
   _moveSpeed: 3
@@ -872,9 +874,12 @@ MonoBehaviour:
   HBar: {fileID: 363618131193408213}
   target: {fileID: 4077321530019250279}
   _hitSound: {fileID: 8300000, guid: c9c39983af9d441278cf44370e151cf1, type: 3}
+  Party: []
   _maxExp: 100
   EBar: {fileID: 6456204773656379936}
   BattleHUD: {fileID: 8015278021862394909}
+  _levelDialogue: {fileID: 0}
+  _lowHealthDialogue: {fileID: 11400000, guid: 8760216a5d0fb4f23a24687488816119, type: 2}
   _inventoryBox: {fileID: 1299034464229309381}
 --- !u!114 &1737939773625099332
 MonoBehaviour:

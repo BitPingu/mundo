@@ -22,6 +22,8 @@ public class PartyBase : FighterBase
     public bool IsSparring { get; set; }
     public bool LeveledUp { get; set; }
 
+    [SerializeField] protected Dialogue _levelDialogue, _lowHealthDialogue;
+
     protected override void Start()
     {
         // call base class
@@ -69,7 +71,14 @@ public class PartyBase : FighterBase
                 if (!_battlePrompt)
                 {
                     string text = "What will " + charName + " do?";
-                    DialogueController.Instance.BattleDialogue(this, text, true);
+                    if (CurrentHealth <= MaxHealth*.25f)
+                    {
+                        DialogueController.Instance.BattleDialogue(this, text, "tired");
+                    }
+                    else
+                    {
+                        DialogueController.Instance.BattleDialogue(this, text, "show");
+                    }
                     _battlePrompt = true;
                 }
 
@@ -109,6 +118,10 @@ public class PartyBase : FighterBase
             else
                 StartCoroutine(Die());
         }
+        else if (!IsSparring && CurrentHealth <= MaxHealth*.25f)
+        {
+            SecondaryDialogueController.Instance.StartDialogue(_lowHealthDialogue, new List<CharacterBase>{this});
+        }
     }
 
     public IEnumerator Defeat()
@@ -119,7 +132,7 @@ public class PartyBase : FighterBase
         Anim.enabled = false;
 
         string text = charName + " was defeated!";
-        DialogueController.Instance.BattleDialogue(this, text, false);
+        DialogueController.Instance.BattleDialogue(this, text, "");
     }
 
     public override IEnumerator Die()
@@ -127,7 +140,7 @@ public class PartyBase : FighterBase
         yield return new WaitForSeconds(1.5f);
 
         string text = charName + " was defeated!";
-        DialogueController.Instance.BattleDialogue(this, text, false);
+        DialogueController.Instance.BattleDialogue(this, text, "");
 
         // set dead anim
         Anim.Rebind();
@@ -147,7 +160,7 @@ public class PartyBase : FighterBase
         _currentExp += amount;
 
         string text = charName + " gained " + amount + " exp.";
-        DialogueController.Instance.BattleDialogue(this, text, false);
+        DialogueController.Instance.BattleDialogue(this, text, "");
 
         StartCoroutine(ShowEBar());
 
@@ -202,7 +215,7 @@ public class PartyBase : FighterBase
         EBar.UpdateBar(_maxExp, _currentExp);
 
         string text = charName + " grew to level " + Level + "!";
-        DialogueController.Instance.BattleDialogue(this, text, false);
+        DialogueController.Instance.BattleDialogue(this, text, "");
 
         yield return new WaitForSeconds(1.5f);
     }

@@ -61,3 +61,5 @@ MonoBehaviour:
   _afterAmbushDialogue: {fileID: 11400000, guid: 2b7bb45d47dbd470c9172fd80bd103f3, type: 2}
   _travellerDialogue: {fileID: 11400000, guid: 7fa5e897410a94c699ea2d3283ce47ff, type: 2}
   _vinesDialogue: {fileID: 11400000, guid: f7f685e18e0a548418e50c2e46aeb00b, type: 2}
+  _crystalDialogue: {fileID: 11400000, guid: 815ffcf9f807e449a9129dd48f29d197, type: 2}
+  _friendDialogue4: {fileID: 11400000, guid: 55514532f0c3f43eda96709b484f3b8a, type: 2}

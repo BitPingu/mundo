@@ -78,7 +78,7 @@ public class Player : PartyBase
     public IEnumerator Engage(Enemy enemy)
     {
         string text = charName + " engages enemy " + enemy.charName + ".";
-        DialogueController.Instance.BattleDialogue(this, text, false);
+        DialogueController.Instance.BattleDialogue(this, text, "");
 
         Opponents.Add(enemy);
         foreach (Enemy opponent in enemy.Allies)
@@ -137,7 +137,7 @@ public class Player : PartyBase
     public IEnumerator Run()
     {
         string text = "Got away safely!";
-        DialogueController.Instance.BattleDialogue(this, text, false);
+        DialogueController.Instance.BattleDialogue(this, text, "");
 
         // end battle
         yield return new WaitForSeconds(1.5f);

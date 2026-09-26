@@ -16,14 +16,16 @@ public class FirstQuest : EventBase
     public GameObject HouseIndoor { get; set; }
     public GameObject Chest { get; set; }
     public GameObject Vines { get; set; }
+    public GameObject Crystal { get; set; }
     public Destination EncounterTrigger { get; set; }
     public Destination AmbushTrigger { get; set; }
     [SerializeField] private GameObject _reactIcon;
     [SerializeField] private Dialogue _friendDialogue, _chiefDialogue, _momDialogue, _shopkeeperDialogue, 
         _slimeDialogue, _friendDialogue2, _outBoundsDialogue, _slimeDialogue2, _afterBattleDialogue, 
         _friendDialogue3, _chestDialogue, _ambushDialogue, _afterAmbushDialogue, _travellerDialogue,
-        _vinesDialogue;
-    private bool _encounter, _outBounds, _firstSlimeDefeat, _ambushSlimeDefeat, _findChest, _ambush, _vines;
+        _vinesDialogue, _crystalDialogue, _friendDialogue4;
+    private bool _slimeEncounter, _outBounds, _firstSlimeDefeat, _firstSlimeDefeat2, _findChest, _ambush, 
+        _vines, _crystal, _crystalEncounter;
     private int _inPos;
 
     private void Start()
@@ -34,6 +36,7 @@ public class FirstQuest : EventBase
         DialogueController.Instance.OnBattleDialogueFinish += SlimeDefeat;
         DialogueController.Instance.OnDialogueFinish += SlimeDefeat2;
         DialogueController.Instance.OnDialogueFinish += Ambush;
+        DialogueController.Instance.OnDialogueFinish += CrystalEncounter;
         // DialogueController.Instance.OnDialogueFinish += FinishEvent;
 
         // set current dialogues
@@ -63,7 +66,7 @@ public class FirstQuest : EventBase
         if (EncounterTrigger.Reached && !_firstSlimeDefeat)
         {
             float slimeDistance = Vector2.Distance(SlimeChar.SpawnPoint, PlayerChar.transform.position);
-            if (!_encounter && !DialogueController.Instance.IsDialogueActive)
+            if (!_slimeEncounter && !DialogueController.Instance.IsDialogueActive)
             {
                 PlayerChar.StateMachine.End(); // stop movement
                 Friend.StateMachine.End(); // stop movement
@@ -76,9 +79,9 @@ public class FirstQuest : EventBase
 
                 CameraController.Instance.target = SlimeChar.transform;
 
-                _encounter = true;
+                _slimeEncounter = true;
             }
-            if (_encounter && slimeDistance > 7f && PlayerChar.StateMachine.CurrentState == PlayerChar.IdleState)
+            if (_slimeEncounter && slimeDistance > 6f && PlayerChar.StateMachine.CurrentState == PlayerChar.IdleState)
             {
                 PlayerChar.StateMachine.End(); // stop movement
 
@@ -104,7 +107,7 @@ public class FirstQuest : EventBase
         }
 
         // ambush
-        if (AmbushTrigger.Reached && !_ambushSlimeDefeat)
+        if (AmbushTrigger.Reached)
         {
             if (!_ambush)
             {
@@ -134,7 +137,7 @@ public class FirstQuest : EventBase
         }
 
         // vines
-        if (!_vines)
+        if (!_vines && !_crystalEncounter)
         {
             float vinesDistance = Vector2.Distance(Vines.transform.position, PlayerChar.transform.position);
             if (vinesDistance < 3f)
@@ -143,11 +146,33 @@ public class FirstQuest : EventBase
                 _vines = true;
             }
         }
+
+        // crystal
+        if (!_crystal)
+        {
+            float crystalDistance = Vector2.Distance(Crystal.transform.position, PlayerChar.transform.position);
+            if (crystalDistance < 3f)
+            {
+                PlayerChar.StateMachine.End(); // stop movement
+                Friend.StateMachine.End(); // stop movement
+
+                Friend.Anim.Rebind();
+                Friend.Anim.enabled = false;
+
+                // start dialogue
+                DialogueController.Instance.StartDialogue(_crystalDialogue, new List<CharacterBase>{Friend});
+
+                CameraController.Instance.target = Crystal.transform;
+
+                _crystal = true;
+                _crystalEncounter = true;
+            }
+        }
     }
 
     private void SlimeEncounter()
     {
-        if (!_encounter || _outBounds || SlimeChar == null)
+        if (!_slimeEncounter || _outBounds || SlimeChar == null)
             return;
 
         CameraController.Instance.target = PlayerChar.transform;
@@ -222,22 +247,22 @@ public class FirstQuest : EventBase
 
         // start dialogue
         DialogueController.Instance.StartDialogue(_slimeDialogue2, new List<CharacterBase>{Friend});
-        _ambushSlimeDefeat = true;
+        _firstSlimeDefeat2 = true;
     }
 
     private IEnumerator DelayAnimStop()
     {
         yield return new WaitForSeconds(.4f);
-        if (_ambushSlimeDefeat)
+        if (_firstSlimeDefeat2)
             Friend.Anim.enabled = false;
     }
 
     private void SlimeDefeat2()
     {
-        if (!_ambushSlimeDefeat)
+        if (!_firstSlimeDefeat2)
             return;
         
-        _ambushSlimeDefeat = false;
+        _firstSlimeDefeat2 = false;
 
         Friend.SpeakAfterBattle = true;
         Friend.CurrentDialogue = _friendDialogue3;
@@ -300,6 +325,22 @@ public class FirstQuest : EventBase
 
         // Slime goes first
         SlimeChar1.BattleTurn = true;
+    }
+
+    private void CrystalEncounter()
+    {
+        if (!_crystalEncounter)
+            return;
+
+        _crystalEncounter = true;
+
+        CameraController.Instance.target = PlayerChar.transform;
+
+        PlayerChar.StateMachine.Initialize(PlayerChar.IdleState);
+        Friend.StateMachine.Initialize(Friend.IdleState);
+
+        Friend.Anim.enabled = true;
+        Friend.CurrentDialogue = _friendDialogue4;
     }
 
     private void FinishEvent()

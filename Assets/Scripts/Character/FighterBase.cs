@@ -62,7 +62,7 @@ public class FighterBase : CharacterBase
     {
         // battle dialogue
         string text = charName + " attacks " + CurrentOpponent.charName + "!";
-        DialogueController.Instance.BattleDialogue(this, text, false);
+        DialogueController.Instance.BattleDialogue(this, text, "");
 
         StartCoroutine(Attack());
     }
@@ -203,7 +203,7 @@ public class FighterBase : CharacterBase
 
         // battle dialogue
         string text = charName + " took " + damageAmount + " damage.";
-        DialogueController.Instance.BattleDialogue(this, text, false);
+        DialogueController.Instance.BattleDialogue(this, text, "");
         Debug.Log("Current health: " + CurrentHealth + "/" + MaxHealth);
     }
 

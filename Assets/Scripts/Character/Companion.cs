@@ -7,7 +7,6 @@ public class Companion : PartyBase
     public Player Leader { get; set; }
 
     [SerializeField] private float _followDistance = 1f;
-    [SerializeField] private Dialogue _levelDialogue;
     public Dialogue CurAfterBattleDialogue { get; set; }
     public bool SpeakAfterBattle { get; set; }
 

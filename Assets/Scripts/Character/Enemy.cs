@@ -145,7 +145,7 @@ public class Enemy : FighterBase
         yield return new WaitForSeconds(1.5f);
 
         string text = "Enemy " + charName + " was defeated!";
-        DialogueController.Instance.BattleDialogue(this, text, false);
+        DialogueController.Instance.BattleDialogue(this, text, "");
 
         // set color
         Sprite.material.SetFloat("_FlashAmount", 1f);
