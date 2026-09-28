@@ -61,7 +61,7 @@ public class Companion : PartyBase
             Move(Vector2.zero);
     }
 
-    public IEnumerator Engage(Enemy enemy, Vector3 playerAttackPos, Vector3 enemyPos, float distanceFromEnemy)
+    public IEnumerator Engage(Vector3 playerAttackPos, Vector3 enemyPos, float distanceFromEnemy)
     {
         // get angle of player attack position in radians
         Vector2 offsetFromCenter = playerAttackPos - enemyPos;

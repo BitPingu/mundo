@@ -102,7 +102,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2585198199552577836}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -215,10 +215,7 @@ MonoBehaviour:
   target: {fileID: 2831535199063017972}
   _hitSound: {fileID: 8300000, guid: 35960fccc016f4913a9c6ec5fea7c48f, type: 3}
   SightRadius: 0
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  _spawnPoint: {x: 0, y: 0}
+  SpawnPoint: {x: 0, y: 0, z: 0}
   _spawnRange: 3
   _minWaitTime: 3
   _maxWaitTime: 5
@@ -584,7 +581,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6355494288163707688, guid: 341c6909b0d874b3aa8c42cfd01da55b, type: 3}
       propertyPath: m_Offset.y
-      value: -1.2
+      value: -0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -80,10 +80,11 @@ public class Player : PartyBase
         string text = charName + " engages enemy " + enemy.charName + ".";
         DialogueController.Instance.BattleDialogue(this, text, "");
 
+        // add enemies to battle
         Opponents.Add(enemy);
-        foreach (Enemy opponent in enemy.Allies)
+        foreach (Enemy enemyAlly in enemy.Allies)
         {
-            Opponents.Add(opponent);
+            Opponents.Add(enemyAlly);
         }
 
         Vector3 attackDir = (enemy.transform.position - transform.position).normalized;
@@ -96,7 +97,7 @@ public class Player : PartyBase
         foreach (Companion ally in Allies)
         {
             if (!ally.IsSparring)
-                StartCoroutine(ally.Engage(enemy, attackPos, enemy.transform.position, distanceFromEnemy));
+                StartCoroutine(ally.Engage(attackPos, enemy.transform.position, distanceFromEnemy));
         }
 
         // go to enemy
@@ -112,11 +113,19 @@ public class Player : PartyBase
         yield return new WaitForSeconds(.1f);
         enemy.CallDamageFlash();
 
-        // trigger battle with enemy
+        // trigger battle with enemies
         enemy.Opponents.Add(this);
         foreach (PartyBase ally in Allies)
         {
             enemy.Opponents.Add(ally);
+        }
+        foreach (Enemy enemyAlly in enemy.Allies)
+        {
+            enemyAlly.Opponents.Add(this);
+            foreach (PartyBase ally in Allies)
+            {
+                enemyAlly.Opponents.Add(ally);
+            }
         }
 
         // return to pos

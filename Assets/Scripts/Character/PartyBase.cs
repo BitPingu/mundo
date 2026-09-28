@@ -57,7 +57,7 @@ public class PartyBase : FighterBase
                         CurrentOpponent.target.enabled = false;
 
                         // target selected opponent
-                        CurrentOpponent = CurrentOpponent.Allies[0];
+                        SetCurrentOpponent(CurrentOpponent.Allies[0]);
                         foreach (FighterBase ally in Allies)
                         {
                             ally.SetCurrentOpponent(CurrentOpponent);
