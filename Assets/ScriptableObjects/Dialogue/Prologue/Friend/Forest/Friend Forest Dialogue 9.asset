@@ -14,18 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Alice
-    line: Oh, look over there!
+    line: Hmm, looks like these vines are blocking the way.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Alice
-    line: Those slimes seem to be gathered around that crystal. Maybe that's what's
-      triggering those vines.
-    reaction: 
-    choices: []
-    redirectDialogueIndex: -1
-  - charName: Alice
-    line: Let's take them out first.
+    line: Let's see if we can find a way around it.
     reaction: 
     choices: []
     redirectDialogueIndex: -1

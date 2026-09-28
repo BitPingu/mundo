@@ -13,6 +13,7 @@ public class FirstQuest : EventBase
     public Enemy SlimeChar { get; set; }
     public Enemy SlimeChar1 { get; set; }
     public Enemy SlimeChar2 { get; set; }
+    public Enemy SlimeChar3 { get; set; }
     public GameObject HouseIndoor { get; set; }
     public GameObject Chest { get; set; }
     public GameObject Vines { get; set; }
@@ -22,10 +23,11 @@ public class FirstQuest : EventBase
     [SerializeField] private GameObject _reactIcon;
     [SerializeField] private Dialogue _friendDialogue, _chiefDialogue, _momDialogue, _shopkeeperDialogue, 
         _slimeDialogue, _friendDialogue2, _outBoundsDialogue, _slimeDialogue2, _afterBattleDialogue, 
-        _friendDialogue3, _chestDialogue, _ambushDialogue, _afterAmbushDialogue, _travellerDialogue,
-        _vinesDialogue, _crystalDialogue, _friendDialogue4;
-    private bool _slimeEncounter, _outBounds, _firstSlimeDefeat, _firstSlimeDefeat2, _findChest, _ambush, 
-        _vines, _crystal, _crystalEncounter;
+        _friendDialogue3, _chestDialogue, _ambushDialogue, _ambushBattleDialogue, _afterAmbushDialogue, 
+        _travellerDialogue, _vinesDialogue, _crystalDialogue, _friendDialogue4, _friendDialogue5, 
+        _removeVinesDialogue, _friendDialogue6;
+    private bool _slimeEncounter, _outBounds, _firstSlimeDefeat, _firstSlimeDefeat2, _findChest, _ambush,
+        _ambushTutorial, _vines, _crystal, _crystalEncounter, _crystalSlimeDefeat, _vinesRemoved;
     private int _inPos;
 
     private void Start()
@@ -37,6 +39,9 @@ public class FirstQuest : EventBase
         DialogueController.Instance.OnDialogueFinish += SlimeDefeat2;
         DialogueController.Instance.OnDialogueFinish += Ambush;
         DialogueController.Instance.OnDialogueFinish += CrystalEncounter;
+        DialogueController.Instance.OnBattleDialogueFinish += CrystalSlimeDefeat;
+        Crystal.GetComponentInChildren<Interact>().OnInteract += CrystalInteract;
+        DialogueController.Instance.OnDialogueFinish += VinesRemoved;
         // DialogueController.Instance.OnDialogueFinish += FinishEvent;
 
         // set current dialogues
@@ -58,6 +63,9 @@ public class FirstQuest : EventBase
         Vector2 iconPos = new Vector2(Traveller.transform.position.x, Traveller.transform.position.y+1f);
         GameObject _activeIcon = Instantiate(_reactIcon, iconPos, Quaternion.identity, Traveller.transform);
         _activeIcon.GetComponent<React>().Mute = true;
+
+        // disable crystal
+        Crystal.GetComponentInChildren<Interact>().gameObject.GetComponent<BoxCollider2D>().enabled = false;
     }
 
     private void Update()
@@ -74,14 +82,13 @@ public class FirstQuest : EventBase
                 Friend.Anim.Rebind();
                 Friend.Anim.enabled = false;
 
-                // start dialogue
-                DialogueController.Instance.StartDialogue(_slimeDialogue, new List<CharacterBase>{Friend});
-
                 CameraController.Instance.target = SlimeChar.transform;
+
+                StartCoroutine(SlimeDialogue());
 
                 _slimeEncounter = true;
             }
-            if (_slimeEncounter && slimeDistance > 6f && PlayerChar.StateMachine.CurrentState == PlayerChar.IdleState)
+            if (_slimeEncounter && slimeDistance > 5.5f && PlayerChar.StateMachine.CurrentState == PlayerChar.IdleState)
             {
                 PlayerChar.StateMachine.End(); // stop movement
 
@@ -101,7 +108,7 @@ public class FirstQuest : EventBase
             float chestDistance = Vector2.Distance(Chest.transform.position, PlayerChar.transform.position);
             if (chestDistance < 3f)
             {
-                SecondaryDialogueController.Instance.StartDialogue(_chestDialogue, new List<CharacterBase>{Friend});
+                SecondaryDialogueController.Instance.StartDialogue(_chestDialogue, new List<CharacterBase>{Friend}, 1.5f);
                 _findChest = true;
             }
         }
@@ -136,13 +143,20 @@ public class FirstQuest : EventBase
             }
         }
 
+        // ambush battle dialogue
+        if (PlayerChar.BattleTurn && _ambush && !_ambushTutorial)
+        {
+            StartCoroutine(AmbushBattleDialogue());
+            _ambushTutorial = true;
+        }
+
         // vines
         if (!_vines && !_crystalEncounter)
         {
             float vinesDistance = Vector2.Distance(Vines.transform.position, PlayerChar.transform.position);
             if (vinesDistance < 3f)
             {
-                SecondaryDialogueController.Instance.StartDialogue(_vinesDialogue, new List<CharacterBase>{Friend});
+                SecondaryDialogueController.Instance.StartDialogue(_vinesDialogue, new List<CharacterBase>{Friend}, 1.5f);
                 _vines = true;
             }
         }
@@ -159,15 +173,21 @@ public class FirstQuest : EventBase
                 Friend.Anim.Rebind();
                 Friend.Anim.enabled = false;
 
-                // start dialogue
-                DialogueController.Instance.StartDialogue(_crystalDialogue, new List<CharacterBase>{Friend});
-
                 CameraController.Instance.target = Crystal.transform;
 
+                StartCoroutine(CrystalDialogue());
+
                 _crystal = true;
-                _crystalEncounter = true;
             }
         }
+    }
+
+    private IEnumerator SlimeDialogue()
+    {
+        yield return new WaitForSeconds(.5f);
+
+        // start dialogue
+        DialogueController.Instance.StartDialogue(_slimeDialogue, new List<CharacterBase>{Friend});
     }
 
     private void SlimeEncounter()
@@ -203,7 +223,7 @@ public class FirstQuest : EventBase
 
         // go back
         float _distance = Vector2.Distance(returnPos, player.transform.position);
-        while (_distance > 2f)
+        while (_distance > 3f)
         {
             _distance = Vector2.Distance(returnPos, player.transform.position);
             player.Move(returnPos - player.transform.position);
@@ -327,9 +347,25 @@ public class FirstQuest : EventBase
         SlimeChar1.BattleTurn = true;
     }
 
+    private IEnumerator AmbushBattleDialogue()
+    {
+        yield return new WaitForSeconds(1f);
+
+        // dialogue during battle
+        SecondaryDialogueController.Instance.StartDialogue(_ambushBattleDialogue, new List<CharacterBase>{Friend}, 3f);
+    }
+
+    private IEnumerator CrystalDialogue()
+    {
+        yield return new WaitForSeconds(.5f);
+
+        // start dialogue
+        DialogueController.Instance.StartDialogue(_crystalDialogue, new List<CharacterBase>{Friend});
+    }
+
     private void CrystalEncounter()
     {
-        if (!_crystalEncounter)
+        if (!_crystal || _crystalEncounter)
             return;
 
         _crystalEncounter = true;
@@ -341,6 +377,62 @@ public class FirstQuest : EventBase
 
         Friend.Anim.enabled = true;
         Friend.CurrentDialogue = _friendDialogue4;
+    }
+
+    private void CrystalSlimeDefeat()
+    {
+        if ((SlimeChar3 && SlimeChar3.Opponents.Count == 0) || _crystalSlimeDefeat)
+            return;
+        
+        _crystalSlimeDefeat = true;
+
+        Friend.CurrentDialogue = _friendDialogue5;
+
+        // enable crystal
+        Crystal.GetComponentInChildren<Interact>().gameObject.GetComponent<BoxCollider2D>().enabled = true;
+    }
+
+    private void CrystalInteract()
+    {
+        PlayerChar.StateMachine.End(); // stop movement
+        Friend.StateMachine.End();
+        
+        StartCoroutine(RemoveVines());
+
+        // disable crystal
+        Crystal.GetComponentInChildren<Interact>().gameObject.GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    private IEnumerator RemoveVines()
+    {
+        CameraController.Instance.target = Vines.transform;
+        yield return new WaitForSeconds(1f);
+        Destroy(Vines);
+        yield return new WaitForSeconds(1f);
+        CameraController.Instance.target = PlayerChar.transform;
+
+        Friend.Face(PlayerChar);
+        Friend.Anim.enabled = false;
+
+        yield return new WaitForSeconds(1f);
+
+        // start dialogue
+        DialogueController.Instance.StartDialogue(_removeVinesDialogue, new List<CharacterBase>{Friend});
+        _vinesRemoved = true;
+    }
+
+    private void VinesRemoved()
+    {
+        if (!_vinesRemoved)
+            return;
+        
+        _vinesRemoved = false;
+
+        PlayerChar.StateMachine.Initialize(PlayerChar.IdleState);
+        Friend.StateMachine.Initialize(Friend.IdleState);
+
+        Friend.Anim.enabled = true;
+        Friend.CurrentDialogue = _friendDialogue6;
     }
 
     private void FinishEvent()

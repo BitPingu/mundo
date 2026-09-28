@@ -70,7 +70,7 @@ public class FighterBase : CharacterBase
     protected virtual IEnumerator Attack()
     {
         Vector3 attackDir = (CurrentOpponent.transform.position - transform.position).normalized;
-        Vector3 attackPos = CurrentOpponent.transform.position - (attackDir*1.5f);
+        Vector3 attackPos = CurrentOpponent.transform.position - (attackDir*1.3f);
 
         IsAttacking = true;
 
@@ -91,7 +91,7 @@ public class FighterBase : CharacterBase
 
         // return to pos
         _distance = Vector2.Distance(attackPos, transform.position);
-        while (_distance > 0.1f)
+        while (_distance > 0.05f)
         {
             _distance = Vector2.Distance(attackPos, transform.position);
             Move(attackPos - transform.position);

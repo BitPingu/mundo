@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Alice
-    line: Phew, that was a close one!
+    line: We're facing multiple enemies this time! Use the arrow keys to target one.
     reaction: 
     choices: []
     redirectDialogueIndex: -1

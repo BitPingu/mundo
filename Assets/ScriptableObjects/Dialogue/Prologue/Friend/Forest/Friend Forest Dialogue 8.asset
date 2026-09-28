@@ -14,12 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Alice
-    line: Hmm, looks like these vines are blocking the way.
-    reaction: 
-    choices: []
-    redirectDialogueIndex: -1
-  - charName: Alice
-    line: Let's see if we can find a way around it.
+    line: Phew, that was a close one!
     reaction: 
     choices: []
     redirectDialogueIndex: -1

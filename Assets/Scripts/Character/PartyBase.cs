@@ -120,8 +120,14 @@ public class PartyBase : FighterBase
         }
         else if (!IsSparring && CurrentHealth <= MaxHealth*.25f)
         {
-            SecondaryDialogueController.Instance.StartDialogue(_lowHealthDialogue, new List<CharacterBase>{this});
+            StartCoroutine(LowHealthDialogue());
         }
+    }
+
+    private IEnumerator LowHealthDialogue()
+    {
+        yield return new WaitForSeconds(1f);
+        SecondaryDialogueController.Instance.StartDialogue(_lowHealthDialogue, new List<CharacterBase>{this}, 1.5f);
     }
 
     public IEnumerator Defeat()

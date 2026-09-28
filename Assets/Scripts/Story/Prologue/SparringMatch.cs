@@ -44,8 +44,7 @@ public class SparringMatch : EventBase
     {
         if (PlayerChar.StateMachine.CurrentState == PlayerChar.BattleState && !_friendHurt && Friend.CurrentHealth <= Friend.MaxHealth/2f)
         {
-            // dialogue during battle
-            SecondaryDialogueController.Instance.StartDialogue(_damageDialogue, new List<CharacterBase>{Friend});
+            StartCoroutine(SparringDialogue());
             _friendHurt = true;
         }
     }
@@ -70,6 +69,14 @@ public class SparringMatch : EventBase
 
         // Player goes first
         PlayerChar.BattleTurn = true;
+    }
+
+    private IEnumerator SparringDialogue()
+    {
+        yield return new WaitForSeconds(1f);
+
+        // dialogue during battle
+        SecondaryDialogueController.Instance.StartDialogue(_damageDialogue, new List<CharacterBase>{Friend}, 1.5f);
     }
 
     private void FinishMatch()

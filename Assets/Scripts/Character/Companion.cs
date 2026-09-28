@@ -110,7 +110,7 @@ public class Companion : PartyBase
             LeveledUp = false;
         }
         yield return new WaitForSeconds(1f);
-        SecondaryDialogueController.Instance.StartDialogue(dialogue, new List<CharacterBase>{this});
+        SecondaryDialogueController.Instance.StartDialogue(dialogue, new List<CharacterBase>{this}, 1.5f);
     }
 }
 

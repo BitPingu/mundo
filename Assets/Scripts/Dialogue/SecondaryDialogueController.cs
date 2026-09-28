@@ -20,6 +20,7 @@ public class SecondaryDialogueController : MonoBehaviour
     [SerializeField] private PlayerController _input;
 
     [SerializeField] private float _autoProgressDelay = 1.5f;
+    private float _currentDelay;
     [SerializeField] private float _typingSpeed = 0.05f;
     [SerializeField] private float _skipDelay = 0.1f;
 
@@ -53,7 +54,7 @@ public class SecondaryDialogueController : MonoBehaviour
         }
     }
 
-    public void StartDialogue(Dialogue dialogue, List<CharacterBase> characters)
+    public void StartDialogue(Dialogue dialogue, List<CharacterBase> characters, float delay)
     {
         // set params
         _dialogue = dialogue;
@@ -64,7 +65,7 @@ public class SecondaryDialogueController : MonoBehaviour
 
         IsDialogueActive = true;
         _dialogueIndex = 0;
-        
+        _autoProgressDelay = delay;
         _autoProgress = true; // always autoprogress
 
         // show dialogue
@@ -165,7 +166,7 @@ public class SecondaryDialogueController : MonoBehaviour
         {
             SetDialogueText(_dialogueText.text += letter);
 
-            if (letterIndex % 2 == 1 || letter == '.' || letter == '!' || letter == '?')
+            if (letterIndex % 4 == 1 || (letter == '.' && letterIndex == _currentDialogue.line.Length) || letter == '!' || letter == '?')
             {
                 if (_currentChar)
                     SFXManager.PlayVoice(_currentChar.voiceSound, _currentChar.voicePitch);

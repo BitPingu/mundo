@@ -46,7 +46,7 @@ MonoBehaviour:
     choices: []
     redirectDialogueIndex: -1
   - charName: Chief Vandham
-    line: You two have shown me your strength in the way you fight. I can see potential
+    line: You two have shown me your strength in the way you fight. I can sense potential
       in both of you.
     reaction: 
     choices: []

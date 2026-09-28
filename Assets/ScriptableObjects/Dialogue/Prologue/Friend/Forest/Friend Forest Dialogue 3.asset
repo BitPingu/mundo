@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Alice
-    line: Where are you going? We can't let it get away!
+    line: Where do you think you're going? We can't let it get away!
     reaction: surprised
     choices: []
     redirectDialogueIndex: -1

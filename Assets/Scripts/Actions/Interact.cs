@@ -8,6 +8,9 @@ public class Interact : MonoBehaviour
     [SerializeField] private GameObject _icon;
     [SerializeField] private Dialogue _dialogue;
 
+    public delegate void Interacted();
+    public Interacted OnInteract;
+
     private void Start()
     {
         // set dialogue delegates
@@ -41,10 +44,15 @@ public class Interact : MonoBehaviour
         {
             if (_detectPlayer.Input.E)
             {
-                _detectPlayer.StateMachine.End(); // disable movement
-                _activeIcon.SetActive(false);
-                // start dialogue
-                DialogueController.Instance.StartDialogue(_dialogue, new List<CharacterBase>{_detectPlayer});
+                if (_dialogue)
+                {
+                    _detectPlayer.StateMachine.End(); // disable movement
+                    _activeIcon.SetActive(false);
+                    // start dialogue
+                    DialogueController.Instance.StartDialogue(_dialogue, new List<CharacterBase>{_detectPlayer});
+                }
+
+                OnInteract?.Invoke(); // call delegates
             }
 
             if (_activeIcon && !_activeIcon.activeSelf && !DialogueController.Instance.IsDialogueActive)
