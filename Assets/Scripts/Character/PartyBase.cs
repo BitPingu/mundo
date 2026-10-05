@@ -20,9 +20,9 @@ public class PartyBase : FighterBase
 
     private bool _battlePrompt;
     public bool IsSparring { get; set; }
-    public bool LeveledUp { get; set; }
+    public bool IsLeveling { get; set; }
 
-    [SerializeField] protected Dialogue _levelDialogue, _lowHealthDialogue;
+    [SerializeField] protected Dialogue _easyDialogue, _levelDialogue, _lowHealthDialogue;
 
     protected override void Start()
     {
@@ -193,7 +193,7 @@ public class PartyBase : FighterBase
 
     private IEnumerator LevelUp()
     {
-        LeveledUp = true;
+        IsLeveling = true;
 
         // increase level
         Level++;
@@ -201,7 +201,6 @@ public class PartyBase : FighterBase
         // update stats
         MaxHealth = Level * 20;
         CurrentHealth = MaxHealth;
-        HBar.UpdateBar(MaxHealth, CurrentHealth);
         Strength = Level * 3 + 3;
 
         // reset exp
@@ -211,19 +210,25 @@ public class PartyBase : FighterBase
         yield return new WaitForSeconds(.3f);
 
         // glow up effect
-        Sprite.material.SetColor("_FlashColor", new Color(0, 243, 255));
+        Sprite.material.SetColor("_FlashColor", new Color(0f, 0.9529412f, 1f));
         CallDamageFlash();
 
         yield return new WaitForSeconds(.5f);
 
         Sprite.material.SetColor("_FlashColor", Color.white);
 
+        HBar.UpdateBar(MaxHealth, CurrentHealth);
         EBar.UpdateBar(_maxExp, _currentExp);
 
         string text = charName + " grew to level " + Level + "!";
         DialogueController.Instance.BattleDialogue(this, text, "");
 
         yield return new WaitForSeconds(1.5f);
+
+        if (GetComponent<Companion>())
+            GetComponent<Companion>().EventDialogue = _levelDialogue;
+
+        IsLeveling = false;
     }
 }
 

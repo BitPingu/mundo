@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Alice
-    line: I heard something move! Looks like that crystal had something to do with
-      the vines.
+    line: We took them out! Let's see what happens when we interact with the crystal.
     reaction: 
     choices: []
     redirectDialogueIndex: -1

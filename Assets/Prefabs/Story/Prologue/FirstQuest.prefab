@@ -54,7 +54,6 @@ MonoBehaviour:
   _friendDialogue2: {fileID: 11400000, guid: f863bc52012bb4af497d7b5441180c12, type: 2}
   _outBoundsDialogue: {fileID: 11400000, guid: c31b4e231ab9a4ccdad50cc533309b79, type: 2}
   _slimeDialogue2: {fileID: 11400000, guid: 0feb00a6f53514461b077f991e230b3d, type: 2}
-  _afterBattleDialogue: {fileID: 11400000, guid: 0fe9e2073025d4a99b0f54349554c726, type: 2}
   _friendDialogue3: {fileID: 11400000, guid: 2fb32ec0264ee4c8d8df4ffdad8dd193, type: 2}
   _chestDialogue: {fileID: 11400000, guid: 4703ec5f1568143c7b118f96bfe57103, type: 2}
   _ambushDialogue: {fileID: 11400000, guid: f2a3a277ce8404446bd5ba283e55a17c, type: 2}
@@ -62,8 +61,9 @@ MonoBehaviour:
   _afterAmbushDialogue: {fileID: 11400000, guid: 2b7bb45d47dbd470c9172fd80bd103f3, type: 2}
   _travellerDialogue: {fileID: 11400000, guid: 7fa5e897410a94c699ea2d3283ce47ff, type: 2}
   _vinesDialogue: {fileID: 11400000, guid: f7f685e18e0a548418e50c2e46aeb00b, type: 2}
+  _friendDialogue4: {fileID: 11400000, guid: b1c9abae1c3114fd38f2e4cd17b46479, type: 2}
   _crystalDialogue: {fileID: 11400000, guid: 815ffcf9f807e449a9129dd48f29d197, type: 2}
-  _friendDialogue4: {fileID: 11400000, guid: 55514532f0c3f43eda96709b484f3b8a, type: 2}
-  _friendDialogue5: {fileID: 11400000, guid: d698c465f7aaa4487b284f6e2c763bfd, type: 2}
+  _friendDialogue5: {fileID: 11400000, guid: 55514532f0c3f43eda96709b484f3b8a, type: 2}
+  _friendDialogue6: {fileID: 11400000, guid: d698c465f7aaa4487b284f6e2c763bfd, type: 2}
   _removeVinesDialogue: {fileID: 11400000, guid: 8443c0b2e8ee84fadbcefd7c6245168d, type: 2}
-  _friendDialogue6: {fileID: 11400000, guid: 8e3ef5f45f9954511a71c2fdde77245f, type: 2}
+  _friendDialogue7: {fileID: 11400000, guid: 8e3ef5f45f9954511a71c2fdde77245f, type: 2}

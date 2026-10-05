@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Alice
-    line: The path is clear. Let's keep going!
+    line: I heard something move! Looks like that crystal had something to do with
+      the vines.
     reaction: 
     choices: []
     redirectDialogueIndex: -1

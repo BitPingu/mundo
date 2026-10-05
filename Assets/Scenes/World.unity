@@ -44717,7 +44717,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -44826,7 +44826,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -47157,7 +47157,7 @@ Transform:
   m_GameObject: {fileID: 904777746}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.05, y: 0.64, z: 0}
+  m_LocalPosition: {x: 10.97, y: 29.48, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -47312,7 +47312,7 @@ MonoBehaviour:
   _choiceButton: {fileID: 8208744464520117523, guid: 98697e84a7ab44d69a3075d7c45fbbfc, type: 3}
   _input: {fileID: 1642564164}
   _autoProgressDelay: 1.5
-  _typingSpeed: 0.02
+  _typingSpeed: 0.015
   _skipDelay: 0.2
 --- !u!114 &908243666
 MonoBehaviour:
@@ -47336,7 +47336,7 @@ MonoBehaviour:
   _defaultVoicePitch: 0.4
   _input: {fileID: 1642564164}
   _autoProgressDelay: 1.5
-  _typingSpeed: 0.02
+  _typingSpeed: 0.01
   _skipDelay: 0.2
 --- !u!1 &911120674
 GameObject:
@@ -57350,6 +57350,7 @@ MonoBehaviour:
   _maxExp: 100
   EBar: {fileID: 1053833620}
   BattleHUD: {fileID: 533249005}
+  _easyDialogue: {fileID: 0}
   _levelDialogue: {fileID: 0}
   _lowHealthDialogue: {fileID: 0}
   _followDistance: 1.1

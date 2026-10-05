@@ -20,9 +20,6 @@ public class Player : PartyBase
     {
         // call base class
         base.Start();
-
-        // set dialogue delegates
-        DialogueController.Instance.OnBattleDialogueFinish += AfterBattle;
     }
 
     protected override void Update()
@@ -164,17 +161,7 @@ public class Player : PartyBase
         }
 
         // end battle dialogue
-        Allies[0].GetComponent<Companion>().SpeakAfterBattle = false;
         DialogueController.Instance.EndBattleDialogue();
-        Allies[0].GetComponent<Companion>().SpeakAfterBattle = true;
-    }
-
-    private void AfterBattle()
-    {
-        if (LeveledUp)
-        {
-            LeveledUp = false;
-        }
     }
 
     public void CheckStatus()

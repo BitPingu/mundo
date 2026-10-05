@@ -731,6 +731,7 @@ MonoBehaviour:
   _maxExp: 100
   EBar: {fileID: 8792345666785891725}
   BattleHUD: {fileID: 5598363155657312378}
+  _easyDialogue: {fileID: 11400000, guid: 0fe9e2073025d4a99b0f54349554c726, type: 2}
   _levelDialogue: {fileID: 11400000, guid: ac22504ded5504530be366ff9bae55af, type: 2}
   _lowHealthDialogue: {fileID: 11400000, guid: 42ad145772f5545eba6ff067c8538047, type: 2}
   _followDistance: 1.1

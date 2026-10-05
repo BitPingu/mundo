@@ -7,8 +7,7 @@ public class Companion : PartyBase
     public Player Leader { get; set; }
 
     [SerializeField] private float _followDistance = 1f;
-    public Dialogue CurAfterBattleDialogue { get; set; }
-    public bool SpeakAfterBattle { get; set; }
+    public Dialogue EventDialogue { get; set; }
 
     protected override void Start()
     {
@@ -97,20 +96,35 @@ public class Companion : PartyBase
 
     private void AfterBattle()
     {
-        if (SpeakAfterBattle)
-            StartCoroutine(AfterBattleDialogue());
+        StartCoroutine(AfterBattleDialogue());
     }
 
     private IEnumerator AfterBattleDialogue()
     {
-        Dialogue dialogue = CurAfterBattleDialogue;
-        if (LeveledUp)
+        Dialogue dialogue = null;
+
+        if (EventDialogue)
         {
-            dialogue = _levelDialogue;
-            LeveledUp = false;
+            dialogue = EventDialogue;
         }
-        yield return new WaitForSeconds(1f);
-        SecondaryDialogueController.Instance.StartDialogue(dialogue, new List<CharacterBase>{this}, 1.5f);
+        else if (CurrentHealth >= MaxHealth*.6f)
+        {
+            dialogue = _easyDialogue;
+        }
+
+        yield return new WaitForSeconds(.1f);
+
+        if (StateMachine.CurrentState != IdleState)
+            dialogue = null;
+
+        yield return new WaitForSeconds(.9f);
+
+        if (dialogue)
+            SecondaryDialogueController.Instance.StartDialogue(dialogue, new List<CharacterBase>{this}, 1.5f);
+
+        // reset event dialogue
+        if (EventDialogue)
+            EventDialogue = null;
     }
 }
 

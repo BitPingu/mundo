@@ -121,7 +121,7 @@ public class FighterBase : CharacterBase
                 {
                     ally.GainExperience(40);
                     yield return new WaitForSeconds(1.5f);
-                    if (ally.LeveledUp)
+                    if (ally.IsLeveling)
                         yield return new WaitForSeconds(1.5f);
                 }
             }
