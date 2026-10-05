@@ -17,7 +17,7 @@ public class Prologue : ChapterBase
     [SerializeField] protected VillagerDialogue[] _vDialogue;
     [SerializeField] protected GameObject _chiefHouse, _chiefHouseIndoor, _chest, _vines, _crystal;
     [SerializeField] protected Boundary _matchBoundary, _slimeBoundary;
-    [SerializeField] protected Destination _chiefTrigger, _encounterTrigger, _ambushTrigger;
+    [SerializeField] protected Destination _momTrigger, _friendTrigger, _chiefTrigger, _encounterTrigger, _ambushTrigger;
 
     public override void BeginChapter()
     {
@@ -32,32 +32,22 @@ public class Prologue : ChapterBase
     {
         base.SetupEvent();
 
-        if (CurrentEvent.GetComponent<TalkToMom>())
-        {
-            _player.CanEnter = true; // enable enter action
-            CurrentEvent.GetComponent<TalkToMom>().PlayerChar = _player;
-            CurrentEvent.GetComponent<TalkToMom>().Mom = _mom;
-        }
-        else if (CurrentEvent.GetComponent<TalkToFriend>())
-        {
-            CurrentEvent.GetComponent<TalkToFriend>().PlayerChar = _player;
-            CurrentEvent.GetComponent<TalkToFriend>().Mom = _mom;
-            CurrentEvent.GetComponent<TalkToFriend>().Friend = _friend;
-        }
-        else if (CurrentEvent.GetComponent<SparringMatch>())
+        if (CurrentEvent.GetComponent<SparringMatch>())
         {
             CurrentEvent.GetComponent<SparringMatch>().PlayerChar = _player;
             CurrentEvent.GetComponent<SparringMatch>().Friend = _friend;
+            CurrentEvent.GetComponent<SparringMatch>().Mom = _mom;
             CurrentEvent.GetComponent<SparringMatch>().Chief = _chief;
             CurrentEvent.GetComponent<SparringMatch>().House = _chiefHouse;
             CurrentEvent.GetComponent<SparringMatch>().HouseIndoor = _chiefHouseIndoor;
             CurrentEvent.GetComponent<SparringMatch>().MatchBoundary = _matchBoundary;
+            CurrentEvent.GetComponent<SparringMatch>().MomTrigger = _momTrigger;
+            CurrentEvent.GetComponent<SparringMatch>().FriendTrigger = _friendTrigger;
             CurrentEvent.GetComponent<SparringMatch>().ChiefTrigger = _chiefTrigger;
         }
         else if (CurrentEvent.GetComponent<FirstQuest>())
         {
             UpdateDialogue(1); // update dialogue
-            _player.CanEnter = true; // enable enter action
             CurrentEvent.GetComponent<FirstQuest>().PlayerChar = _player;
             CurrentEvent.GetComponent<FirstQuest>().Friend = _friend;
             CurrentEvent.GetComponent<FirstQuest>().Mom = _mom;

@@ -46,12 +46,12 @@ public class PartyBase : FighterBase
                 // show HUD
                 BattleHUD.SetActive(true);
 
+                // target icon
+                CurrentOpponent.target.enabled = true;
+
                 // multiple enemies
                 if (CurrentOpponent.Allies.Count > 0)
                 {
-                    // target icon
-                    CurrentOpponent.target.enabled = true;
-
                     if (Input.Right || Input.Left)
                     {
                         CurrentOpponent.target.enabled = false;

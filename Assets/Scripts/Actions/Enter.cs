@@ -51,7 +51,7 @@ public class Enter : MonoBehaviour
     {
         if (_detectPlayer && _detectPlayer.StateMachine.CurrentState == _detectPlayer.IdleState)
         {
-            if (_detectPlayer.Input.E && _detectPlayer.CanEnter)
+            if (_detectPlayer.Input.E && !_detectPlayer.CannotEnter)
             {
                 if (_location == null)
                 {
@@ -65,7 +65,7 @@ public class Enter : MonoBehaviour
                     ScreenTransition();
                 }
             }
-            else if (_detectPlayer.Input.E && !_detectPlayer.CanEnter)
+            else if (_detectPlayer.Input.E && _detectPlayer.CannotEnter)
             {
                 _detectPlayer.OnEnter(); // call delegates
                 _activeIcon.SetActive(false);

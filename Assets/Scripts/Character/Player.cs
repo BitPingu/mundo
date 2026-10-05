@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Player : PartyBase
 {
     // conditions
-    public bool CanEnter { get; set; }
+    public bool CannotEnter { get; set; }
     public bool IsEntering { get; set; }
     public bool IsNearEnemy { get; set; }
     public bool IsNearChest { get; set; }
