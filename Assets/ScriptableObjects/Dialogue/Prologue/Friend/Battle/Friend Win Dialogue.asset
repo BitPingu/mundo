@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Friend Win Dialogue
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Alice
+  - charName: Reina
     line: That was too easy!
     reaction: 
     choices: []

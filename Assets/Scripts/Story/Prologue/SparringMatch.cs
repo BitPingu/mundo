@@ -9,44 +9,183 @@ public class SparringMatch : EventBase
     public Villager Chief { get; set; }
     public GameObject House { get; set; }
     public GameObject HouseIndoor { get; set; }
-    [SerializeField] private Dialogue _chiefDialogue, _damageDialogue, _chiefDialogue2, _chiefDialogue3, _friendDialogue;
-    private bool _chiefDialogueActive, _friendHurt, _chiefDialogue2Active, _chiefDialogue3Active, _friendDialogueActive;
+    public Boundary MatchBoundary { get; set; }
+    public Destination ChiefTrigger { get; set; }
+    [SerializeField] private Dialogue _curFriendDialogue, _targetDialogue, _outBoundsDialogue, _chiefDialogue, 
+        _damageDialogue, _chiefDialogue2, _chiefDialogue3, _friendDialogue;
+    private bool _entered, _chiefEncounter, _chiefDialogueActive, _friendHurt, _chiefDialogue2Active, _chiefDialogue3Active, 
+        _friendDialogueActive;
+    private int _inPos;
 
     private void Start()
     {
         // set dialogue delegates
+        DialogueController.Instance.OnDialogueFinish += OutOfBounds;
+        PlayerChar.OnEnter += EnterBuilding;
+        DialogueController.Instance.OnDialogueFinish += ExitBuilding;
+        DialogueController.Instance.OnDialogueFinish += ChiefEncounter;
         DialogueController.Instance.OnDialogueFinish += StartMatch;
         DialogueController.Instance.OnBattleDialogueFinish += FinishMatch;
         DialogueController.Instance.OnDialogueFinish += GiveQuest;
         DialogueController.Instance.OnDialogueFinish += ChiefReturns;
         DialogueController.Instance.OnDialogueFinish += FinishEvent;
 
-        // set spawn
-        PlayerChar.transform.position = new Vector2(Chief.transform.position.x+.8f, Chief.transform.position.y-1f);
-        Friend.transform.position = new Vector2(Chief.transform.position.x-.8f, Chief.transform.position.y-1f);
+        // set current dialogue
+        Friend.CurrentDialogue = _curFriendDialogue;
 
-        // end states
-        if (PlayerChar.StateMachine.CurrentState != null)
-            PlayerChar.StateMachine.End(); // stop movement
-        if (Friend.StateMachine.CurrentState != null)
-            Friend.StateMachine.End(); // stop movement
-        
-        PlayerChar.Face(Chief);
-        Friend.Face(Chief);
-        Friend.Anim.enabled = false;
-
-        // start chief dialogue
-        DialogueController.Instance.StartDialogue(_chiefDialogue, new List<CharacterBase>{Chief, Friend});
-        _chiefDialogueActive = true;
+        // disable enter action
+        PlayerChar.CanEnter = false;
     }
 
     private void Update()
     {
-        if (PlayerChar.StateMachine.CurrentState == PlayerChar.BattleState && !_friendHurt && Friend.CurrentHealth <= Friend.MaxHealth/2f)
+        // out of bounds check
+        if (MatchBoundary.DetectPlayer && PlayerChar.StateMachine.CurrentState == PlayerChar.IdleState)
         {
-            StartCoroutine(SparringDialogue());
-            _friendHurt = true;
+            PlayerChar.StateMachine.End(); // stop movement
+
+            Friend.Face(PlayerChar);
+            Friend.Anim.Rebind();
+            Friend.Anim.enabled = false;
+
+            // start dialogue
+            DialogueController.Instance.StartDialogue(_outBoundsDialogue, new List<CharacterBase>{Friend});
         }
+
+        // meet the chief
+        if (ChiefTrigger.Reached)
+        {
+            // approach chief
+            if (!_chiefEncounter && !DialogueController.Instance.IsDialogueActive)
+            {
+                PlayerChar.StateMachine.End(); // stop movement
+                Friend.StateMachine.End(); // stop movement
+                
+                Friend.Anim.Rebind();
+                Friend.Anim.enabled = false;
+
+                // start dialogue
+                DialogueController.Instance.StartDialogue(_targetDialogue, new List<CharacterBase>{Friend});
+                _chiefEncounter = true;
+            }
+
+            // setup match
+            if (_chiefEncounter && _inPos == 2)
+            {
+                Debug.Log("setup!");
+                _inPos = -1;
+
+                Friend.Anim.Rebind();
+                Friend.Anim.enabled = false;
+
+                // set spawn
+                PlayerChar.transform.position = new Vector2(Chief.transform.position.x+.8f, Chief.transform.position.y-1f);
+                Friend.transform.position = new Vector2(Chief.transform.position.x-.8f, Chief.transform.position.y-1f);
+
+                // end states
+                if (PlayerChar.StateMachine.CurrentState != null)
+                    PlayerChar.StateMachine.End(); // stop movement
+                if (Friend.StateMachine.CurrentState != null)
+                    Friend.StateMachine.End(); // stop movement
+                
+                PlayerChar.Face(Chief);
+                Friend.Face(Chief);
+
+                // start chief dialogue
+                DialogueController.Instance.StartDialogue(_chiefDialogue, new List<CharacterBase>{Chief, Friend});
+                _chiefDialogueActive = true;
+            }
+
+            // sparring dialogue
+            if (!_friendHurt && Friend.CurrentHealth <= Friend.MaxHealth/2f)
+            {
+                StartCoroutine(SparringDialogue());
+                _friendHurt = true;
+            }
+        }
+    }
+
+    private void OutOfBounds()
+    {
+        if (!MatchBoundary.DetectPlayer)
+            return;
+
+        Friend.Anim.enabled = true;
+        StartCoroutine(GoBack());
+    }
+
+    private IEnumerator GoBack()
+    {
+        PlayerChar.Face(Friend);
+
+        // go back
+        Vector2 vec = Friend.transform.position - PlayerChar.transform.position;
+        
+        PlayerChar.Move(vec);
+
+        yield return new WaitForSeconds(.5f);
+
+        PlayerChar.StateMachine.Initialize(PlayerChar.IdleState); // enable movement
+        
+        MatchBoundary.DetectPlayer = null;
+    }
+
+    private void EnterBuilding()
+    {
+        // enter building check
+        PlayerChar.StateMachine.End(); // stop movement
+
+        Friend.Face(PlayerChar);
+        Friend.Anim.Rebind();
+        Friend.Anim.enabled = false;
+
+        // start dialogue
+        DialogueController.Instance.StartDialogue(_outBoundsDialogue, new List<CharacterBase>{Friend});
+
+        _entered = true;
+    }
+
+    private void ExitBuilding()
+    {
+        if (!_entered)
+            return;
+
+        _entered = false;
+        Friend.Anim.enabled = true;
+        PlayerChar.StateMachine.Initialize(PlayerChar.IdleState); // enable movement
+    }
+
+    private void ChiefEncounter()
+    {
+        if (!_chiefEncounter || MatchBoundary.DetectPlayer || _inPos == -1)
+            return;
+        
+        Debug.Log("encounter");
+
+        Friend.Anim.enabled = true;
+
+        // before battle
+        StartCoroutine(GoToBattle(PlayerChar, new Vector2(Chief.transform.position.x+.8f, Chief.transform.position.y-1f)));
+        StartCoroutine(GoToBattle(Friend, new Vector2(Chief.transform.position.x-.8f, Chief.transform.position.y-1f)));
+    }
+
+    private IEnumerator GoToBattle(CharacterBase character, Vector3 destination)
+    {
+        // move to battle position
+        float distance = Vector2.Distance(destination, character.transform.position);
+        Vector2 vec = destination - character.transform.position;
+        while (distance > 0.1f)
+        {
+            distance = Vector2.Distance(destination, character.transform.position);
+            character.Move(vec);
+            yield return new WaitForFixedUpdate();
+        }
+
+        character.Move(Vector2.zero);
+        character.Face(Chief);
+        Debug.Log("add");
+
+        _inPos++;
     }
 
     private void StartMatch()
@@ -190,7 +329,12 @@ public class SparringMatch : EventBase
 
         EventIsDone = true; // event done
 
+        DialogueController.Instance.OnDialogueFinish -= OutOfBounds;
+        PlayerChar.OnEnter -= EnterBuilding;
+        DialogueController.Instance.OnDialogueFinish -= ExitBuilding;
+        DialogueController.Instance.OnDialogueFinish -= ChiefEncounter;
         DialogueController.Instance.OnDialogueFinish -= StartMatch;
+        DialogueController.Instance.OnBattleDialogueFinish -= FinishMatch;
         DialogueController.Instance.OnDialogueFinish -= GiveQuest;
         DialogueController.Instance.OnDialogueFinish -= ChiefReturns;
         DialogueController.Instance.OnDialogueFinish -= FinishEvent;

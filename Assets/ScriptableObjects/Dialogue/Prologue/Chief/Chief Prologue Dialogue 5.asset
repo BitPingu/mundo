@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Chief Prologue Dialogue 5
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Alice
+  - charName: Reina
     line: We've defeated them!
     reaction: 
     choices: []

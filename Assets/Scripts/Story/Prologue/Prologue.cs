@@ -16,12 +16,13 @@ public class Prologue : ChapterBase
     [SerializeField] protected Enemy _slime, _slime1, _slime2, _slime3;
     [SerializeField] protected VillagerDialogue[] _vDialogue;
     [SerializeField] protected GameObject _chiefHouse, _chiefHouseIndoor, _chest, _vines, _crystal;
-    [SerializeField] protected Destination _encounterTrigger, _ambushTrigger;
+    [SerializeField] protected Boundary _matchBoundary, _slimeBoundary;
+    [SerializeField] protected Destination _chiefTrigger, _encounterTrigger, _ambushTrigger;
 
     public override void BeginChapter()
     {
         // TODO: temp
-        _friend.Join(_player);
+        // _friend.Join(_player);
 
         UpdateDialogue(0); // init dialogue
         base.BeginChapter();
@@ -43,13 +44,6 @@ public class Prologue : ChapterBase
             CurrentEvent.GetComponent<TalkToFriend>().Mom = _mom;
             CurrentEvent.GetComponent<TalkToFriend>().Friend = _friend;
         }
-        else if (CurrentEvent.GetComponent<HeadToMatch>())
-        {
-            _player.CanEnter = false; // disable enter action
-            CurrentEvent.GetComponent<HeadToMatch>().PlayerChar = _player;
-            CurrentEvent.GetComponent<HeadToMatch>().Friend = _friend;
-            CurrentEvent.GetComponent<HeadToMatch>().Chief = _chief;
-        }
         else if (CurrentEvent.GetComponent<SparringMatch>())
         {
             CurrentEvent.GetComponent<SparringMatch>().PlayerChar = _player;
@@ -57,6 +51,8 @@ public class Prologue : ChapterBase
             CurrentEvent.GetComponent<SparringMatch>().Chief = _chief;
             CurrentEvent.GetComponent<SparringMatch>().House = _chiefHouse;
             CurrentEvent.GetComponent<SparringMatch>().HouseIndoor = _chiefHouseIndoor;
+            CurrentEvent.GetComponent<SparringMatch>().MatchBoundary = _matchBoundary;
+            CurrentEvent.GetComponent<SparringMatch>().ChiefTrigger = _chiefTrigger;
         }
         else if (CurrentEvent.GetComponent<FirstQuest>())
         {
@@ -76,6 +72,7 @@ public class Prologue : ChapterBase
             CurrentEvent.GetComponent<FirstQuest>().Chest = _chest;
             CurrentEvent.GetComponent<FirstQuest>().Vines = _vines;
             CurrentEvent.GetComponent<FirstQuest>().Crystal = _crystal;
+            CurrentEvent.GetComponent<FirstQuest>().SlimeBoundary = _slimeBoundary;
             CurrentEvent.GetComponent<FirstQuest>().EncounterTrigger = _encounterTrigger;
             CurrentEvent.GetComponent<FirstQuest>().AmbushTrigger = _ambushTrigger;
         }

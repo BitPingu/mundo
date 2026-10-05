@@ -34,7 +34,7 @@ MonoBehaviour:
     choices: []
     redirectDialogueIndex: -1
   - charName: 
-    line: I have a sparring match with Alice today...
+    line: I have a sparring match with Reina today...
     reaction: 
     choices: []
     redirectDialogueIndex: -1

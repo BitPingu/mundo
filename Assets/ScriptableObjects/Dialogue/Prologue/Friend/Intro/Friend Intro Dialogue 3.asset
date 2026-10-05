@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Friend Intro Dialogue 3
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Alice
+  - charName: Reina
     line: Hey! Where are you going? It's not that way!
     reaction: surprised
     choices: []

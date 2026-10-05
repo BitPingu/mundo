@@ -18,7 +18,7 @@ MonoBehaviour:
     reaction: 
     choices: []
     redirectDialogueIndex: -1
-  - charName: Alice
+  - charName: Reina
     line: ...Whew, that was fun! You sure are strong, Ely!
     reaction: 
     choices: []

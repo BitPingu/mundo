@@ -18,12 +18,12 @@ MonoBehaviour:
     reaction: 
     choices: []
     redirectDialogueIndex: -1
-  - charName: Alice
+  - charName: Reina
     line: Oh, we are not done yet...
     reaction: surprised
     choices: []
     redirectDialogueIndex: -1
-  - charName: Alice
+  - charName: Reina
     line: Ely! Let's finish the mission first!
     reaction: surprised
     choices: []

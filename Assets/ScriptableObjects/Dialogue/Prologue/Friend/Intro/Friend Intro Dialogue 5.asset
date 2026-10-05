@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: Friend Intro Dialogue 5
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Alice
+  - charName: Reina
     line: Wow, Ely! Our first mission!
     reaction: 
     choices: []
     redirectDialogueIndex: -1
-  - charName: Alice
+  - charName: Reina
     line: But before we head out, let's make sure we are fully prepared.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
-  - charName: Alice
+  - charName: Reina
     line: ...Have you forgetten where the shop and inn is? Come, I'll show you!
     reaction: 
     choices: []

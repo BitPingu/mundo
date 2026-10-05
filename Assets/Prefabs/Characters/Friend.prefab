@@ -706,7 +706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b6789b0c92741ff84df7f0e9217811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charName: Alice
+  charName: Reina
   _portraits:
   - sprite: {fileID: 21300000, guid: 367b383abb86a4777b787aceeafbf3af, type: 3}
     reaction: 

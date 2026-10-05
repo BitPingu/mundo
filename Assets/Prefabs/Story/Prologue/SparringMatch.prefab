@@ -45,6 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EventIsDone: 0
+  MatchBoundary: {fileID: 0}
+  _curFriendDialogue: {fileID: 11400000, guid: 65a8d4cf9bbe04f8ba05e996aba7544a, type: 2}
+  _targetDialogue: {fileID: 11400000, guid: c998a2fade45c40399454dd063761d6a, type: 2}
+  _outBoundsDialogue: {fileID: 11400000, guid: 1cba9b3744285411e94cd8c5edd890c5, type: 2}
   _chiefDialogue: {fileID: 11400000, guid: a57eade50fde54347a8208253a190bce, type: 2}
   _damageDialogue: {fileID: 11400000, guid: aed81be899702441986aaf8233662165, type: 2}
   _chiefDialogue2: {fileID: 11400000, guid: 728ae53c705f6488c892fdb97162a0b3, type: 2}

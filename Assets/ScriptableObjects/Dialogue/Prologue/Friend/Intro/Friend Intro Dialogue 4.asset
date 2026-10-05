@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Friend Intro Dialogue 4
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Alice
+  - charName: Reina
     line: Sorry we're late!
     reaction: 
     choices: []

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Friend Hurt Dialogue
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Alice
+  - charName: Reina
     line: Agh! I'll get you for that one!
     reaction: hurt
     choices: []

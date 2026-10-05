@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Friend Tired Dialogue
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Alice
+  - charName: Reina
     line: Ugh... I'm not feeling too well...
     reaction: tired
     choices: []

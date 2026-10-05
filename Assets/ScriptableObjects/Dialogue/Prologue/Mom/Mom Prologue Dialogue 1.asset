@@ -19,7 +19,7 @@ MonoBehaviour:
     choices: []
     redirectDialogueIndex: -1
   - charName: Mom
-    line: Alice was just here looking for you. You have a sparring match with her
+    line: Reina was just here looking for you. You have a sparring match with her
       today, right?
     reaction: 
     choices: []

@@ -18,6 +18,7 @@ public class FirstQuest : EventBase
     public GameObject Chest { get; set; }
     public GameObject Vines { get; set; }
     public GameObject Crystal { get; set; }
+    public Boundary SlimeBoundary { get; set; }
     public Destination EncounterTrigger { get; set; }
     public Destination AmbushTrigger { get; set; }
     [SerializeField] private GameObject _reactIcon;
@@ -26,7 +27,7 @@ public class FirstQuest : EventBase
         _ambushDialogue, _ambushBattleDialogue, _afterAmbushDialogue, _travellerDialogue, _vinesDialogue, 
         _friendDialogue4, _crystalDialogue, _friendDialogue5, _friendDialogue6, _removeVinesDialogue, 
         _friendDialogue7;
-    private bool _slimeEncounter, _outBounds, _firstSlimeDefeat, _firstSlimeDefeat2, _findChest, _ambush,
+    private bool _slimeEncounter, _firstSlimeDefeat, _firstSlimeDefeat2, _findChest, _ambush,
         _ambushTutorial, _vines, _crystal, _crystalEncounter, _crystalSlimeDefeat, _vinesRemoved;
     private int _inPos;
 
@@ -73,7 +74,7 @@ public class FirstQuest : EventBase
         // first enemy slime encounter
         if (EncounterTrigger.Reached && !_firstSlimeDefeat)
         {
-            float slimeDistance = Vector2.Distance(SlimeChar.SpawnPoint, PlayerChar.transform.position);
+            // approach slime
             if (!_slimeEncounter && !DialogueController.Instance.IsDialogueActive)
             {
                 PlayerChar.StateMachine.End(); // stop movement
@@ -84,11 +85,13 @@ public class FirstQuest : EventBase
 
                 CameraController.Instance.target = SlimeChar.transform;
 
+                // start dialogue
                 StartCoroutine(SlimeDialogue());
-
                 _slimeEncounter = true;
             }
-            if (_slimeEncounter && slimeDistance > 5.5f && PlayerChar.StateMachine.CurrentState == PlayerChar.IdleState)
+
+            // out of bounds check
+            if (_slimeEncounter && SlimeBoundary.DetectPlayer && PlayerChar.StateMachine.CurrentState == PlayerChar.IdleState)
             {
                 PlayerChar.StateMachine.End(); // stop movement
 
@@ -98,7 +101,6 @@ public class FirstQuest : EventBase
 
                 // start dialogue
                 DialogueController.Instance.StartDialogue(_outBoundsDialogue, new List<CharacterBase>{Friend});
-                _outBounds = true;
             }
         }
 
@@ -193,7 +195,7 @@ public class FirstQuest : EventBase
 
     private void SlimeEncounter()
     {
-        if (!_slimeEncounter || _outBounds || SlimeChar == null)
+        if (!_slimeEncounter || SlimeBoundary.DetectPlayer || SlimeChar == null)
             return;
 
         CameraController.Instance.target = PlayerChar.transform;
@@ -207,31 +209,27 @@ public class FirstQuest : EventBase
 
     private void OutOfBounds()
     {
-        if (!_outBounds)
+        if (!SlimeBoundary.DetectPlayer)
             return;
 
-        _outBounds = false;
-
         Friend.Anim.enabled = true;
-        StartCoroutine(GoBack(PlayerChar));
+        StartCoroutine(GoBack());
     }
 
-    private IEnumerator GoBack(Player player)
+    private IEnumerator GoBack()
     {
-        player.Face(SlimeChar);
-
-        Vector3 returnPos = SlimeChar.SpawnPoint;
+        PlayerChar.Face(Friend);
 
         // go back
-        float _distance = Vector2.Distance(returnPos, player.transform.position);
-        while (_distance > 3f)
-        {
-            _distance = Vector2.Distance(returnPos, player.transform.position);
-            player.Move(returnPos - player.transform.position);
-            yield return new WaitForFixedUpdate();
-        }
+        Vector2 vec = Friend.transform.position - PlayerChar.transform.position;
+        
+        PlayerChar.Move(vec);
 
-        player.StateMachine.Initialize(player.IdleState); // enable movement
+        yield return new WaitForSeconds(.5f);
+
+        PlayerChar.StateMachine.Initialize(PlayerChar.IdleState); // enable movement
+        
+        SlimeBoundary.DetectPlayer = null;
     }
 
     private void SlimeDefeat()

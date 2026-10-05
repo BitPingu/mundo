@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6952143963744924556}
   - component: {fileID: 4777164378282475502}
   m_Layer: 0
-  m_Name: HeadToMatch
+  m_Name: Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 20, y: 10}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &4777164378282475502
 MonoBehaviour:
@@ -91,7 +91,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7fa4e10d2bf6423cb8bb5b39618575d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EventIsDone: 0
-  _curFriendDialogue: {fileID: 11400000, guid: 65a8d4cf9bbe04f8ba05e996aba7544a, type: 2}
-  _targetDialogue: {fileID: 11400000, guid: c998a2fade45c40399454dd063761d6a, type: 2}
-  _outBoundsDialogue: {fileID: 11400000, guid: 1cba9b3744285411e94cd8c5edd890c5, type: 2}

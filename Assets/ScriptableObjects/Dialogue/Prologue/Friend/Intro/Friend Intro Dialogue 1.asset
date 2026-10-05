@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: Friend Intro Dialogue 1
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Alice
+  - charName: Reina
     line: Hey, sleepyhead! What kept you in?
     reaction: 
     choices: []
     redirectDialogueIndex: -1
-  - charName: Alice
+  - charName: Reina
     line: Did you forget? Our sparring match is today!
     reaction: 
     choices: []
     redirectDialogueIndex: -1
-  - charName: Alice
+  - charName: Reina
     line: Let's hurry! We have to meet with the chief at the training grounds.
     reaction: 
     choices: []

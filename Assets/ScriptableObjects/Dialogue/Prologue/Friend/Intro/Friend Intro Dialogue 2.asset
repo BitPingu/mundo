@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Friend Intro Dialogue 2
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Alice
+  - charName: Reina
     line: Let's hurry! We have to meet with the chief at the training grounds.
     reaction: 
     choices: []

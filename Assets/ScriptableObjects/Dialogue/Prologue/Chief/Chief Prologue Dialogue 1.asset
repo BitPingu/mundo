@@ -19,7 +19,7 @@ MonoBehaviour:
     choices: []
     redirectDialogueIndex: -1
   - charName: Chief Vandham
-    line: I shall commence the sparring match between Ely and Alice.
+    line: I shall commence the sparring match between Ely and Reina.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
@@ -28,7 +28,7 @@ MonoBehaviour:
     reaction: 
     choices: []
     redirectDialogueIndex: -1
-  - charName: Alice
+  - charName: Reina
     line: En garde!
     reaction: 
     choices: []

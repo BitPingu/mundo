@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Friend Intro Dialogue 6
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Alice
+  - charName: Reina
     line: Let's head to the forest!
     reaction: 
     choices: []
