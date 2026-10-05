@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Friend Forest Dialogue 7
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Alice
+  - charName: Reina
     line: We're facing multiple enemies this time! Use the arrow keys to target one.
     reaction: 
     choices: []

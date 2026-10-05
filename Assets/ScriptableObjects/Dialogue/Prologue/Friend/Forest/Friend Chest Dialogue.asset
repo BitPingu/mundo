@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Friend Chest Dialogue
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Alice
+  - charName: Reina
     line: Oh, look! A treasure chest!
     reaction: 
     choices: []
     redirectDialogueIndex: -1
-  - charName: Alice
+  - charName: Reina
     line: Let's see what's inside!
     reaction: 
     choices: []

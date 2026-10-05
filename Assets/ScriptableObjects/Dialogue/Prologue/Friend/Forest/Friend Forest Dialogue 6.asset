@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Friend Forest Dialogue 6
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Alice
+  - charName: Reina
     line: Oh no, it's an ambush!
     reaction: surprised
     choices: []

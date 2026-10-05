@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Friend Forest Dialogue 10
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Alice
+  - charName: Reina
     line: Let's see if we can find a way around those vines.
     reaction: 
     choices: []

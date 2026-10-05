@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Friend Forest Dialogue 16
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Alice
+  - charName: Reina
     line: Hold on, it's getting late. Let's stop here and rest.
     reaction: 
     choices: []

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Friend Forest Dialogue 12
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Alice
+  - charName: Reina
     line: We should take out those slimes so we can investigate that crystal.
     reaction: 
     choices: []

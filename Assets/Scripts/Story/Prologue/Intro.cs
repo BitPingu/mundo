@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SparringMatch : EventBase
+public class Intro : EventBase
 {
     public Player PlayerChar { get; set; }
     public Companion Friend { get; set; }
@@ -57,7 +57,7 @@ public class SparringMatch : EventBase
             }
         }
 
-        if (FriendTrigger.Reached && !Friend.Leader)
+        if (FriendTrigger.Reached && !Friend.CurrentDialogue && !Friend.Leader)
         {
             // meet friend
             if (!_friendEncounter && PlayerChar.StateMachine.CurrentState == PlayerChar.IdleState)
@@ -415,7 +415,6 @@ public class SparringMatch : EventBase
 
         _introEnd = false;
 
-        Friend.Join(PlayerChar); // rejoin party
         PlayerChar.CannotEnter = false; // enable enter action
 
         EventIsDone = true; // event done

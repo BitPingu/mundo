@@ -19,7 +19,7 @@ MonoBehaviour:
     reaction: 
     choices: []
     redirectDialogueIndex: -1
-  - charName: Alice
+  - charName: Reina
     line: Sure!
     reaction: 
     choices: []
@@ -35,12 +35,12 @@ MonoBehaviour:
     reaction: 
     choices: []
     redirectDialogueIndex: -1
-  - charName: Alice
+  - charName: Reina
     line: Of course! We'd love to help! We're heading there anyway.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
-  - charName: Alice
+  - charName: Reina
     line: What do you say, Ely? Should we help?
     reaction: 
     choices: []

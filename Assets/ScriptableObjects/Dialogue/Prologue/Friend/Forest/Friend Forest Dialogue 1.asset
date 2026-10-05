@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Friend Forest Dialogue 1
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Alice
+  - charName: Reina
     line: Oh, look! There's an enemy slime!
     reaction: 
     choices: []
     redirectDialogueIndex: -1
-  - charName: Alice
+  - charName: Reina
     line: Let's close in on it!
     reaction: 
     choices: []

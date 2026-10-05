@@ -13,24 +13,24 @@ MonoBehaviour:
   m_Name: Friend Forest Dialogue 11
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Alice
+  - charName: Reina
     line: Oh, look over there!
     reaction: 
     choices: []
     redirectDialogueIndex: -1
-  - charName: Alice
+  - charName: Reina
     line: There's a strange glowing crystal. I wonder why those slimes are attracted
       to it.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
-  - charName: Alice
+  - charName: Reina
     line: We should try inspecting it to see if it might be causing those vines to
       grow.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
-  - charName: Alice
+  - charName: Reina
     line: But first, let's take out those slimes.
     reaction: 
     choices: []

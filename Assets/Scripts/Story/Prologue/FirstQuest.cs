@@ -60,6 +60,8 @@ public class FirstQuest : EventBase
         Mom.transform.position = new Vector3(.73f,-43.48f,0);
         Mom.Sprite.flipX = false;
 
+        Friend.Join(PlayerChar); // rejoin party
+
         // available quests
         Vector2 iconPos = new Vector2(Traveller.transform.position.x, Traveller.transform.position.y+1f);
         GameObject _activeIcon = Instantiate(_reactIcon, iconPos, Quaternion.identity, Traveller.transform);

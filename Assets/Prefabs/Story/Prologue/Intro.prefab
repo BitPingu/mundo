@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9155836629394963969}
   - component: {fileID: 2594605836150673444}
   m_Layer: 0
-  m_Name: SparringMatch
+  m_Name: Intro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

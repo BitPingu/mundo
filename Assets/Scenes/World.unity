@@ -47494,7 +47494,7 @@ MonoBehaviour:
   _defaultVoicePitch: 0.4
   _input: {fileID: 1642564164}
   _autoProgressDelay: 1.5
-  _typingSpeed: 0.01
+  _typingSpeed: 0.015
   _skipDelay: 0.2
 --- !u!1 &911120674
 GameObject:

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 779dd7459b6454ed6babaec1e3e9cb9c
+guid: 912921c4633f144cc9922b11921ad322
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7664605693119280686
-    second: butterfly_0
+      213: -3526766879439944812
+    second: butterfly 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,10 +126,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2d9403e1bb9d1a590800000000000000
-      internalID: -7664605693119280686
+      spriteID: 09ec0260b3f744443999e0782f7f872c
+      internalID: -1551273538
       vertices: []
       indices: 
       edges: []
@@ -150,8 +150,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e4ae278d584854781ab6fdabcfafbf43
-      internalID: 481005186
+      spriteID: 720674a566d0140258f1dc317d6cd5ca
+      internalID: -614033253
       vertices: []
       indices: 
       edges: []
@@ -172,8 +172,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a339424393529460b9dfb7d254455cbf
-      internalID: 371766273
+      spriteID: 7d602045f3dc243da99c23c4de2c92a6
+      internalID: 878981035
       vertices: []
       indices: 
       edges: []
@@ -194,8 +194,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f3294b8f04084a8caf0c4e938eb7ac8
-      internalID: -722980805
+      spriteID: 5d76a1f09410c404d980765ba15a8dfd
+      internalID: 1402747387
       vertices: []
       indices: 
       edges: []
@@ -204,7 +204,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 092b3ee1c05644e7da81f24b6d364634
+    spriteID: 56219ec1aa8e44d56b7e69e69d7ef864
     internalID: 0
     vertices: []
     indices: 
@@ -214,10 +214,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      butterfly_0: -7664605693119280686
-      butterfly_1: 481005186
-      butterfly_2: 371766273
-      butterfly_3: -722980805
+      butterfly_0: -1551273538
+      butterfly_1: -614033253
+      butterfly_2: 878981035
+      butterfly_3: 1402747387
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

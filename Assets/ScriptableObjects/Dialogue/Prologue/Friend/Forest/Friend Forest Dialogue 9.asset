@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Friend Forest Dialogue 9
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Alice
+  - charName: Reina
     line: Hmm, looks like these vines are blocking the way.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
-  - charName: Alice
+  - charName: Reina
     line: Let's see if we can find a way around it.
     reaction: 
     choices: []

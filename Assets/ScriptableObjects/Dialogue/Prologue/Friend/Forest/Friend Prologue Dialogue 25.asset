@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Friend Prologue Dialogue 25
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Alice
+  - charName: Reina
     line: Hm? What's that sound?
     reaction: 
     choices: []

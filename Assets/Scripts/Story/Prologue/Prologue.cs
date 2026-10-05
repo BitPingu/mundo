@@ -21,9 +21,6 @@ public class Prologue : ChapterBase
 
     public override void BeginChapter()
     {
-        // TODO: temp
-        // _friend.Join(_player);
-
         UpdateDialogue(0); // init dialogue
         base.BeginChapter();
     }
@@ -32,18 +29,18 @@ public class Prologue : ChapterBase
     {
         base.SetupEvent();
 
-        if (CurrentEvent.GetComponent<SparringMatch>())
+        if (CurrentEvent.GetComponent<Intro>())
         {
-            CurrentEvent.GetComponent<SparringMatch>().PlayerChar = _player;
-            CurrentEvent.GetComponent<SparringMatch>().Friend = _friend;
-            CurrentEvent.GetComponent<SparringMatch>().Mom = _mom;
-            CurrentEvent.GetComponent<SparringMatch>().Chief = _chief;
-            CurrentEvent.GetComponent<SparringMatch>().House = _chiefHouse;
-            CurrentEvent.GetComponent<SparringMatch>().HouseIndoor = _chiefHouseIndoor;
-            CurrentEvent.GetComponent<SparringMatch>().MatchBoundary = _matchBoundary;
-            CurrentEvent.GetComponent<SparringMatch>().MomTrigger = _momTrigger;
-            CurrentEvent.GetComponent<SparringMatch>().FriendTrigger = _friendTrigger;
-            CurrentEvent.GetComponent<SparringMatch>().ChiefTrigger = _chiefTrigger;
+            CurrentEvent.GetComponent<Intro>().PlayerChar = _player;
+            CurrentEvent.GetComponent<Intro>().Friend = _friend;
+            CurrentEvent.GetComponent<Intro>().Mom = _mom;
+            CurrentEvent.GetComponent<Intro>().Chief = _chief;
+            CurrentEvent.GetComponent<Intro>().House = _chiefHouse;
+            CurrentEvent.GetComponent<Intro>().HouseIndoor = _chiefHouseIndoor;
+            CurrentEvent.GetComponent<Intro>().MatchBoundary = _matchBoundary;
+            CurrentEvent.GetComponent<Intro>().MomTrigger = _momTrigger;
+            CurrentEvent.GetComponent<Intro>().FriendTrigger = _friendTrigger;
+            CurrentEvent.GetComponent<Intro>().ChiefTrigger = _chiefTrigger;
         }
         else if (CurrentEvent.GetComponent<FirstQuest>())
         {
