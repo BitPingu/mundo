@@ -7,6 +7,7 @@ public class Talk : MonoBehaviour
     private GameObject _activeIcon;
     private CharacterBase _character;
     [SerializeField] private GameObject _icon;
+    private bool _talking;
 
     private void Start()
     {
@@ -75,6 +76,7 @@ public class Talk : MonoBehaviour
 
                 // start dialogue
                 DialogueController.Instance.StartDialogue(_character.CurrentDialogue, characters);
+                _talking = true;
             }
 
             if (!_activeIcon)
@@ -97,7 +99,7 @@ public class Talk : MonoBehaviour
             _activeIcon.SetActive(true);
         }
 
-        if (_detectPlayer && (_detectPlayer.IsEntering || _detectPlayer.IsNearEnemy || _detectPlayer.IsNearChest))
+        if (_detectPlayer && (_detectPlayer.IsEntering || _detectPlayer.IsNearEnemy || _detectPlayer.IsNearInteractable))
         {
             // cancel when other actions are available
             OnTriggerExit2D(_detectPlayer.GetComponent<Collider2D>());
@@ -111,7 +113,7 @@ public class Talk : MonoBehaviour
 
     private void End()
     {
-        if (!_detectPlayer)
+        if (!_talking)
             return;
 
         if (_character && _character.Anim)
@@ -119,5 +121,6 @@ public class Talk : MonoBehaviour
 
         _detectPlayer.StateMachine.Initialize(_detectPlayer.IdleState); // enable movement
         _character.StateMachine.Initialize(_character.IdleState); // enable movement
+        _talking = false;
     }
 }

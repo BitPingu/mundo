@@ -8,7 +8,7 @@ public class Player : PartyBase
     public bool CannotEnter { get; set; }
     public bool IsEntering { get; set; }
     public bool IsNearEnemy { get; set; }
-    public bool IsNearChest { get; set; }
+    public bool IsNearInteractable { get; set; }
 
     public delegate void Enter();
     public Enter OnEnter;

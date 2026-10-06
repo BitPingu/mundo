@@ -15,9 +15,9 @@ public class Prologue : ChapterBase
     [SerializeField] protected Villager _mom, _chief, _shopkeeper, _traveller;
     [SerializeField] protected Enemy _slime, _slime1, _slime2, _slime3;
     [SerializeField] protected VillagerDialogue[] _vDialogue;
-    [SerializeField] protected GameObject _chiefHouse, _chiefHouseIndoor, _chest, _vines, _crystal;
+    [SerializeField] protected GameObject _chiefHouse, _chiefHouseIndoor, _chest, _vines, _crystal, _campfire;
     [SerializeField] protected Boundary _matchBoundary, _slimeBoundary;
-    [SerializeField] protected Destination _momTrigger, _friendTrigger, _chiefTrigger, _encounterTrigger, _ambushTrigger;
+    [SerializeField] protected Destination _momTrigger, _friendTrigger, _chiefTrigger, _encounterTrigger, _ambushTrigger, _restTrigger;
 
     public override void BeginChapter()
     {
@@ -59,9 +59,11 @@ public class Prologue : ChapterBase
             CurrentEvent.GetComponent<FirstQuest>().Chest = _chest;
             CurrentEvent.GetComponent<FirstQuest>().Vines = _vines;
             CurrentEvent.GetComponent<FirstQuest>().Crystal = _crystal;
+            CurrentEvent.GetComponent<FirstQuest>().Campfire = _campfire;
             CurrentEvent.GetComponent<FirstQuest>().SlimeBoundary = _slimeBoundary;
             CurrentEvent.GetComponent<FirstQuest>().EncounterTrigger = _encounterTrigger;
             CurrentEvent.GetComponent<FirstQuest>().AmbushTrigger = _ambushTrigger;
+            CurrentEvent.GetComponent<FirstQuest>().RestTrigger = _restTrigger;
         }
     }
 

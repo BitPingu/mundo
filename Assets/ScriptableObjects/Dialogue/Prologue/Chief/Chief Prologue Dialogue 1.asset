@@ -14,17 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Chief Vandham
-    line: Ah, there you two are.
+    line: Ah, there you two are. I was beginning to wonder if you had forgotten.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Chief Vandham
-    line: I shall commence the sparring match between Ely and Reina.
-    reaction: 
-    choices: []
-    redirectDialogueIndex: -1
-  - charName: Chief Vandham
-    line: Now, begin!
+    line: Very well, let us begin. Prepare yourselves, and give it your all!
     reaction: 
     choices: []
     redirectDialogueIndex: -1

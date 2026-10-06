@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Chief Vandham
-    line: Hm? How goes the mission?
+    line: Hm? How goes the assignment?
     reaction: 
     choices: []
     redirectDialogueIndex: -1
@@ -24,7 +24,7 @@ MonoBehaviour:
     choices: []
     redirectDialogueIndex: -1
   - charName: Reina
-    line: Ely! Let's finish the mission first!
+    line: Ely! Let's finish the assignment first!
     reaction: surprised
     choices: []
     redirectDialogueIndex: -1

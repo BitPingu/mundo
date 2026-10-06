@@ -67,3 +67,5 @@ MonoBehaviour:
   _friendDialogue6: {fileID: 11400000, guid: d698c465f7aaa4487b284f6e2c763bfd, type: 2}
   _removeVinesDialogue: {fileID: 11400000, guid: 8443c0b2e8ee84fadbcefd7c6245168d, type: 2}
   _friendDialogue7: {fileID: 11400000, guid: 8e3ef5f45f9954511a71c2fdde77245f, type: 2}
+  _restDialogue: {fileID: 11400000, guid: 5a494c47c8aed4b349260f69a34b49f3, type: 2}
+  _nostalgiaDialogue: {fileID: 11400000, guid: ef76adb090ddf4766b9012bad9e8622e, type: 2}

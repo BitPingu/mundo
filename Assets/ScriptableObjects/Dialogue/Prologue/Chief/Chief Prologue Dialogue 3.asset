@@ -14,51 +14,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Chief Vandham
-    line: Now that I have both of you here, I have a favor to ask.
-    reaction: 
-    choices: []
-    redirectDialogueIndex: -1
-  - charName: Reina
-    line: Oh! A special request from the chief?
+    line: Now then, you two have proven yourselves ready. I have an assignment for
+      you both.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Chief Vandham
-    line: Wild slimes have been growing quite restless in the nearby forest.
+    line: Recently, the slimes have grown increasingly restless in the nearby forest.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Chief Vandham
-    line: With so many roaming around the area, they'll threaten the very safety
-      of our village.
+    line: With so many roaming around, they pose a serious threat to the safety of
+      our village.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Chief Vandham
-    line: I want you two to investigate the forest and find out where they're coming
-      from.
-    reaction: 
-    choices: []
-    redirectDialogueIndex: -1
-  - charName: Reina
-    line: Really, Chief? Are you sure? But why choose us?
+    line: I want you two to investigate the forest and determine what is causing
+      this.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Chief Vandham
-    line: You two have shown me your strength in the way you fight. I can sense potential
-      in both of you.
+    line: Report back to me when you have finished. I trust that you two will succeed.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Chief Vandham
-    line: Thus, I shall assign this mission to you both. I trust that you two will
-      succeed.
-    reaction: 
-    choices: []
-    redirectDialogueIndex: -1
-  - charName: Chief Vandham
-    line: Report back to me when you have finished. May the gods keep you well.
+    line: May the gods keep you well.
     reaction: 
     choices: []
     redirectDialogueIndex: -1

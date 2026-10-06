@@ -14,17 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Chief Vandham
-    line: Okay, that is enough! Ely is the victor!
-    reaction: 
-    choices: []
-    redirectDialogueIndex: -1
-  - charName: Reina
-    line: ...Whew, that was fun! You sure are strong, Ely!
+    line: That is enough. You have both fought well.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Chief Vandham
-    line: Splendid! I can see that you two have improved much since last time.
+    line: The winner is Ely!
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Reina
+    line: ...Whew, that was fun! You're really strong, Ely!
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Chief Vandham
+    line: Come, you two. Allow me to tend to your wounds.
     reaction: 
     choices: []
     redirectDialogueIndex: -1

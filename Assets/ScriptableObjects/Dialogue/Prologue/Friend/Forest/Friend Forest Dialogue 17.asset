@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a0ebe69b3164f6e91f94a88da27730, type: 3}
+  m_Name: Friend Forest Dialogue 17
+  m_EditorClassIdentifier: 
+  Lines:
+  - charName: Reina
+    line: Whew... what a day. So much has happened today.
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Reina
+    line: Still, this is kinda nice. Just sitting here by the fire and looking at
+      the stars... feels like old times.
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Reina
+    line: Especially when it's just the two of us... haha.
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Ely
+    line: ...
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Reina
+    line: ...
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Reina
+    line: ...Anyway, remember when we'd sneak out of the village just to explore
+      the woods?
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Reina
+    line: We'd always get in trouble when we came back.
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Reina
+    line: I guess not much has changed, huh?
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Reina
+    line: I'm really glad we're doing this together. It's nice having you by my side
+      again.
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1

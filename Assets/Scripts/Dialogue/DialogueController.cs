@@ -204,7 +204,7 @@ public class DialogueController : MonoBehaviour
         {
             SetDialogueText(_dialogueText.text += letter);
 
-            if (letterIndex % 4 == 1 || (letter == '.' && letterIndex == _currentDialogue.line.Length) || letter == '!' || letter == '?')
+            if (letterIndex % 4 == 1 || letter == '.' || letter == '!' || letter == '?')
             {
                 if (_currentChar)
                     SFXManager.PlayVoice(_currentChar.voiceSound, _currentChar.voicePitch);
@@ -218,7 +218,7 @@ public class DialogueController : MonoBehaviour
             // delay
             if (letter == '.' && letterIndex < _currentDialogue.line.Length-1 && _currentDialogue.line[letterIndex+1] == '.')
             {
-                yield return new WaitForSeconds(_typingSpeed);
+                yield return new WaitForSeconds(_typingSpeed*6f);
                 continue;
             }
 

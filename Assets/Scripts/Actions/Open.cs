@@ -21,7 +21,7 @@ public class Open : MonoBehaviour
         if (hitInfo.GetComponent<Player>() && !_detectPlayer && !_opened)
         {
             _detectPlayer = hitInfo.GetComponent<Player>();
-            _detectPlayer.IsNearChest = true;
+            _detectPlayer.IsNearInteractable = true;
 
             Vector2 iconPos = new Vector2(transform.position.x, transform.position.y+.05f);
             _activeIcon = Instantiate(_icon, iconPos, Quaternion.identity, transform);
@@ -35,7 +35,7 @@ public class Open : MonoBehaviour
             Destroy(_activeIcon);
 
             _detectPlayer = hitInfo.GetComponent<Player>();
-            _detectPlayer.IsNearChest = false;
+            _detectPlayer.IsNearInteractable = false;
             _detectPlayer = null;
         }
     }

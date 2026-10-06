@@ -22,6 +22,7 @@ public class Interact : MonoBehaviour
         if (hitInfo.GetComponent<Player>() && !_detectPlayer)
         {
             _detectPlayer = hitInfo.GetComponent<Player>();
+            _detectPlayer.IsNearInteractable = true;
 
             Vector2 iconPos = new Vector2(_detectPlayer.transform.position.x, _detectPlayer.transform.position.y+1f);
             _activeIcon = Instantiate(_icon, iconPos, Quaternion.identity, _detectPlayer.transform);
@@ -34,6 +35,8 @@ public class Interact : MonoBehaviour
         {
             Destroy(_activeIcon);
 
+            _detectPlayer = hitInfo.GetComponent<Player>();
+            _detectPlayer.IsNearInteractable = false;
             _detectPlayer = null;
         }
     }

@@ -14,17 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Reina
-    line: Wow, Ely! Our first mission!
+    line: Wow, Ely! Our first assignment! This is exciting!
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Reina
-    line: But before we head out, let's make sure we are fully prepared.
+    line: But before we head out, let's make sure we're fully prepared.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Reina
-    line: ...Have you forgetten where the shop and inn is? Come, I'll show you!
+    line: Let's upgrade our equipment first. These weapons have definitely seen better
+      days.
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Reina
+    line: ...Have you forgotten where the armory is? Come, I'll show you!
     reaction: 
     choices: []
     redirectDialogueIndex: -1

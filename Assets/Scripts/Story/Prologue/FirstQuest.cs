@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class FirstQuest : EventBase
 {
@@ -18,17 +19,20 @@ public class FirstQuest : EventBase
     public GameObject Chest { get; set; }
     public GameObject Vines { get; set; }
     public GameObject Crystal { get; set; }
+    public GameObject Campfire { get; set; }
     public Boundary SlimeBoundary { get; set; }
     public Destination EncounterTrigger { get; set; }
     public Destination AmbushTrigger { get; set; }
+    public Destination RestTrigger { get; set; }
     [SerializeField] private GameObject _reactIcon;
     [SerializeField] private Dialogue _friendDialogue, _chiefDialogue, _momDialogue, _shopkeeperDialogue, 
         _slimeDialogue, _friendDialogue2, _outBoundsDialogue, _slimeDialogue2, _friendDialogue3, _chestDialogue, 
         _ambushDialogue, _ambushBattleDialogue, _afterAmbushDialogue, _travellerDialogue, _vinesDialogue, 
         _friendDialogue4, _crystalDialogue, _friendDialogue5, _friendDialogue6, _removeVinesDialogue, 
-        _friendDialogue7;
+        _friendDialogue7, _restDialogue, _nostalgiaDialogue;
     private bool _slimeEncounter, _firstSlimeDefeat, _firstSlimeDefeat2, _findChest, _ambush,
-        _ambushTutorial, _vines, _crystal, _crystalEncounter, _crystalSlimeDefeat, _vinesRemoved;
+        _ambushTutorial, _vines, _crystal, _crystalEncounter, _crystalSlimeDefeat, _vinesRemoved,
+        _rest, _rest2, _rested;
     private int _inPos;
 
     private void Start()
@@ -43,6 +47,8 @@ public class FirstQuest : EventBase
         DialogueController.Instance.OnBattleDialogueFinish += CrystalSlimeDefeat;
         Crystal.GetComponentInChildren<Interact>().OnInteract += CrystalInteract;
         DialogueController.Instance.OnDialogueFinish += VinesRemoved;
+        DialogueController.Instance.OnDialogueFinish += RestStop;
+        DialogueController.Instance.OnDialogueFinish += RestDialogue;
         // DialogueController.Instance.OnDialogueFinish += FinishEvent;
 
         // set current dialogues
@@ -67,8 +73,9 @@ public class FirstQuest : EventBase
         GameObject _activeIcon = Instantiate(_reactIcon, iconPos, Quaternion.identity, Traveller.transform);
         _activeIcon.GetComponent<React>().Mute = true;
 
-        // disable crystal
+        // disable objects
         Crystal.GetComponentInChildren<Interact>().gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        Campfire.SetActive(false);
     }
 
     private void Update()
@@ -183,6 +190,23 @@ public class FirstQuest : EventBase
                 StartCoroutine(CrystalDialogue());
 
                 _crystal = true;
+            }
+        }
+
+        // rest stop
+        if (RestTrigger.Reached)
+        {
+            if (!_rest)
+            {
+                PlayerChar.StateMachine.End(); // stop movement
+                Friend.StateMachine.End(); // stop movement
+
+                Friend.Anim.Rebind();
+                Friend.Anim.enabled = false;
+
+                // start dialogue
+                DialogueController.Instance.StartDialogue(_restDialogue, new List<CharacterBase>{Friend});
+                _rest = true;
             }
         }
     }
@@ -399,6 +423,7 @@ public class FirstQuest : EventBase
 
         // disable crystal
         Crystal.GetComponentInChildren<Interact>().gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        Crystal.GetComponentInChildren<Light2D>().enabled = false;
     }
 
     private IEnumerator RemoveVines()
@@ -431,6 +456,59 @@ public class FirstQuest : EventBase
 
         Friend.Anim.enabled = true;
         Friend.CurrentDialogue = _friendDialogue7;
+    }
+
+    private async void RestStop()
+    {
+        if (!_rest || _rest2)
+            return;
+        
+        _rest2 = true;
+
+        await Transition.Instance.FadeOut();
+
+        // move characters
+        PlayerChar.transform.position = new Vector2(Campfire.transform.position.x+.8f, Campfire.transform.position.y);
+        Friend.transform.position = new Vector2(Campfire.transform.position.x-.8f, Campfire.transform.position.y);
+
+        PlayerChar.Face(Friend);
+        Friend.Face(PlayerChar);
+
+        Campfire.SetActive(true);
+
+        // lighting to night
+        Lighting.Instance.SetLighting(255f, .4f);
+
+        await Transition.Instance.FadeIn();
+
+        // start dialogue
+        DialogueController.Instance.StartDialogue(_nostalgiaDialogue, new List<CharacterBase>{Friend, PlayerChar});
+        _rested = true;
+    }
+
+    private async void RestDialogue()
+    {
+        if (!_rested)
+            return;
+        
+        _rested = false;
+
+        await Transition.Instance.FadeOut();
+
+        // lighting to day
+        Lighting.Instance.SetLighting(50f, 1f);
+
+        Campfire.GetComponentInChildren<Light2D>().enabled = false;
+
+        PlayerChar.transform.position = new Vector2(Campfire.transform.position.x+.8f, Campfire.transform.position.y-.4f);
+
+        await Transition.Instance.FadeIn(); 
+
+        PlayerChar.StateMachine.Initialize(PlayerChar.IdleState);
+        Friend.StateMachine.Initialize(Friend.IdleState);
+
+        Friend.Anim.enabled = true;
+        // Friend.CurrentDialogue =
     }
 
     private void FinishEvent()
