@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a0ebe69b3164f6e91f94a88da27730, type: 3}
+  m_Name: Chief Intro Dialogue 1
+  m_EditorClassIdentifier: 
+  Lines:
+  - charName: Chief Vandham
+    line: Ah, there you two are. I was beginning to wonder if you had forgotten.
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Chief Vandham
+    line: Very well, let us begin. Prepare yourselves, and give it your all!
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Reina
+    line: En garde!
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1

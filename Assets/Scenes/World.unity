@@ -2018,7 +2018,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7990249944024980896, guid: 6fada48a0ed35472697d5598f14b7caa, type: 3}
       propertyPath: m_Name
-      value: Friend
+      value: Companion
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -54513,7 +54513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8738532700896166120, guid: 008b80281a55b467db7f43714d05a494, type: 3}
       propertyPath: m_Name
-      value: Friend Trigger
+      value: Companion Trigger
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -59877,11 +59877,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Events:
+  - {fileID: 2594605836150673444, guid: 046f856f2c9224f459bd7f766401176a, type: 3}
   - {fileID: 3184691118879588049, guid: a879d8965692b40ef8569b52b495c670, type: 3}
   CurrentEvent: {fileID: 0}
   EventIndex: -1
   _player: {fileID: 1642564165}
-  _friend: {fileID: 1173070324}
+  _companion: {fileID: 1173070324}
   _mom: {fileID: 975367506}
   _chief: {fileID: 1603337781}
   _shopkeeper: {fileID: 2039258940}
@@ -59915,7 +59916,7 @@ MonoBehaviour:
   _matchBoundary: {fileID: 2051768822}
   _slimeBoundary: {fileID: 334640823}
   _momTrigger: {fileID: 500338403}
-  _friendTrigger: {fileID: 1334567268}
+  _companionTrigger: {fileID: 1334567268}
   _chiefTrigger: {fileID: 1603099620}
   _encounterTrigger: {fileID: 812598790}
   _ambushTrigger: {fileID: 1790198393}
@@ -59985,7 +59986,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6904338341474015277, guid: 525d004159cea4606a752e3f4e71b05b, type: 3}
       propertyPath: m_Name
-      value: Fiona's House
+      value: Reina's House
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -291490,7 +291491,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6904338341474015277, guid: 525d004159cea4606a752e3f4e71b05b, type: 3}
       propertyPath: m_Name
-      value: Player's House
+      value: Ely's House
       objectReference: {fileID: 0}
     - target: {fileID: 8520866708175434668, guid: 525d004159cea4606a752e3f4e71b05b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -292410,7 +292411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6122720899678808909}
   m_Layer: 0
-  m_Name: Player's House Indoor
+  m_Name: Ely's House Indoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a0ebe69b3164f6e91f94a88da27730, type: 3}
+  m_Name: Companion Intro Dialogue 5
+  m_EditorClassIdentifier: 
+  Lines:
+  - charName: Reina
+    line: Wow, Ely! Our first assignment! This is exciting!
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Reina
+    line: But before we head out, let's make sure we're fully prepared.
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Reina
+    line: Let's upgrade our equipment first. These weapons have definitely seen better
+      days.
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Reina
+    line: ...Have you forgotten where the armory is? Come, I'll show you!
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1

@@ -49,7 +49,7 @@ MonoBehaviour:
   _wakeDialogue: {fileID: 11400000, guid: 294e3e61d107a4fc58109350eb7d6ec7, type: 2}
   _momDialogue: {fileID: 11400000, guid: 611f9ae6462ce4a41b43fd374704a2ad, type: 2}
   _meetDialogue: {fileID: 11400000, guid: 45969abfc01cd41a5b0c43ff1bfc7cf8, type: 2}
-  _friendDialogue: {fileID: 11400000, guid: 65a8d4cf9bbe04f8ba05e996aba7544a, type: 2}
+  _companionDialogue: {fileID: 11400000, guid: 65a8d4cf9bbe04f8ba05e996aba7544a, type: 2}
   _outBoundsDialogue: {fileID: 11400000, guid: 1cba9b3744285411e94cd8c5edd890c5, type: 2}
   _reachDialogue: {fileID: 11400000, guid: c998a2fade45c40399454dd063761d6a, type: 2}
   _chiefDialogue: {fileID: 11400000, guid: a57eade50fde54347a8208253a190bce, type: 2}

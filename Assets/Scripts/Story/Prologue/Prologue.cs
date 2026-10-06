@@ -11,13 +11,13 @@ public class Prologue : ChapterBase
 {
     // characters
     [SerializeField] protected Player _player;
-    [SerializeField] protected Companion _friend;
+    [SerializeField] protected Companion _companion;
     [SerializeField] protected Villager _mom, _chief, _shopkeeper, _traveller;
     [SerializeField] protected Enemy _slime, _slime1, _slime2, _slime3;
     [SerializeField] protected VillagerDialogue[] _vDialogue;
     [SerializeField] protected GameObject _chiefHouse, _chiefHouseIndoor, _chest, _vines, _crystal, _campfire;
     [SerializeField] protected Boundary _matchBoundary, _slimeBoundary;
-    [SerializeField] protected Destination _momTrigger, _friendTrigger, _chiefTrigger, _encounterTrigger, _ambushTrigger, _restTrigger;
+    [SerializeField] protected Destination _momTrigger, _companionTrigger, _chiefTrigger, _encounterTrigger, _ambushTrigger, _restTrigger;
 
     public override void BeginChapter()
     {
@@ -32,21 +32,21 @@ public class Prologue : ChapterBase
         if (CurrentEvent.GetComponent<Intro>())
         {
             CurrentEvent.GetComponent<Intro>().PlayerChar = _player;
-            CurrentEvent.GetComponent<Intro>().Friend = _friend;
+            CurrentEvent.GetComponent<Intro>().CompanionChar = _companion;
             CurrentEvent.GetComponent<Intro>().Mom = _mom;
             CurrentEvent.GetComponent<Intro>().Chief = _chief;
             CurrentEvent.GetComponent<Intro>().House = _chiefHouse;
             CurrentEvent.GetComponent<Intro>().HouseIndoor = _chiefHouseIndoor;
             CurrentEvent.GetComponent<Intro>().MatchBoundary = _matchBoundary;
             CurrentEvent.GetComponent<Intro>().MomTrigger = _momTrigger;
-            CurrentEvent.GetComponent<Intro>().FriendTrigger = _friendTrigger;
+            CurrentEvent.GetComponent<Intro>().CompanionTrigger = _companionTrigger;
             CurrentEvent.GetComponent<Intro>().ChiefTrigger = _chiefTrigger;
         }
         else if (CurrentEvent.GetComponent<FirstQuest>())
         {
             UpdateDialogue(1); // update dialogue
             CurrentEvent.GetComponent<FirstQuest>().PlayerChar = _player;
-            CurrentEvent.GetComponent<FirstQuest>().Friend = _friend;
+            CurrentEvent.GetComponent<FirstQuest>().CompanionChar = _companion;
             CurrentEvent.GetComponent<FirstQuest>().Mom = _mom;
             CurrentEvent.GetComponent<FirstQuest>().Chief = _chief;
             CurrentEvent.GetComponent<FirstQuest>().Shopkeeper = _shopkeeper;

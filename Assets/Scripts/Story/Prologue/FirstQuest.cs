@@ -6,7 +6,7 @@ using UnityEngine.Rendering.Universal;
 public class FirstQuest : EventBase
 {
     public Player PlayerChar { get; set; }
-    public Companion Friend { get; set; }
+    public Companion CompanionChar { get; set; }
     public Villager Mom { get; set; }
     public Villager Chief { get; set; }
     public Villager Shopkeeper { get; set; }
@@ -25,11 +25,11 @@ public class FirstQuest : EventBase
     public Destination AmbushTrigger { get; set; }
     public Destination RestTrigger { get; set; }
     [SerializeField] private GameObject _reactIcon;
-    [SerializeField] private Dialogue _friendDialogue, _chiefDialogue, _momDialogue, _shopkeeperDialogue, 
-        _slimeDialogue, _friendDialogue2, _outBoundsDialogue, _slimeDialogue2, _friendDialogue3, _chestDialogue, 
+    [SerializeField] private Dialogue _companionDialogue, _chiefDialogue, _momDialogue, _shopkeeperDialogue, 
+        _slimeDialogue, _companionDialogue2, _outBoundsDialogue, _slimeDialogue2, _companionDialogue3, _chestDialogue, 
         _ambushDialogue, _ambushBattleDialogue, _afterAmbushDialogue, _travellerDialogue, _vinesDialogue, 
-        _friendDialogue4, _crystalDialogue, _friendDialogue5, _friendDialogue6, _removeVinesDialogue, 
-        _friendDialogue7, _restDialogue, _nostalgiaDialogue;
+        _companionDialogue4, _crystalDialogue, _companionDialogue5, _companionDialogue6, _removeVinesDialogue, 
+        _companionDialogue7, _restDialogue, _nostalgiaDialogue, _companionDialogue8;
     private bool _slimeEncounter, _firstSlimeDefeat, _firstSlimeDefeat2, _findChest, _ambush,
         _ambushTutorial, _vines, _crystal, _crystalEncounter, _crystalSlimeDefeat, _vinesRemoved,
         _rest, _rest2, _rested;
@@ -52,7 +52,7 @@ public class FirstQuest : EventBase
         // DialogueController.Instance.OnDialogueFinish += FinishEvent;
 
         // set current dialogues
-        Friend.CurrentDialogue = _friendDialogue;
+        CompanionChar.CurrentDialogue = _companionDialogue;
         Mom.CurrentDialogue = _momDialogue;
         Chief.CurrentDialogue = _chiefDialogue;
         Shopkeeper.CurrentDialogue = _shopkeeperDialogue;
@@ -66,7 +66,7 @@ public class FirstQuest : EventBase
         Mom.transform.position = new Vector3(.73f,-43.48f,0);
         Mom.Sprite.flipX = false;
 
-        Friend.Join(PlayerChar); // rejoin party
+        CompanionChar.Join(PlayerChar); // rejoin party
 
         // available quests
         Vector2 iconPos = new Vector2(Traveller.transform.position.x, Traveller.transform.position.y+1f);
@@ -87,10 +87,10 @@ public class FirstQuest : EventBase
             if (!_slimeEncounter && !DialogueController.Instance.IsDialogueActive)
             {
                 PlayerChar.StateMachine.End(); // stop movement
-                Friend.StateMachine.End(); // stop movement
+                CompanionChar.StateMachine.End(); // stop movement
                 
-                Friend.Anim.Rebind();
-                Friend.Anim.enabled = false;
+                CompanionChar.Anim.Rebind();
+                CompanionChar.Anim.enabled = false;
 
                 CameraController.Instance.target = SlimeChar.transform;
 
@@ -104,12 +104,12 @@ public class FirstQuest : EventBase
             {
                 PlayerChar.StateMachine.End(); // stop movement
 
-                Friend.Face(PlayerChar);
-                Friend.Anim.Rebind();
-                Friend.Anim.enabled = false;
+                CompanionChar.Face(PlayerChar);
+                CompanionChar.Anim.Rebind();
+                CompanionChar.Anim.enabled = false;
 
                 // start dialogue
-                DialogueController.Instance.StartDialogue(_outBoundsDialogue, new List<CharacterBase>{Friend});
+                DialogueController.Instance.StartDialogue(_outBoundsDialogue, new List<CharacterBase>{CompanionChar});
             }
         }
 
@@ -119,7 +119,7 @@ public class FirstQuest : EventBase
             float chestDistance = Vector2.Distance(Chest.transform.position, PlayerChar.transform.position);
             if (chestDistance < 3f)
             {
-                SecondaryDialogueController.Instance.StartDialogue(_chestDialogue, new List<CharacterBase>{Friend}, 1.5f);
+                SecondaryDialogueController.Instance.StartDialogue(_chestDialogue, new List<CharacterBase>{CompanionChar}, 1.5f);
                 _findChest = true;
             }
         }
@@ -130,19 +130,19 @@ public class FirstQuest : EventBase
             if (!_ambush)
             {
                 PlayerChar.StateMachine.End(); // stop movement
-                Friend.StateMachine.End(); // stop movement
+                CompanionChar.StateMachine.End(); // stop movement
 
-                Friend.Anim.Rebind();
-                Friend.Anim.enabled = false;
+                CompanionChar.Anim.Rebind();
+                CompanionChar.Anim.enabled = false;
 
                 SlimeChar1.Face(PlayerChar);
-                SlimeChar2.Face(Friend);
+                SlimeChar2.Face(CompanionChar);
 
                 SlimeChar1.StateMachine.End();
                 SlimeChar2.StateMachine.End();
 
                 StartCoroutine(MoveSlime(SlimeChar1, new Vector2(PlayerChar.transform.position.x-1.6f, PlayerChar.transform.position.y+.5f)));
-                StartCoroutine(MoveSlime(SlimeChar2, new Vector2(Friend.transform.position.x+1.6f, Friend.transform.position.y-.3f)));
+                StartCoroutine(MoveSlime(SlimeChar2, new Vector2(CompanionChar.transform.position.x+1.6f, CompanionChar.transform.position.y-.3f)));
 
                 _ambush = true;
             }
@@ -167,8 +167,8 @@ public class FirstQuest : EventBase
             float vinesDistance = Vector2.Distance(Vines.transform.position, PlayerChar.transform.position);
             if (vinesDistance < 3f)
             {
-                SecondaryDialogueController.Instance.StartDialogue(_vinesDialogue, new List<CharacterBase>{Friend}, 1.5f);
-                Friend.CurrentDialogue = _friendDialogue4;
+                SecondaryDialogueController.Instance.StartDialogue(_vinesDialogue, new List<CharacterBase>{CompanionChar}, 1.5f);
+                CompanionChar.CurrentDialogue = _companionDialogue4;
                 _vines = true;
             }
         }
@@ -180,10 +180,10 @@ public class FirstQuest : EventBase
             if (crystalDistance < 3f)
             {
                 PlayerChar.StateMachine.End(); // stop movement
-                Friend.StateMachine.End(); // stop movement
+                CompanionChar.StateMachine.End(); // stop movement
 
-                Friend.Anim.Rebind();
-                Friend.Anim.enabled = false;
+                CompanionChar.Anim.Rebind();
+                CompanionChar.Anim.enabled = false;
 
                 CameraController.Instance.target = Crystal.transform;
 
@@ -199,13 +199,13 @@ public class FirstQuest : EventBase
             if (!_rest)
             {
                 PlayerChar.StateMachine.End(); // stop movement
-                Friend.StateMachine.End(); // stop movement
+                CompanionChar.StateMachine.End(); // stop movement
 
-                Friend.Anim.Rebind();
-                Friend.Anim.enabled = false;
+                CompanionChar.Anim.Rebind();
+                CompanionChar.Anim.enabled = false;
 
                 // start dialogue
-                DialogueController.Instance.StartDialogue(_restDialogue, new List<CharacterBase>{Friend});
+                DialogueController.Instance.StartDialogue(_restDialogue, new List<CharacterBase>{CompanionChar});
                 _rest = true;
             }
         }
@@ -216,7 +216,7 @@ public class FirstQuest : EventBase
         yield return new WaitForSeconds(.5f);
 
         // start dialogue
-        DialogueController.Instance.StartDialogue(_slimeDialogue, new List<CharacterBase>{Friend});
+        DialogueController.Instance.StartDialogue(_slimeDialogue, new List<CharacterBase>{CompanionChar});
     }
 
     private void SlimeEncounter()
@@ -227,10 +227,10 @@ public class FirstQuest : EventBase
         CameraController.Instance.target = PlayerChar.transform;
 
         PlayerChar.StateMachine.Initialize(PlayerChar.IdleState);
-        Friend.StateMachine.Initialize(Friend.IdleState);
+        CompanionChar.StateMachine.Initialize(CompanionChar.IdleState);
 
-        Friend.Anim.enabled = true;
-        Friend.CurrentDialogue = _friendDialogue2;
+        CompanionChar.Anim.enabled = true;
+        CompanionChar.CurrentDialogue = _companionDialogue2;
     }
 
     private void OutOfBounds()
@@ -238,16 +238,16 @@ public class FirstQuest : EventBase
         if (!SlimeBoundary.DetectPlayer)
             return;
 
-        Friend.Anim.enabled = true;
+        CompanionChar.Anim.enabled = true;
         StartCoroutine(GoBack());
     }
 
     private IEnumerator GoBack()
     {
-        PlayerChar.Face(Friend);
+        PlayerChar.Face(CompanionChar);
 
         // go back
-        Vector2 vec = Friend.transform.position - PlayerChar.transform.position;
+        Vector2 vec = CompanionChar.transform.position - PlayerChar.transform.position;
         
         PlayerChar.Move(vec);
 
@@ -266,31 +266,31 @@ public class FirstQuest : EventBase
         _firstSlimeDefeat = true;
 
         PlayerChar.StateMachine.End(); // stop movement
-        PlayerChar.Face(Friend);
+        PlayerChar.Face(CompanionChar);
 
-        Friend.StateMachine.End();
+        CompanionChar.StateMachine.End();
 
-        StartCoroutine(MoveFriend());
+        StartCoroutine(MoveCompanion());
     }
 
-    private IEnumerator MoveFriend()
+    private IEnumerator MoveCompanion()
     {
         // move to player
-        Friend.Face(PlayerChar);
-        float _distance = Vector2.Distance(PlayerChar.transform.position, Friend.transform.position);
+        CompanionChar.Face(PlayerChar);
+        float _distance = Vector2.Distance(PlayerChar.transform.position, CompanionChar.transform.position);
         while (_distance > 0.7f)
         {
-            _distance = Vector2.Distance(PlayerChar.transform.position, Friend.transform.position);
-            Friend.Move(PlayerChar.transform.position - Friend.transform.position);
+            _distance = Vector2.Distance(PlayerChar.transform.position, CompanionChar.transform.position);
+            CompanionChar.Move(PlayerChar.transform.position - CompanionChar.transform.position);
             yield return new WaitForFixedUpdate();
         }
 
-        Friend.Move(Vector2.zero);
+        CompanionChar.Move(Vector2.zero);
 
         StartCoroutine(DelayAnimStop());
 
         // start dialogue
-        DialogueController.Instance.StartDialogue(_slimeDialogue2, new List<CharacterBase>{Friend});
+        DialogueController.Instance.StartDialogue(_slimeDialogue2, new List<CharacterBase>{CompanionChar});
         _firstSlimeDefeat2 = true;
     }
 
@@ -298,7 +298,7 @@ public class FirstQuest : EventBase
     {
         yield return new WaitForSeconds(.4f);
         if (_firstSlimeDefeat2)
-            Friend.Anim.enabled = false;
+            CompanionChar.Anim.enabled = false;
     }
 
     private void SlimeDefeat2()
@@ -308,11 +308,11 @@ public class FirstQuest : EventBase
         
         _firstSlimeDefeat2 = false;
 
-        Friend.CurrentDialogue = _friendDialogue3;
+        CompanionChar.CurrentDialogue = _companionDialogue3;
 
         PlayerChar.StateMachine.Initialize(PlayerChar.IdleState);
-        Friend.StateMachine.Initialize(Friend.IdleState);
-        Friend.Anim.enabled = true;
+        CompanionChar.StateMachine.Initialize(CompanionChar.IdleState);
+        CompanionChar.Anim.enabled = true;
     }
 
     private IEnumerator MoveSlime(CharacterBase character, Vector3 destination)
@@ -335,13 +335,13 @@ public class FirstQuest : EventBase
     private IEnumerator AmbushReact()
     {
         // react
-        Vector2 iconPos = new Vector2(Friend.transform.position.x, Friend.transform.position.y+1f);
-        GameObject _activeIcon = Instantiate(_reactIcon, iconPos, Quaternion.identity, Friend.transform);
+        Vector2 iconPos = new Vector2(CompanionChar.transform.position.x, CompanionChar.transform.position.y+1f);
+        GameObject _activeIcon = Instantiate(_reactIcon, iconPos, Quaternion.identity, CompanionChar.transform);
         yield return new WaitForSeconds(1f);
         Destroy(_activeIcon);
 
         // start dialogue
-        DialogueController.Instance.StartDialogue(_ambushDialogue, new List<CharacterBase>{Friend});
+        DialogueController.Instance.StartDialogue(_ambushDialogue, new List<CharacterBase>{CompanionChar});
     }
 
     private void Ambush()
@@ -350,19 +350,19 @@ public class FirstQuest : EventBase
             return;
         
         PlayerChar.StateMachine.Initialize(PlayerChar.IdleState);
-        Friend.StateMachine.Initialize(Friend.IdleState);
-        Friend.Anim.enabled = true;
-        Friend.EventDialogue = _afterAmbushDialogue;
+        CompanionChar.StateMachine.Initialize(CompanionChar.IdleState);
+        CompanionChar.Anim.enabled = true;
+        CompanionChar.EventDialogue = _afterAmbushDialogue;
 
         SlimeChar1.StateMachine.Initialize(SlimeChar1.IdleState);
         SlimeChar2.StateMachine.Initialize(SlimeChar2.IdleState);
 
         PlayerChar.Opponents.AddRange(new List<FighterBase>{SlimeChar1, SlimeChar2});
-        Friend.Opponents.AddRange(new List<FighterBase>{SlimeChar1, SlimeChar2});
+        CompanionChar.Opponents.AddRange(new List<FighterBase>{SlimeChar1, SlimeChar2});
 
-        SlimeChar1.Opponents.AddRange(new List<FighterBase>{PlayerChar, Friend});
+        SlimeChar1.Opponents.AddRange(new List<FighterBase>{PlayerChar, CompanionChar});
         SlimeChar1.Allies.Add(SlimeChar2);
-        SlimeChar2.Opponents.AddRange(new List<FighterBase>{PlayerChar, Friend});
+        SlimeChar2.Opponents.AddRange(new List<FighterBase>{PlayerChar, CompanionChar});
         SlimeChar2.Allies.Add(SlimeChar1);
 
         // Slime goes first
@@ -374,7 +374,7 @@ public class FirstQuest : EventBase
         yield return new WaitForSeconds(1f);
 
         // dialogue during battle
-        SecondaryDialogueController.Instance.StartDialogue(_ambushBattleDialogue, new List<CharacterBase>{Friend}, 3f);
+        SecondaryDialogueController.Instance.StartDialogue(_ambushBattleDialogue, new List<CharacterBase>{CompanionChar}, 3f);
     }
 
     private IEnumerator CrystalDialogue()
@@ -382,7 +382,7 @@ public class FirstQuest : EventBase
         yield return new WaitForSeconds(.5f);
 
         // start dialogue
-        DialogueController.Instance.StartDialogue(_crystalDialogue, new List<CharacterBase>{Friend});
+        DialogueController.Instance.StartDialogue(_crystalDialogue, new List<CharacterBase>{CompanionChar});
     }
 
     private void CrystalEncounter()
@@ -395,10 +395,10 @@ public class FirstQuest : EventBase
         CameraController.Instance.target = PlayerChar.transform;
 
         PlayerChar.StateMachine.Initialize(PlayerChar.IdleState);
-        Friend.StateMachine.Initialize(Friend.IdleState);
+        CompanionChar.StateMachine.Initialize(CompanionChar.IdleState);
 
-        Friend.Anim.enabled = true;
-        Friend.CurrentDialogue = _friendDialogue5;
+        CompanionChar.Anim.enabled = true;
+        CompanionChar.CurrentDialogue = _companionDialogue5;
     }
 
     private void CrystalSlimeDefeat()
@@ -408,7 +408,7 @@ public class FirstQuest : EventBase
         
         _crystalSlimeDefeat = true;
 
-        Friend.CurrentDialogue = _friendDialogue6;
+        CompanionChar.CurrentDialogue = _companionDialogue6;
 
         // enable crystal
         Crystal.GetComponentInChildren<Interact>().gameObject.GetComponent<BoxCollider2D>().enabled = true;
@@ -417,7 +417,7 @@ public class FirstQuest : EventBase
     private void CrystalInteract()
     {
         PlayerChar.StateMachine.End(); // stop movement
-        Friend.StateMachine.End();
+        CompanionChar.StateMachine.End();
         
         StartCoroutine(RemoveVines());
 
@@ -434,13 +434,13 @@ public class FirstQuest : EventBase
         yield return new WaitForSeconds(1f);
         CameraController.Instance.target = PlayerChar.transform;
 
-        Friend.Face(PlayerChar);
-        Friend.Anim.enabled = false;
+        CompanionChar.Face(PlayerChar);
+        CompanionChar.Anim.enabled = false;
 
         yield return new WaitForSeconds(1f);
 
         // start dialogue
-        DialogueController.Instance.StartDialogue(_removeVinesDialogue, new List<CharacterBase>{Friend});
+        DialogueController.Instance.StartDialogue(_removeVinesDialogue, new List<CharacterBase>{CompanionChar});
         _vinesRemoved = true;
     }
 
@@ -452,10 +452,10 @@ public class FirstQuest : EventBase
         _vinesRemoved = false;
 
         PlayerChar.StateMachine.Initialize(PlayerChar.IdleState);
-        Friend.StateMachine.Initialize(Friend.IdleState);
+        CompanionChar.StateMachine.Initialize(CompanionChar.IdleState);
 
-        Friend.Anim.enabled = true;
-        Friend.CurrentDialogue = _friendDialogue7;
+        CompanionChar.Anim.enabled = true;
+        CompanionChar.CurrentDialogue = _companionDialogue7;
     }
 
     private async void RestStop()
@@ -469,10 +469,10 @@ public class FirstQuest : EventBase
 
         // move characters
         PlayerChar.transform.position = new Vector2(Campfire.transform.position.x+.8f, Campfire.transform.position.y);
-        Friend.transform.position = new Vector2(Campfire.transform.position.x-.8f, Campfire.transform.position.y);
+        CompanionChar.transform.position = new Vector2(Campfire.transform.position.x-.8f, Campfire.transform.position.y);
 
-        PlayerChar.Face(Friend);
-        Friend.Face(PlayerChar);
+        PlayerChar.Face(CompanionChar);
+        CompanionChar.Face(PlayerChar);
 
         Campfire.SetActive(true);
 
@@ -482,7 +482,7 @@ public class FirstQuest : EventBase
         await Transition.Instance.FadeIn();
 
         // start dialogue
-        DialogueController.Instance.StartDialogue(_nostalgiaDialogue, new List<CharacterBase>{Friend, PlayerChar});
+        DialogueController.Instance.StartDialogue(_nostalgiaDialogue, new List<CharacterBase>{CompanionChar, PlayerChar});
         _rested = true;
     }
 
@@ -505,10 +505,10 @@ public class FirstQuest : EventBase
         await Transition.Instance.FadeIn(); 
 
         PlayerChar.StateMachine.Initialize(PlayerChar.IdleState);
-        Friend.StateMachine.Initialize(Friend.IdleState);
+        CompanionChar.StateMachine.Initialize(CompanionChar.IdleState);
 
-        Friend.Anim.enabled = true;
-        // Friend.CurrentDialogue =
+        CompanionChar.Anim.enabled = true;
+        CompanionChar.CurrentDialogue = _companionDialogue8;
     }
 
     private void FinishEvent()

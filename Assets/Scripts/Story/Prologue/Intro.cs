@@ -5,21 +5,21 @@ using UnityEngine;
 public class Intro : EventBase
 {
     public Player PlayerChar { get; set; }
-    public Companion Friend { get; set; }
+    public Companion CompanionChar { get; set; }
     public Villager Mom { get; set; }
     public Villager Chief { get; set; }
     public GameObject House { get; set; }
     public GameObject HouseIndoor { get; set; }
     public Boundary MatchBoundary { get; set; }
     public Destination MomTrigger { get; set; }
-    public Destination FriendTrigger { get; set; }
+    public Destination CompanionTrigger { get; set; }
     public Destination ChiefTrigger { get; set; }
     [SerializeField] private GameObject _reactIcon;
-    [SerializeField] private Dialogue _wakeDialogue, _momDialogue, _meetDialogue, _friendDialogue, 
+    [SerializeField] private Dialogue _wakeDialogue, _momDialogue, _meetDialogue, _companionDialogue, 
         _outBoundsDialogue, _reachDialogue, _chiefDialogue, _damageDialogue, _chiefDialogue2, 
         _restoreDialogue, _chiefDialogue3, _afterMatchDialogue;
-    private bool _momEncounter, _friendEncounter, _entered, _chiefEncounter, _moveToMatch, 
-        _matchReady, _chiefDialogueActive, _friendHurt, _chiefDialogue2Active, _moveToChief, 
+    private bool _momEncounter, _companionEncounter, _entered, _chiefEncounter, _moveToMatch, 
+        _matchReady, _chiefDialogueActive, _companionHurt, _chiefDialogue2Active, _moveToChief, 
         _healthRestored, _moveBack, _moveBack2, _origPos, _chiefDialogue3Active, _introEnd;
     private int _inPos;
 
@@ -27,7 +27,7 @@ public class Intro : EventBase
     {
         // set dialogue delegates
         DialogueController.Instance.OnDialogueFinish += MomEncounter;
-        DialogueController.Instance.OnDialogueFinish += FriendEncounter;
+        DialogueController.Instance.OnDialogueFinish += CompanionEncounter;
         DialogueController.Instance.OnDialogueFinish += OutOfBounds;
         PlayerChar.OnEnter += EnterBuilding;
         DialogueController.Instance.OnDialogueFinish += EnterBuilding2;
@@ -41,7 +41,7 @@ public class Intro : EventBase
 
         // set positions
         PlayerChar.transform.position = new Vector3(-13.79f,-41.41f);
-        Friend.transform.position = new Vector3(3f,-.3f);
+        CompanionChar.transform.position = new Vector3(3f,-.3f);
         Mom.transform.position = new Vector3(.73f,-43.48f,0);
     }
 
@@ -60,36 +60,36 @@ public class Intro : EventBase
             }
         }
 
-        if (FriendTrigger.Reached && !Friend.CurrentDialogue && !Friend.Leader)
+        if (CompanionTrigger.Reached && !CompanionChar.CurrentDialogue && !CompanionChar.Leader)
         {
-            // meet friend
-            if (!_friendEncounter && PlayerChar.StateMachine.CurrentState == PlayerChar.IdleState)
+            // meet companion
+            if (!_companionEncounter && PlayerChar.StateMachine.CurrentState == PlayerChar.IdleState)
             {
                 PlayerChar.StateMachine.End(); // stop movement
-                PlayerChar.Face(Friend);
+                PlayerChar.Face(CompanionChar);
 
                 StartCoroutine(DelayAnimStop());
 
                 // join party
-                Friend.Join(PlayerChar);
+                CompanionChar.Join(PlayerChar);
 
                 // start dialogue
-                DialogueController.Instance.StartDialogue(_meetDialogue, new List<CharacterBase>{Friend});
-                _friendEncounter = true;
+                DialogueController.Instance.StartDialogue(_meetDialogue, new List<CharacterBase>{CompanionChar});
+                _companionEncounter = true;
             }
         }
 
         // out of bounds check
-        if (Friend.Leader && MatchBoundary.DetectPlayer && PlayerChar.StateMachine.CurrentState == PlayerChar.IdleState)
+        if (CompanionChar.Leader && MatchBoundary.DetectPlayer && PlayerChar.StateMachine.CurrentState == PlayerChar.IdleState)
         {
             PlayerChar.StateMachine.End(); // stop movement
 
-            Friend.Face(PlayerChar);
-            Friend.Anim.Rebind();
-            Friend.Anim.enabled = false;
+            CompanionChar.Face(PlayerChar);
+            CompanionChar.Anim.Rebind();
+            CompanionChar.Anim.enabled = false;
 
             // start dialogue
-            DialogueController.Instance.StartDialogue(_outBoundsDialogue, new List<CharacterBase>{Friend});
+            DialogueController.Instance.StartDialogue(_outBoundsDialogue, new List<CharacterBase>{CompanionChar});
         }
 
         // sparring match
@@ -99,13 +99,13 @@ public class Intro : EventBase
             if (!_chiefEncounter && !DialogueController.Instance.IsDialogueActive)
             {
                 PlayerChar.StateMachine.End(); // stop movement
-                Friend.StateMachine.End(); // stop movement
+                CompanionChar.StateMachine.End(); // stop movement
                 
-                Friend.Anim.Rebind();
-                Friend.Anim.enabled = false;
+                CompanionChar.Anim.Rebind();
+                CompanionChar.Anim.enabled = false;
 
                 // start dialogue
-                DialogueController.Instance.StartDialogue(_reachDialogue, new List<CharacterBase>{Friend});
+                DialogueController.Instance.StartDialogue(_reachDialogue, new List<CharacterBase>{CompanionChar});
                 _chiefEncounter = true;
                 _moveToMatch = true;
             }
@@ -115,27 +115,27 @@ public class Intro : EventBase
             {
                 _inPos = 0;
 
-                Friend.Anim.Rebind();
-                Friend.Anim.enabled = false;
+                CompanionChar.Anim.Rebind();
+                CompanionChar.Anim.enabled = false;
 
                 // set spawn
                 PlayerChar.transform.position = new Vector2(Chief.transform.position.x+.65f, Chief.transform.position.y-1f);
-                Friend.transform.position = new Vector2(Chief.transform.position.x-.65f, Chief.transform.position.y-1f);
+                CompanionChar.transform.position = new Vector2(Chief.transform.position.x-.65f, Chief.transform.position.y-1f);
                 
                 PlayerChar.Face(Chief);
-                Friend.Face(Chief);
+                CompanionChar.Face(Chief);
 
                 // start chief dialogue
-                DialogueController.Instance.StartDialogue(_chiefDialogue, new List<CharacterBase>{Chief, Friend});
+                DialogueController.Instance.StartDialogue(_chiefDialogue, new List<CharacterBase>{Chief, CompanionChar});
                 _matchReady = true;
                 _chiefDialogueActive = true;
             }
 
             // sparring dialogue
-            if (!_friendHurt && Friend.CurrentHealth <= Friend.MaxHealth/2f)
+            if (!_companionHurt && CompanionChar.CurrentHealth <= CompanionChar.MaxHealth/2f)
             {
                 StartCoroutine(SparringDialogue());
-                _friendHurt = true;
+                _companionHurt = true;
             }
 
             // after match
@@ -143,19 +143,19 @@ public class Intro : EventBase
             {
                 _inPos = 0;
 
-                Friend.Anim.Rebind();
-                Friend.Anim.enabled = false;
+                CompanionChar.Anim.Rebind();
+                CompanionChar.Anim.enabled = false;
 
                 // set spawn
                 PlayerChar.transform.position = new Vector2(Chief.transform.position.x+.2f, Chief.transform.position.y-.2f);
-                Friend.transform.position = new Vector2(Chief.transform.position.x-.2f, Chief.transform.position.y-.2f);
+                CompanionChar.transform.position = new Vector2(Chief.transform.position.x-.2f, Chief.transform.position.y-.2f);
 
                 PlayerChar.Face(Chief);
-                Friend.Face(Chief);
+                CompanionChar.Face(Chief);
 
                 // chief restores health
                 PlayerChar.Heal(PlayerChar.MaxHealth);
-                Friend.Heal(Friend.MaxHealth);
+                CompanionChar.Heal(CompanionChar.MaxHealth);
 
                 // restore dialogue
                 DialogueController.Instance.StartDialogue(_restoreDialogue, new List<CharacterBase>{});
@@ -168,15 +168,15 @@ public class Intro : EventBase
             {
                 _inPos = 0;
 
-                Friend.Anim.Rebind();
-                Friend.Anim.enabled = false;
+                CompanionChar.Anim.Rebind();
+                CompanionChar.Anim.enabled = false;
 
                 // set spawn
                 PlayerChar.transform.position = new Vector2(Chief.transform.position.x+.65f, Chief.transform.position.y-1f);
-                Friend.transform.position = new Vector2(Chief.transform.position.x-.65f, Chief.transform.position.y-1f);
+                CompanionChar.transform.position = new Vector2(Chief.transform.position.x-.65f, Chief.transform.position.y-1f);
 
                 PlayerChar.Face(Chief);
-                Friend.Face(Chief);
+                CompanionChar.Face(Chief);
 
                 // start quest dialogue
                 DialogueController.Instance.StartDialogue(_chiefDialogue3, new List<CharacterBase>{Chief});
@@ -225,22 +225,22 @@ public class Intro : EventBase
     private IEnumerator DelayAnimStop()
     {
         yield return new WaitForSeconds(.4f);
-        Friend.Anim.enabled = false;
+        CompanionChar.Anim.enabled = false;
     }
 
-    private void FriendEncounter()
+    private void CompanionEncounter()
     {
-        if (!_friendEncounter)
+        if (!_companionEncounter)
             return;
 
-        _friendEncounter = false;
+        _companionEncounter = false;
 
-        Friend.CurrentDialogue = _friendDialogue;
+        CompanionChar.CurrentDialogue = _companionDialogue;
 
         PlayerChar.CannotEnter = true; // disable enter action
         PlayerChar.StateMachine.Initialize(PlayerChar.IdleState); // enable movement
 
-        Friend.Anim.enabled = true;
+        CompanionChar.Anim.enabled = true;
     }
 
     private void OutOfBounds()
@@ -248,16 +248,16 @@ public class Intro : EventBase
         if (!MatchBoundary.DetectPlayer)
             return;
 
-        Friend.Anim.enabled = true;
+        CompanionChar.Anim.enabled = true;
         StartCoroutine(GoBack());
     }
 
     private IEnumerator GoBack()
     {
-        PlayerChar.Face(Friend);
+        PlayerChar.Face(CompanionChar);
 
         // go back
-        Vector2 vec = Friend.transform.position - PlayerChar.transform.position;
+        Vector2 vec = CompanionChar.transform.position - PlayerChar.transform.position;
         
         PlayerChar.Move(vec);
 
@@ -273,12 +273,12 @@ public class Intro : EventBase
         // enter building check
         PlayerChar.StateMachine.End(); // stop movement
 
-        Friend.Face(PlayerChar);
-        Friend.Anim.Rebind();
-        Friend.Anim.enabled = false;
+        CompanionChar.Face(PlayerChar);
+        CompanionChar.Anim.Rebind();
+        CompanionChar.Anim.enabled = false;
 
         // start dialogue
-        DialogueController.Instance.StartDialogue(_outBoundsDialogue, new List<CharacterBase>{Friend});
+        DialogueController.Instance.StartDialogue(_outBoundsDialogue, new List<CharacterBase>{CompanionChar});
         _entered = true;
     }
 
@@ -288,7 +288,7 @@ public class Intro : EventBase
             return;
 
         _entered = false;
-        Friend.Anim.enabled = true;
+        CompanionChar.Anim.enabled = true;
         PlayerChar.StateMachine.Initialize(PlayerChar.IdleState); // enable movement
     }
 
@@ -299,11 +299,11 @@ public class Intro : EventBase
         
         _moveToMatch = false;
 
-        Friend.Anim.enabled = true;
+        CompanionChar.Anim.enabled = true;
 
         // before battle
         StartCoroutine(GoToChief(PlayerChar, new Vector2(Chief.transform.position.x+.65f, Chief.transform.position.y-1f)));
-        StartCoroutine(GoToChief(Friend, new Vector2(Chief.transform.position.x-.65f, Chief.transform.position.y-1f)));
+        StartCoroutine(GoToChief(CompanionChar, new Vector2(Chief.transform.position.x-.65f, Chief.transform.position.y-1f)));
     }
 
     private IEnumerator GoToChief(CharacterBase character, Vector3 destination)
@@ -333,14 +333,14 @@ public class Intro : EventBase
 
         // start the match
         PlayerChar.StateMachine.Initialize(PlayerChar.IdleState);
-        Friend.StateMachine.Initialize(Friend.IdleState);
-        Friend.Anim.enabled = true;
+        CompanionChar.StateMachine.Initialize(CompanionChar.IdleState);
+        CompanionChar.Anim.enabled = true;
 
-        Friend.Leave(PlayerChar);
-        Friend.IsSparring = true;
+        CompanionChar.Leave(PlayerChar);
+        CompanionChar.IsSparring = true;
 
-        PlayerChar.Opponents.Add(Friend);
-        Friend.Opponents.Add(PlayerChar);
+        PlayerChar.Opponents.Add(CompanionChar);
+        CompanionChar.Opponents.Add(PlayerChar);
 
         // Player goes first
         PlayerChar.BattleTurn = true;
@@ -351,18 +351,18 @@ public class Intro : EventBase
         yield return new WaitForSeconds(1f);
 
         // dialogue during battle
-        SecondaryDialogueController.Instance.StartDialogue(_damageDialogue, new List<CharacterBase>{Friend}, 1.5f);
+        SecondaryDialogueController.Instance.StartDialogue(_damageDialogue, new List<CharacterBase>{CompanionChar}, 1.5f);
     }
 
     private void FinishMatch()
     {
-        if (!Friend.IsSparring)
+        if (!CompanionChar.IsSparring)
             return;
 
         PlayerChar.Opponents.Clear();
-        Friend.Opponents.Clear();
+        CompanionChar.Opponents.Clear();
 
-        Friend.IsSparring = false;
+        CompanionChar.IsSparring = false;
 
         PlayerChar.StateMachine.End(); // stop movement (and combat)
 
@@ -374,7 +374,7 @@ public class Intro : EventBase
         yield return new WaitForSeconds(.4f);
 
         // start dialogue
-        DialogueController.Instance.StartDialogue(_chiefDialogue2, new List<CharacterBase>{Chief, Friend});
+        DialogueController.Instance.StartDialogue(_chiefDialogue2, new List<CharacterBase>{Chief, CompanionChar});
         _chiefDialogue2Active = true;
     }
 
@@ -385,11 +385,11 @@ public class Intro : EventBase
 
         _chiefDialogue2Active = false;
 
-        Friend.Anim.enabled = true;
+        CompanionChar.Anim.enabled = true;
 
         // go to chief
         StartCoroutine(GoToChief(PlayerChar, new Vector2(Chief.transform.position.x+.2f, Chief.transform.position.y-.2f)));
-        StartCoroutine(GoToChief(Friend, new Vector2(Chief.transform.position.x-.2f, Chief.transform.position.y-.2f)));
+        StartCoroutine(GoToChief(CompanionChar, new Vector2(Chief.transform.position.x-.2f, Chief.transform.position.y-.2f)));
         _moveToChief = true;
     }
 
@@ -400,11 +400,11 @@ public class Intro : EventBase
         
         _moveBack = false;
 
-        Friend.Anim.enabled = true;
+        CompanionChar.Anim.enabled = true;
 
         // return
         StartCoroutine(GoToChief(PlayerChar, new Vector2(Chief.transform.position.x+.65f, Chief.transform.position.y-1f)));
-        StartCoroutine(GoToChief(Friend, new Vector2(Chief.transform.position.x-.65f, Chief.transform.position.y-1f)));
+        StartCoroutine(GoToChief(CompanionChar, new Vector2(Chief.transform.position.x-.65f, Chief.transform.position.y-1f)));
         _moveBack2 = true;
     }
 
@@ -443,28 +443,28 @@ public class Intro : EventBase
         Chief.transform.SetParent(HouseIndoor.transform);
         Chief.StateMachine.Initialize(Chief.IdleState);
 
-        Friend.Anim.enabled = true;
-        StartCoroutine(MoveFriend());
+        CompanionChar.Anim.enabled = true;
+        StartCoroutine(MoveCompanion());
     }
 
-    private IEnumerator MoveFriend()
+    private IEnumerator MoveCompanion()
     {
         // move to player
-        float _distance = Vector2.Distance(PlayerChar.transform.position, Friend.transform.position);
+        float _distance = Vector2.Distance(PlayerChar.transform.position, CompanionChar.transform.position);
         while (_distance > 0.7f)
         {
-            _distance = Vector2.Distance(PlayerChar.transform.position, Friend.transform.position);
-            Friend.Move(PlayerChar.transform.position - Friend.transform.position);
+            _distance = Vector2.Distance(PlayerChar.transform.position, CompanionChar.transform.position);
+            CompanionChar.Move(PlayerChar.transform.position - CompanionChar.transform.position);
             yield return new WaitForFixedUpdate();
         }
 
-        Friend.Move(Vector2.zero);
-        Friend.Anim.enabled = false;
+        CompanionChar.Move(Vector2.zero);
+        CompanionChar.Anim.enabled = false;
 
-        PlayerChar.Face(Friend);
+        PlayerChar.Face(CompanionChar);
 
         // start dialogue
-        DialogueController.Instance.StartDialogue(_afterMatchDialogue, new List<CharacterBase>{Friend});
+        DialogueController.Instance.StartDialogue(_afterMatchDialogue, new List<CharacterBase>{CompanionChar});
         _introEnd = true;
     }
 
@@ -477,13 +477,13 @@ public class Intro : EventBase
 
         PlayerChar.CannotEnter = false; // enable enter action
         PlayerChar.StateMachine.Initialize(PlayerChar.IdleState);
-        Friend.StateMachine.Initialize(Friend.IdleState);
-        Friend.Anim.enabled = true;
+        CompanionChar.StateMachine.Initialize(CompanionChar.IdleState);
+        CompanionChar.Anim.enabled = true;
 
         EventIsDone = true; // event done
 
         DialogueController.Instance.OnDialogueFinish -= MomEncounter;
-        DialogueController.Instance.OnDialogueFinish -= FriendEncounter;
+        DialogueController.Instance.OnDialogueFinish -= CompanionEncounter;
         DialogueController.Instance.OnDialogueFinish -= OutOfBounds;
         PlayerChar.OnEnter -= EnterBuilding;
         DialogueController.Instance.OnDialogueFinish -= EnterBuilding2;
