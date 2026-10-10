@@ -68,5 +68,8 @@ MonoBehaviour:
   _removeVinesDialogue: {fileID: 11400000, guid: 8443c0b2e8ee84fadbcefd7c6245168d, type: 2}
   _companionDialogue7: {fileID: 11400000, guid: 8e3ef5f45f9954511a71c2fdde77245f, type: 2}
   _restDialogue: {fileID: 11400000, guid: 5a494c47c8aed4b349260f69a34b49f3, type: 2}
-  _nostalgiaDialogue: {fileID: 11400000, guid: ef76adb090ddf4766b9012bad9e8622e, type: 2}
+  _nostalgiaDialogue: {fileID: 11400000, guid: 34728b73e74bf48989a838f47b94b9f6, type: 2}
+  _restoreDialogue: {fileID: 11400000, guid: 6ac5bfbda808842e1b7a92eaafd7c64b, type: 2}
   _companionDialogue8: {fileID: 11400000, guid: 6202b6fbe917141e7a6098edc8fb1235, type: 2}
+  _senseDialogue: {fileID: 11400000, guid: 88129bec240da471ba360e21dec4d5d8, type: 2}
+  _companionDialogue9: {fileID: 11400000, guid: e6caaed77799b4eb6921116a4fb357e9, type: 2}

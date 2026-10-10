@@ -18,21 +18,24 @@ public class FirstQuest : EventBase
     public GameObject HouseIndoor { get; set; }
     public GameObject Chest { get; set; }
     public GameObject Vines { get; set; }
+    public GameObject Vines1 { get; set; }
     public GameObject Crystal { get; set; }
     public GameObject Campfire { get; set; }
     public Boundary SlimeBoundary { get; set; }
     public Destination EncounterTrigger { get; set; }
     public Destination AmbushTrigger { get; set; }
     public Destination RestTrigger { get; set; }
+    public Destination SenseTrigger { get; set; }
     [SerializeField] private GameObject _reactIcon;
     [SerializeField] private Dialogue _companionDialogue, _chiefDialogue, _momDialogue, _shopkeeperDialogue, 
         _slimeDialogue, _companionDialogue2, _outBoundsDialogue, _slimeDialogue2, _companionDialogue3, _chestDialogue, 
         _ambushDialogue, _ambushBattleDialogue, _afterAmbushDialogue, _travellerDialogue, _vinesDialogue, 
         _companionDialogue4, _crystalDialogue, _companionDialogue5, _companionDialogue6, _removeVinesDialogue, 
-        _companionDialogue7, _restDialogue, _nostalgiaDialogue, _companionDialogue8;
+        _companionDialogue7, _restDialogue, _nostalgiaDialogue, _restoreDialogue, _companionDialogue8, _senseDialogue,
+        _companionDialogue9;
     private bool _slimeEncounter, _firstSlimeDefeat, _firstSlimeDefeat2, _findChest, _ambush,
         _ambushTutorial, _vines, _crystal, _crystalEncounter, _crystalSlimeDefeat, _vinesRemoved,
-        _rest, _rest2, _rested;
+        _rest, _rest2, _rested, _healthRestored, _sense, _sensed;
     private int _inPos;
 
     private void Start()
@@ -49,6 +52,8 @@ public class FirstQuest : EventBase
         DialogueController.Instance.OnDialogueFinish += VinesRemoved;
         DialogueController.Instance.OnDialogueFinish += RestStop;
         DialogueController.Instance.OnDialogueFinish += RestDialogue;
+        DialogueController.Instance.OnDialogueFinish += RestoreHealth;
+        DialogueController.Instance.OnDialogueFinish += Sense;
         // DialogueController.Instance.OnDialogueFinish += FinishEvent;
 
         // set current dialogues
@@ -207,6 +212,25 @@ public class FirstQuest : EventBase
                 // start dialogue
                 DialogueController.Instance.StartDialogue(_restDialogue, new List<CharacterBase>{CompanionChar});
                 _rest = true;
+            }
+        }
+
+        // sense boss
+        if (SenseTrigger.Reached)
+        {
+            if (!_sense)
+            {
+                PlayerChar.StateMachine.End(); // stop movement
+                CompanionChar.StateMachine.End(); // stop movement
+
+                CompanionChar.Anim.Rebind();
+                CompanionChar.Anim.enabled = false;
+
+                CameraController.Instance.target = Vines1.transform;
+
+                // start dialogue
+                StartCoroutine(SenseDialogue());
+                _sense = true;
             }
         }
     }
@@ -477,7 +501,7 @@ public class FirstQuest : EventBase
         Campfire.SetActive(true);
 
         // lighting to night
-        Lighting.Instance.SetLighting(255f, .4f);
+        // Lighting.Instance.SetLighting(255f, .4f);
 
         await Transition.Instance.FadeIn();
 
@@ -496,19 +520,60 @@ public class FirstQuest : EventBase
         await Transition.Instance.FadeOut();
 
         // lighting to day
-        Lighting.Instance.SetLighting(50f, 1f);
+        // Lighting.Instance.SetLighting(50f, 1f);
 
-        Campfire.GetComponentInChildren<Light2D>().enabled = false;
+        // Campfire.GetComponentInChildren<Light2D>().enabled = false;
 
         PlayerChar.transform.position = new Vector2(Campfire.transform.position.x+.8f, Campfire.transform.position.y-.4f);
 
         await Transition.Instance.FadeIn(); 
+
+        // campfire restores health
+        PlayerChar.Heal(PlayerChar.MaxHealth);
+        CompanionChar.Heal(CompanionChar.MaxHealth); 
+
+        // restore dialogue
+        DialogueController.Instance.StartDialogue(_restoreDialogue, new List<CharacterBase>{});
+        _healthRestored = true;
+    }
+
+    private void RestoreHealth()
+    {
+        if (!_healthRestored)
+            return;
+        
+        _healthRestored = false;
 
         PlayerChar.StateMachine.Initialize(PlayerChar.IdleState);
         CompanionChar.StateMachine.Initialize(CompanionChar.IdleState);
 
         CompanionChar.Anim.enabled = true;
         CompanionChar.CurrentDialogue = _companionDialogue8;
+    }
+
+    private IEnumerator SenseDialogue()
+    {
+        yield return new WaitForSeconds(.5f);
+
+        // start dialogue
+        DialogueController.Instance.StartDialogue(_senseDialogue, new List<CharacterBase>{CompanionChar});
+        _sensed = true;
+    }
+
+    private void Sense()
+    {
+        if (!_sensed)
+            return;
+
+        _sensed = false;
+
+        CameraController.Instance.target = PlayerChar.transform;
+
+        PlayerChar.StateMachine.Initialize(PlayerChar.IdleState);
+        CompanionChar.StateMachine.Initialize(CompanionChar.IdleState);
+
+        CompanionChar.Anim.enabled = true;
+        CompanionChar.CurrentDialogue = _companionDialogue9;
     }
 
     private void FinishEvent()

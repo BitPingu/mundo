@@ -14,6 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Reina
+    line: Huh, there's nothing here...
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Reina
     line: Hm? What's that sound?
     reaction: 
     choices: []

@@ -10,11 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6a0ebe69b3164f6e91f94a88da27730, type: 3}
-  m_Name: Companion Forest Dialogue 16
+  m_Name: Companion Forest Dialogue 19
   m_EditorClassIdentifier: 
   Lines:
   - charName: Reina
-    line: Hold on, this area seems clear. Let's stop here and rest for a while.
+    line: Oh, I can sense some kind of energy coming from over there!
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Reina
+    line: But it looks like the path is blocked by vines again.
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Reina
+    line: Let's look around and see if we can find any more crystals to clear the
+      vines.
     reaction: 
     choices: []
     redirectDialogueIndex: -1

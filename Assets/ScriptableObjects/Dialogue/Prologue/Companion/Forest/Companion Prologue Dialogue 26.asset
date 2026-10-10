@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6a0ebe69b3164f6e91f94a88da27730, type: 3}
-  m_Name: Companion Forest Dialogue 16
+  m_Name: Companion Prologue Dialogue 26
   m_EditorClassIdentifier: 
   Lines:
   - charName: Reina
-    line: Hold on, this area seems clear. Let's stop here and rest for a while.
+    line: It's a giant slime! Watch out, Ely!
     reaction: 
     choices: []
     redirectDialogueIndex: -1

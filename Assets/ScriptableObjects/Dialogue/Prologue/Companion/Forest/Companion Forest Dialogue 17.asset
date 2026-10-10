@@ -14,34 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Reina
-    line: Whew... what a day. So much has happened today.
+    line: Whew, I'm beat. I didn't think we'd have to fight this many slimes.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Reina
-    line: Still, this is kinda nice. Just sitting here by the fire and looking at
-      the stars... feels like old times.
+    line: Hopefully we can finish this assignment for the Chief and make him proud.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Reina
-    line: Especially when it's just the two of us... haha.
-    reaction: 
-    choices: []
-    redirectDialogueIndex: -1
-  - charName: Ely
-    line: ...
+    line: Say, it's been a while since the two of us sat together like this.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Reina
-    line: ...
-    reaction: 
-    choices: []
-    redirectDialogueIndex: -1
-  - charName: Reina
-    line: ...Anyway, remember when we'd sneak out of the village just to explore
-      the woods?
+    line: Remember when we'd sneak out of the village just to explore the woods?
     reaction: 
     choices: []
     redirectDialogueIndex: -1
@@ -51,13 +39,23 @@ MonoBehaviour:
     choices: []
     redirectDialogueIndex: -1
   - charName: Reina
-    line: I guess not much has changed, huh?
+    line: ...I guess not much has changed, huh? You're still just as quiet as ever.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Reina
-    line: I'm really glad we're doing this together. It's nice having you by my side
-      again.
+    line: '*giggle*'
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Ely
+    line: ...
+    reaction: 
+    choices: []
+    redirectDialogueIndex: -1
+  - charName: Reina
+    line: Anyway, I'm really glad we're doing this together. It's nice having you
+      by my side again.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
