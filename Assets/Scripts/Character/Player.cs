@@ -50,43 +50,21 @@ public class Player : PartyBase
         Move(new Vector2(Input.HorizontalInput, Input.VerticalInput));
     }
 
-    public override void Battle()
+    public override IEnumerator Engage(FighterBase opponent)
     {
-        // call base class
-        base.Battle();
-
-        // player only battle options go here
-
-        if (BattleTurn)
-        {
-            // run (if wild)
-            // if (Opponent.GetComponent<Enemy>())
-            // {
-            //     BattleHUD.transform.Find("RunImage").gameObject.SetActive(true);
-            //     if (Input.Q)
-            //     {
-            //         StartCoroutine(Run());
-            //         EndTurn();
-            //     }
-            // }
-        }
-    }
-
-    public IEnumerator Engage(Enemy enemy)
-    {
-        string text = charName + " engages enemy " + enemy.charName + ".";
+        string text = charName + " engages enemy " + opponent.charName + ".";
         DialogueController.Instance.BattleDialogue(this, text, "");
 
-        // add enemies to battle
-        Opponents.Add(enemy);
-        foreach (Enemy enemyAlly in enemy.Allies)
+        // add opponents to battle
+        Opponents.Add(opponent);
+        foreach (FighterBase fighter in opponent.Allies)
         {
-            Opponents.Add(enemyAlly);
+            Opponents.Add(fighter);
         }
 
-        Vector3 attackDir = (enemy.transform.position - transform.position).normalized;
+        Vector3 attackDir = (opponent.transform.position - transform.position).normalized;
         float distanceFromEnemy = 1.5f;
-        Vector3 attackPos = enemy.transform.position - (attackDir*distanceFromEnemy);
+        Vector3 attackPos = opponent.transform.position - (attackDir*distanceFromEnemy);
 
         IsAttacking = true;
 
@@ -94,29 +72,29 @@ public class Player : PartyBase
         foreach (Companion ally in Allies)
         {
             if (!ally.IsSparring)
-                StartCoroutine(ally.Engage(attackPos, enemy.transform.position, distanceFromEnemy));
+                StartCoroutine(ally.Engage(attackPos, opponent.transform.position, distanceFromEnemy));
         }
 
-        // go to enemy
-        float distance = Vector2.Distance(enemy.transform.position, transform.position);
+        // go to opponent
+        float distance = Vector2.Distance(opponent.transform.position, transform.position);
         while (distance > 0.7f)
         {
-            distance = Vector2.Distance(enemy.transform.position, transform.position);
-            Move(enemy.transform.position - transform.position);
+            distance = Vector2.Distance(opponent.transform.position, transform.position);
+            Move(opponent.transform.position - transform.position);
             yield return new WaitForFixedUpdate();
         }
 
         Anim.SetTrigger("Attack");
         yield return new WaitForSeconds(.1f);
-        enemy.CallDamageFlash();
+        opponent.CallDamageFlash();
 
-        // trigger battle with enemies
-        enemy.Opponents.Add(this);
+        // trigger battle with opponents
+        opponent.Opponents.Add(this);
         foreach (PartyBase ally in Allies)
         {
-            enemy.Opponents.Add(ally);
+            opponent.Opponents.Add(ally);
         }
-        foreach (Enemy enemyAlly in enemy.Allies)
+        foreach (Enemy enemyAlly in opponent.Allies)
         {
             enemyAlly.Opponents.Add(this);
             foreach (PartyBase ally in Allies)
@@ -138,6 +116,28 @@ public class Player : PartyBase
 
         // Player goes first
         BattleTurn = true;
+    }
+
+    public override void Battle()
+    {
+        // call base class
+        base.Battle();
+
+        // player only battle options go here
+
+        if (BattleTurn)
+        {
+            // run (if wild)
+            // if (Opponent.GetComponent<Enemy>())
+            // {
+            //     BattleHUD.transform.Find("RunImage").gameObject.SetActive(true);
+            //     if (Input.Q)
+            //     {
+            //         StartCoroutine(Run());
+            //         EndTurn();
+            //     }
+            // }
+        }
     }
 
     public IEnumerator Run()

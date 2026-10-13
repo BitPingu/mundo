@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class Enemy : FighterBase
 {
-    public float SightRadius;
     public Vector3 SpawnPoint;
     [SerializeField] private float _spawnRange = 3f;
     private Vector2 _curDir, _curPoint;
     private float _moveCounter, _waitCounter, _waitTime;
     [SerializeField] private float _minWaitTime = 3f, _maxWaitTime = 5f;
+    public bool CannotMove { get; set; }
+    public bool IsNearPlayer { get; set; }
 
     protected override void Start()
     {
@@ -22,7 +23,7 @@ public class Enemy : FighterBase
         _waitCounter = _minWaitTime;
     }
 
-    public void SetRandomDir()
+    private void SetRandomDir()
     {
         // choose random point from spawn
         _curPoint = (Vector2)SpawnPoint + Random.insideUnitCircle * _spawnRange;
@@ -35,21 +36,7 @@ public class Enemy : FighterBase
         _waitTime = Random.Range(_minWaitTime, _maxWaitTime);
     }
 
-    public void InterruptIdle()
-    {
-        // stop
-        _curDir = Vector2.zero;
-    }
-
-    public override void Idle()
-    {
-        // call base class
-        base.Idle();
-
-        Patrol();
-    }
-
-    private void Patrol()
+    protected void Patrol()
     {
         if (_moveCounter > 0)
         {
@@ -64,7 +51,7 @@ public class Enemy : FighterBase
         else
         {
             // stop
-            InterruptIdle();
+            _curDir = Vector2.zero;
 
             // update wait counter
             _waitCounter -= Time.deltaTime;
@@ -82,18 +69,63 @@ public class Enemy : FighterBase
         Move(_curDir);
     }
 
-    public void Chase(CharacterBase opponent)
+    protected void Chase(FighterBase opponent)
     {
         // chase opponent
         float distance = Vector2.Distance(opponent.transform.position, transform.position);
-        if (distance > SightRadius)
+        if (distance > 0.7f)
         {
             Move(opponent.transform.position - transform.position);
         }
         else
         {
-            Move(Vector2.zero);
+            // stop
+            IsNearPlayer = true;
         }
+    }
+
+    public override IEnumerator Engage(FighterBase opponent)
+    {
+        string text = charName + " engages " + opponent.charName + "!";
+        DialogueController.Instance.BattleDialogue(this, text, "");
+
+        // add opponents to battle
+        Opponents.Add(opponent);
+        foreach (FighterBase fighter in opponent.Allies)
+        {
+            Opponents.Add(fighter);
+        }
+
+        Vector3 attackDir = (opponent.transform.position - transform.position).normalized;
+        float distanceFromEnemy = 1.5f;
+        Vector3 attackPos = opponent.transform.position - (attackDir*distanceFromEnemy);
+
+        IsAttacking = true;
+
+        Anim.SetTrigger("Attack");
+        yield return new WaitForSeconds(.1f);
+        opponent.CallDamageFlash();
+
+        // trigger battle with opponents
+        opponent.Opponents.Add(this);
+        foreach (Companion enemyAlly in opponent.Allies)
+        {
+            StartCoroutine(enemyAlly.Engage(attackPos, opponent.transform.position, distanceFromEnemy));
+        }
+
+        // return to pos
+        float distance = Vector2.Distance(attackPos, transform.position);
+        while (distance > 0.1f)
+        {
+            distance = Vector2.Distance(attackPos, transform.position);
+            Move(attackPos - transform.position);
+            yield return new WaitForFixedUpdate();
+        }
+
+        IsAttacking = false;
+
+        // Player goes first
+        BattleTurn = true;
     }
 
     public override void Battle()
@@ -140,7 +172,7 @@ public class Enemy : FighterBase
         }
     }
 
-    public override IEnumerator Die()
+    protected override IEnumerator Die()
     {
         yield return new WaitForSeconds(1.5f);
 
@@ -169,9 +201,9 @@ public class Enemy : FighterBase
         Destroy(gameObject);
     }
 
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(transform.position, SightRadius);
-    }
+    // void OnDrawGizmosSelected()
+    // {
+    //     Gizmos.DrawWireSphere(transform.position, SightRadius);
+    // }
 }
 

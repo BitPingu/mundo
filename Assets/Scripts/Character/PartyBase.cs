@@ -130,7 +130,7 @@ public class PartyBase : FighterBase
         SecondaryDialogueController.Instance.StartDialogue(_lowHealthDialogue, new List<CharacterBase>{this}, 1.5f);
     }
 
-    public IEnumerator Defeat()
+    private IEnumerator Defeat()
     {
         // for sparring matches
         yield return new WaitForSeconds(1.5f);
@@ -141,7 +141,7 @@ public class PartyBase : FighterBase
         DialogueController.Instance.BattleDialogue(this, text, "");
     }
 
-    public override IEnumerator Die()
+    protected override IEnumerator Die()
     {
         yield return new WaitForSeconds(1.5f);
 

@@ -116,7 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: slime2_0
+      name: blue-slime_0
       rect:
         serializedVersion: 2
         x: 0
@@ -129,16 +129,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a1e1bf80f24a77700800000000000000
-      internalID: 538079202415156762
+      spriteID: 2782458870c1643c291b49ce0da8541f
+      internalID: 1168692335
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slime2_1
+      name: blue-slime_1
       rect:
         serializedVersion: 2
         x: 16
@@ -151,10 +151,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: dc103aae3241959d0800000000000000
-      internalID: -2785172750058978867
+      spriteID: c867c2384ff3141cc94f07428709a65c
+      internalID: 965849404
       vertices: []
       indices: 
       edges: []
@@ -173,8 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      slime2_0: 538079202415156762
-      slime2_1: -2785172750058978867
+      blue-slime_0: 1168692335
+      blue-slime_1: 965849404
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

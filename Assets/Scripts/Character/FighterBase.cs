@@ -47,6 +47,11 @@ public class FighterBase : CharacterBase
         CurrentOpponent = opponent;
     }
 
+    public virtual IEnumerator Engage(FighterBase opponent)
+    {
+        yield return null;
+    }
+
     public virtual void Battle()
     {
         // face opponent
@@ -231,7 +236,7 @@ public class FighterBase : CharacterBase
         }
     }
 
-    public virtual IEnumerator Die()
+    protected virtual IEnumerator Die()
     {
         yield return null;
     }

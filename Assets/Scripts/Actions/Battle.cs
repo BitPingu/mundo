@@ -58,26 +58,32 @@ public class Battle : MonoBehaviour
 
     private void Update()
     {
-        if (_detectPlayer && _detectPlayer.StateMachine.CurrentState == _detectPlayer.IdleState)
+        if (_detectPlayer && _detectPlayer.StateMachine.CurrentState == _detectPlayer.IdleState 
+            && _detectPlayer.Input.E)
         {
-            if (_detectPlayer.Input.E)
+            Enemy enemy = GetComponentInParent<Enemy>();
+            enemy.CannotMove = true; // halt enemy movement
+            if (_detectEnemy)
             {
-                Enemy enemy = GetComponentInParent<Enemy>();
-                enemy.InterruptIdle(); // halt enemy movement
-                if (_detectEnemy)
+                // enemy allies
+                enemy.Allies.Add(_detectEnemy);
+                _detectEnemy.Allies.Add(enemy);
+                // check if ally is closer to player
+                if (Vector2.Distance(_detectPlayer.transform.position, enemy.transform.position) > Vector2.Distance(_detectPlayer.transform.position, _detectEnemy.transform.position))
                 {
-                    // enemy allies
-                    enemy.Allies.Add(_detectEnemy);
-                    _detectEnemy.Allies.Add(enemy);
-                    // check if ally is closer to player
-                    if (Vector2.Distance(_detectPlayer.transform.position, enemy.transform.position) > Vector2.Distance(_detectPlayer.transform.position, _detectEnemy.transform.position))
-                    {
-                        enemy = _detectEnemy;
-                    }
+                    enemy = _detectEnemy;
                 }
-                StartCoroutine(_detectPlayer.Engage(enemy)); // engage the enemy
-                OnTriggerExit2D(_detectPlayer.GetComponent<Collider2D>());
             }
+            StartCoroutine(_detectPlayer.Engage(enemy)); // player engages enemy
+            OnTriggerExit2D(_detectPlayer.GetComponent<Collider2D>());
+        }
+        else if (GetComponentInParent<Enemy>().IsNearPlayer)
+        {
+            Enemy enemy = GetComponentInParent<Enemy>();
+            enemy.CannotMove = true; // halt enemy movement
+            StartCoroutine(enemy.Engage(_detectPlayer)); // enemy engages player
+            OnTriggerExit2D(_detectPlayer.GetComponent<Collider2D>());
+            enemy.IsNearPlayer = false;
         }
     }
 }
