@@ -17,24 +17,12 @@ public class BattleState : StateBase
     {
         base.EnterState();
 
-        if (_fighter.GetComponent<Player>())
-        {
-            // camera
-            CameraController.Instance.follow = false;
-        }
-
         // battle anim
         if (_fighter.GetComponent<PartyBase>())
             _fighter.Anim.SetLayerWeight(1, 1);
 
         // show health bar
         _fighter.HBar.gameObject.GetComponent<Image>().enabled = true;
-
-        // set conditions
-        _fighter.WinBattle = false;
-
-        // target first opponent
-        _fighter.SetCurrentOpponent(_fighter.Opponents[0]);
     }
 
     // code that runs when we exit the state
@@ -42,41 +30,12 @@ public class BattleState : StateBase
     {
         base.ExitState();
 
-        if (_fighter.GetComponent<Player>())
-        {
-            // camera
-            CameraController.Instance.follow = true;
-        }
-
         // battle anim
         if (_fighter.GetComponent<PartyBase>())
             _fighter.Anim.SetLayerWeight(1, 0);
 
         // hide health bar
         _fighter.HBar.gameObject.GetComponent<Image>().enabled = false;
-
-        if (_fighter.GetComponent<PartyBase>())
-        {
-            _fighter.GetComponent<PartyBase>().BattleHUD.SetActive(false);
-        }
-
-        // reset conditions
-        _fighter.CurrentTurn = 0;
-        _fighter.BattleTurn = false;
-
-        // TODO: revive party here?
-        if (_fighter.GetComponent<PartyBase>() && _fighter.CurrentHealth > 0)
-        {
-            foreach (PartyBase member in _fighter.GetComponent<PartyBase>().Party)
-            {
-                if (member.CurrentHealth <= 0)
-                {
-                    _fighter.GetComponent<PartyBase>().Allies.Add(member);
-                    member.Anim.SetTrigger("Dead");
-                    member.StateMachine.Initialize(member.IdleState);
-                }
-            }
-        }
     }
 
     public override void FrameUpdate()

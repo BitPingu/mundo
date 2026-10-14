@@ -342,8 +342,14 @@ public class Intro : EventBase
         PlayerChar.Opponents.Add(CompanionChar);
         CompanionChar.Opponents.Add(PlayerChar);
 
+        PlayerChar.SetCurrentOpponent(CompanionChar);
+        CompanionChar.SetCurrentOpponent(PlayerChar);
+
         // Player goes first
         PlayerChar.BattleTurn = true;
+
+        // camera
+        CameraController.Instance.follow = false;
     }
 
     private IEnumerator SparringDialogue()

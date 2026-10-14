@@ -6,8 +6,9 @@ public class Enemy : FighterBase
     public Vector3 SpawnPoint;
     [SerializeField] private float _spawnRange = 3f;
     private Vector2 _curDir, _curPoint;
-    private float _moveCounter, _waitCounter, _waitTime;
+    private float _moveCounter, _waitCounter, _waitTime, _artCooldownCounter;
     [SerializeField] private float _minWaitTime = 3f, _maxWaitTime = 5f;
+    [SerializeField] private float _artCooldownTime;
     public bool CannotMove { get; set; }
     public bool IsNearPlayer { get; set; }
 
@@ -21,6 +22,9 @@ public class Enemy : FighterBase
 
         // set wait time
         _waitCounter = _minWaitTime;
+
+        // set art cooldown time
+        _artCooldownCounter = _artCooldownTime;
     }
 
     private void SetRandomDir()
@@ -86,19 +90,17 @@ public class Enemy : FighterBase
 
     public override IEnumerator Engage(FighterBase opponent)
     {
+        CannotMove = true; // halt enemy movement
+
         string text = charName + " engages " + opponent.charName + "!";
         DialogueController.Instance.BattleDialogue(this, text, "");
 
         // add opponents to battle
         Opponents.Add(opponent);
-        foreach (FighterBase fighter in opponent.Allies)
+        foreach (FighterBase opponentAlly in opponent.Allies)
         {
-            Opponents.Add(fighter);
+            Opponents.Add(opponentAlly);
         }
-
-        Vector3 attackDir = (opponent.transform.position - transform.position).normalized;
-        float distanceFromEnemy = 1.5f;
-        Vector3 attackPos = opponent.transform.position - (attackDir*distanceFromEnemy);
 
         IsAttacking = true;
 
@@ -106,12 +108,19 @@ public class Enemy : FighterBase
         yield return new WaitForSeconds(.1f);
         opponent.CallDamageFlash();
 
+        Vector3 attackDir = (opponent.transform.position - transform.position).normalized;
+        float distanceFromEnemy = 1.5f;
+        Vector3 attackPos = opponent.transform.position - (attackDir*distanceFromEnemy);
+
         // trigger battle with opponents
         opponent.Opponents.Add(this);
         foreach (Companion enemyAlly in opponent.Allies)
         {
             StartCoroutine(enemyAlly.Engage(attackPos, opponent.transform.position, distanceFromEnemy));
         }
+
+        // set player current opponent
+        opponent.SetCurrentOpponent(this);
 
         // return to pos
         float distance = Vector2.Distance(attackPos, transform.position);
@@ -124,7 +133,7 @@ public class Enemy : FighterBase
 
         IsAttacking = false;
 
-        // Player goes first
+        // Enemy goes first
         BattleTurn = true;
     }
 
@@ -136,49 +145,68 @@ public class Enemy : FighterBase
         // attack
         if (BattleTurn)
         {
-            // choose target
-            // current strat: prioritize opponents <= 50% health
-            if (Opponents.Count > 1)
-            {
-                bool priority = false;
-                foreach (FighterBase opponent in Opponents)
-                {
-                    if (opponent.CurrentHealth <= opponent.MaxHealth / 2)
-                    {
-                        CurrentOpponent = opponent;
-                        priority = true;
-                        break;
-                    }
-                }
-                if (!priority && Random.value < .5f)
-                {
-                    CurrentOpponent = Opponents[1];
-                }                
-            }
-
-            CallAttack();
-            BattleTurn = false;
+            TargetOpponent(); // choose target
+            StartCoroutine(CallAttack());
+            EndTurn();
         }
     }
 
-    public override void Damage(int damageAmount)
+    private void TargetOpponent()
+    {
+        // current strat: prioritize opponents <= 50% health
+        if (Opponents.Count > 1)
+        {
+            foreach (FighterBase opponent in Opponents)
+            {
+                if (opponent.CurrentHealth <= opponent.MaxHealth / 2)
+                {
+                    CurrentOpponent = opponent;
+                    return;
+                }
+            }
+            if (Random.value < .5f)
+            {
+                CurrentOpponent = Opponents[0];
+            }
+            else
+            {
+                CurrentOpponent = Opponents[1];
+            }
+        }
+        else
+        {
+            CurrentOpponent = Opponents[0];
+        }
+    }
+
+    protected override void EndTurn()
+    {
+        BattleTurn = false;
+        if (_artCooldownCounter > 0)
+            _artCooldownCounter--;
+        Debug.Log("counter: " + _artCooldownCounter);
+    }
+
+    protected override void EndBattle()
     {
         // call base class
-        base.Damage(damageAmount);
-
-        if (CurrentHealth <= 0)
-        {
-            StartCoroutine(Die());      
-        }
+        base.EndBattle();
+        CannotMove = false;
     }
 
-    protected override IEnumerator Die()
+    public override void Die()
     {
-        yield return new WaitForSeconds(1.5f);
+        // call base class
+        base.Die();
+
+        StartCoroutine(Fade());
 
         string text = "Enemy " + charName + " was defeated!";
         DialogueController.Instance.BattleDialogue(this, text, "");
+    }
 
+    private IEnumerator Fade()
+    {
         // set color
         Sprite.material.SetFloat("_FlashAmount", 1f);
         float flashTime = 1.5f;
@@ -195,9 +223,6 @@ public class Enemy : FighterBase
             yield return null;
         }
 
-        // Die
-        foreach (FighterBase ally in Allies)
-            ally.Allies.Remove(this);
         Destroy(gameObject);
     }
 

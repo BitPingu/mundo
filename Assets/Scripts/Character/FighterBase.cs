@@ -6,7 +6,7 @@ public class FighterBase : CharacterBase
 {
     // battle state
     public StateBase BattleState { get; set; }
-    protected FighterBase CurrentOpponent { get; set; }
+    public FighterBase CurrentOpponent { get; set; }
     public List<FighterBase> Opponents = new List<FighterBase>();
     public List<FighterBase> Allies = new List<FighterBase>();
     public int CurrentTurn { get; set; }
@@ -17,12 +17,9 @@ public class FighterBase : CharacterBase
     public int CurrentHealth { get; set; }
     public int Strength = 4;
 
-    // public List<Ability> Abilities;
-
     // conditions
     public bool BattleTurn { get; set; }
     public bool IsAttacking { get; set; }
-    public bool WinBattle { get; set; }
 
     // UI
     public Bar HBar;
@@ -63,21 +60,24 @@ public class FighterBase : CharacterBase
             Move(Vector2.zero);
     }
 
-    protected virtual void CallAttack()
+    protected virtual void EndTurn()
     {
+        
+    }
+
+    protected virtual IEnumerator CallAttack()
+    {
+        yield return StartCoroutine(Attack());
+        StartCoroutine(AttackFinish());
+    }
+
+    protected IEnumerator Attack()
+    {
+        IsAttacking = true;
+
         // battle dialogue
         string text = charName + " attacks " + CurrentOpponent.charName + "!";
         DialogueController.Instance.BattleDialogue(this, text, "");
-
-        StartCoroutine(Attack());
-    }
-
-    protected virtual IEnumerator Attack()
-    {
-        Vector3 attackDir = (CurrentOpponent.transform.position - transform.position).normalized;
-        Vector3 attackPos = CurrentOpponent.transform.position - (attackDir*1.3f);
-
-        IsAttacking = true;
 
         // go to opponent
         float _distance = Vector2.Distance(CurrentOpponent.transform.position, transform.position);
@@ -94,6 +94,9 @@ public class FighterBase : CharacterBase
         // damage
         CurrentOpponent.Damage(Strength);
 
+        Vector3 attackDir = (CurrentOpponent.transform.position - transform.position).normalized;
+        Vector3 attackPos = CurrentOpponent.transform.position - (attackDir*1.3f);
+
         // return to pos
         _distance = Vector2.Distance(attackPos, transform.position);
         while (_distance > 0.05f)
@@ -102,66 +105,35 @@ public class FighterBase : CharacterBase
             Move(attackPos - transform.position);
             yield return new WaitForFixedUpdate();
         }
-
         Move(Vector2.zero);
 
         IsAttacking = false;
-
-        StartCoroutine(AttackFinish());
     }
 
-    private IEnumerator AttackFinish()
+    protected virtual IEnumerator AttackFinish()
     {
-        yield return new WaitForSeconds(1f);
-
         if (CurrentOpponent.CurrentHealth == 0)
         {
-            yield return new WaitForSeconds(2f);
-
-            if (GetComponent<PartyBase>())
-            {
-                // exp
-                List<FighterBase> party = CurrentOpponent.Opponents;
-                foreach (PartyBase ally in party)
-                {
-                    ally.GainExperience(40);
-                    yield return new WaitForSeconds(1.5f);
-                    if (ally.IsLeveling)
-                        yield return new WaitForSeconds(1.5f);
-                }
-            }
+            CurrentOpponent.Die();
+            yield return new WaitForSeconds(1f);
 
             if (CurrentOpponent.Allies.Count == 0)
             {
-                // no more opponents (end battle)
-                Opponents.Clear();
-                foreach (FighterBase ally in Allies)
-                    ally.Opponents.Clear();
-                
-                // end battle dialogue
-                DialogueController.Instance.EndBattleDialogue();
+                EndBattle();
                 yield break;
             }
             else
             {
-                // more opponents (continue battle)
-                foreach (FighterBase opponent in CurrentOpponent.Allies)
-                {
-                    // target remaining opponents
-                    if (opponent)
-                    {
-                        CurrentOpponent = opponent;
-                        foreach (FighterBase ally in Allies)
-                        {
-                            ally.SetCurrentOpponent(opponent);
-                        }
-                        break;
-                    }
-                }
+                ContinueBattle();
             }
         }
 
-        if (Allies.Count > 0 && CurrentTurn < Allies.Count && !WinBattle)
+        PassTurn();
+    }
+
+    protected void PassTurn()
+    {
+        if (Allies.Count > 0 && CurrentTurn < Allies.Count)
         {
             // ally turn
             foreach (FighterBase ally in Allies)
@@ -189,25 +161,58 @@ public class FighterBase : CharacterBase
         }
     }
 
+    protected void ContinueBattle()
+    {
+        // more opponents (continue battle)
+        foreach (FighterBase opponent in CurrentOpponent.Allies)
+        {
+            // target remaining opponents
+            if (opponent)
+            {
+                SetCurrentOpponent(opponent);
+                foreach (FighterBase ally in Allies)
+                {
+                    ally.SetCurrentOpponent(opponent);
+                }
+                break;
+            }
+        }
+    }
+
+    protected virtual void EndBattle()
+    {
+        // no more opponents (end battle)
+        Opponents.Clear();
+        foreach (FighterBase ally in Allies)
+            ally.Opponents.Clear();
+        
+        // reset conditions
+        CurrentTurn = 0;
+        BattleTurn = false;
+
+        // end battle dialogue
+        DialogueController.Instance.EndBattleDialogue();
+
+        // camera
+        CameraController.Instance.follow = true;
+    }
+
     public virtual void Damage(int damageAmount)
     {
+        // prevent negative
+        int damageTaken = Mathf.Min(damageAmount, CurrentHealth);
+
         // take damage
-        CurrentHealth -= damageAmount;
+        CurrentHealth -= damageTaken;
 
         // damage flash
         CallDamageFlash();
 
-        if (CurrentHealth <= 0)
-        {
-            damageAmount -= -CurrentHealth;
-            CurrentHealth = 0;
-        }
-
         // update health bar
-        HBar.UpdateBar(MaxHealth, CurrentHealth);
+        StartCoroutine(HBar.UpdateBar(MaxHealth, CurrentHealth));
 
         // battle dialogue
-        string text = charName + " took " + damageAmount + " damage.";
+        string text = charName + " took " + damageTaken + " damage.";
         DialogueController.Instance.BattleDialogue(this, text, "");
         Debug.Log("Current health: " + CurrentHealth + "/" + MaxHealth);
     }
@@ -236,9 +241,10 @@ public class FighterBase : CharacterBase
         }
     }
 
-    protected virtual IEnumerator Die()
+    public virtual void Die()
     {
-        yield return null;
+        foreach (FighterBase ally in Allies)
+            ally.Allies.Remove(this);
     }
 
     public void Heal(int healAmount)
@@ -253,7 +259,7 @@ public class FighterBase : CharacterBase
         }
 
         // update health bar
-        HBar.UpdateBar(MaxHealth, CurrentHealth);
+        StartCoroutine(HBar.UpdateBar(MaxHealth, CurrentHealth));
 
         Debug.Log(name + " restored " + healAmount + " health.");
         Debug.Log("Current health: " + CurrentHealth + "/" + MaxHealth);

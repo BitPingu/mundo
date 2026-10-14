@@ -16,6 +16,8 @@ public class Slime : Enemy
 
         if (!CannotMove)
             Patrol();
+        else
+            Move(Vector2.zero);
     }
 }
 

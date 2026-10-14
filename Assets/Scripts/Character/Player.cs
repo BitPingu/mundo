@@ -52,28 +52,33 @@ public class Player : PartyBase
 
     public override IEnumerator Engage(FighterBase opponent)
     {
+        opponent.GetComponent<Enemy>().CannotMove = true; // halt enemy movement
+
         string text = charName + " engages enemy " + opponent.charName + ".";
         DialogueController.Instance.BattleDialogue(this, text, "");
 
         // add opponents to battle
         Opponents.Add(opponent);
-        foreach (FighterBase fighter in opponent.Allies)
+        foreach (FighterBase opponentAlly in opponent.Allies)
         {
-            Opponents.Add(fighter);
+            Opponents.Add(opponentAlly);
         }
+
+        // set current opponent
+        SetCurrentOpponent(opponent);
 
         Vector3 attackDir = (opponent.transform.position - transform.position).normalized;
         float distanceFromEnemy = 1.5f;
         Vector3 attackPos = opponent.transform.position - (attackDir*distanceFromEnemy);
 
-        IsAttacking = true;
-
         // companion engage
         foreach (Companion ally in Allies)
         {
             if (!ally.IsSparring)
-                StartCoroutine(ally.Engage(attackPos, opponent.transform.position, distanceFromEnemy));
+                yield return StartCoroutine(ally.Engage(attackPos, opponent.transform.position, distanceFromEnemy));
         }
+
+        IsAttacking = true;
 
         // go to opponent
         float distance = Vector2.Distance(opponent.transform.position, transform.position);
@@ -102,6 +107,9 @@ public class Player : PartyBase
                 enemyAlly.Opponents.Add(ally);
             }
         }
+
+        // set enemy current opponent
+        opponent.SetCurrentOpponent(this);
 
         // return to pos
         distance = Vector2.Distance(attackPos, transform.position);
@@ -146,7 +154,7 @@ public class Player : PartyBase
         DialogueController.Instance.BattleDialogue(this, text, "");
 
         // end battle
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
 
         // TODO: add random chance of working
         foreach (Enemy opponent in Opponents)

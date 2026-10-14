@@ -18,11 +18,10 @@ public class PartyBase : FighterBase
     public Bar EBar;
     public GameObject BattleHUD;
 
-    private bool _battlePrompt;
+    private bool _battlePrompt, _lowHealth;
     public bool IsSparring { get; set; }
-    public bool IsLeveling { get; set; }
 
-    [SerializeField] protected Dialogue _easyDialogue, _levelDialogue, _lowHealthDialogue;
+    [SerializeField] protected Dialogue _levelDialogue, _lowHealthDialogue;
 
     protected override void Start()
     {
@@ -31,6 +30,9 @@ public class PartyBase : FighterBase
 
         // set components
         Input = GetComponent<PlayerController>();
+
+        // add to party
+        Party.Add(this);
     }
 
     public override void Battle()
@@ -85,20 +87,20 @@ public class PartyBase : FighterBase
                 // attack
                 if (Input.E)
                 {
-                    CallAttack();
+                    StartCoroutine(CallAttack());
                     EndTurn();
                 }
             }
             else
             {
                 // act as enemy
-                CallAttack();
+                StartCoroutine(CallAttack());
                 BattleTurn = false;
             }
         }
     }
 
-    protected void EndTurn()
+    protected override void EndTurn()
     {
         BattleTurn = false;
         _battlePrompt = false;
@@ -106,20 +108,43 @@ public class PartyBase : FighterBase
         BattleHUD.SetActive(false);
     }
 
+    protected override IEnumerator AttackFinish()
+    {
+        if (CurrentOpponent.CurrentHealth == 0)
+        {
+            CurrentOpponent.Die();
+            yield return new WaitForSeconds(1f);
+
+            // exp
+            foreach (PartyBase member in Party)
+            {
+                if (member.CurrentHealth > 0)
+                    yield return StartCoroutine(member.GainExperience(40));
+            }
+
+            if (CurrentOpponent.Allies.Count == 0)
+            {
+                Revive(); // revive fallen members
+                EndBattle();
+                yield break;
+            }
+            else
+            {
+                ContinueBattle();
+            }
+        }
+
+        PassTurn();
+    }
+
     public override void Damage(int damageAmount)
     {
         // call base class
         base.Damage(damageAmount);
 
-        if (CurrentHealth <= 0)
+        if (!_lowHealth && CurrentHealth <= MaxHealth*.25f && !IsSparring)
         {
-            if (IsSparring)
-                StartCoroutine(Defeat());
-            else
-                StartCoroutine(Die());
-        }
-        else if (!IsSparring && CurrentHealth <= MaxHealth*.25f)
-        {
+            _lowHealth = true;
             StartCoroutine(LowHealthDialogue());
         }
     }
@@ -130,71 +155,83 @@ public class PartyBase : FighterBase
         SecondaryDialogueController.Instance.StartDialogue(_lowHealthDialogue, new List<CharacterBase>{this}, 1.5f);
     }
 
+    public override void Die()
+    {
+        if (IsSparring)
+        {
+            StartCoroutine(Defeat());
+            return;
+        }
+
+        // call base class
+        base.Die();
+
+        // exit battle
+        CurrentOpponent.Opponents.Remove(this);
+        foreach (FighterBase opponentAlly in CurrentOpponent.Allies)
+            opponentAlly.Opponents.Remove(this);
+        Opponents.Clear();
+
+        // set dead anim
+        Anim.SetTrigger("Dead");
+
+        string text = charName + " was defeated!";
+        DialogueController.Instance.BattleDialogue(this, text, "");
+    }
+
     private IEnumerator Defeat()
     {
-        // for sparring matches
-        yield return new WaitForSeconds(1.5f);
         Anim.Rebind();
+
+        // for sparring matches
+        yield return new WaitForSeconds(1f);
         Anim.enabled = false;
 
         string text = charName + " was defeated!";
         DialogueController.Instance.BattleDialogue(this, text, "");
     }
 
-    protected override IEnumerator Die()
+    private void Revive()
     {
-        yield return new WaitForSeconds(1.5f);
-
-        string text = charName + " was defeated!";
-        DialogueController.Instance.BattleDialogue(this, text, "");
-
-        // set dead anim
-        Anim.Rebind();
-        Anim.SetTrigger("Dead");
-
-        // Die
-        foreach (FighterBase ally in Allies)
-            ally.Allies.Remove(this);
-        CurrentOpponent.Opponents.Remove(this);
-        foreach (FighterBase opponent in CurrentOpponent.Allies)
-            opponent.Opponents.Remove(this);
-        Opponents.Clear();
+        foreach (PartyBase member in Party)
+        {
+            if (member.CurrentHealth == 0)
+            {
+                Allies.Add(member);
+                member.Anim.SetTrigger("Dead");
+                member.Heal(1);
+                member.StateMachine.Initialize(member.IdleState);
+            }
+        }
     }
 
-    public void GainExperience(int amount)
+    public IEnumerator GainExperience(int amount)
     {
-        _currentExp += amount;
-
         string text = charName + " gained " + amount + " exp.";
         DialogueController.Instance.BattleDialogue(this, text, "");
 
-        StartCoroutine(ShowEBar());
+        _currentExp += amount;
+
+        EBar.GetComponent<Image>().enabled = true;
+
+        // update exp bar
+        yield return StartCoroutine(EBar.UpdateBar(_maxExp, _currentExp));
 
         if (_currentExp >= _maxExp)
         {
-            StartCoroutine(LevelUp());
+            yield return StartCoroutine(LevelUp());
         }
         else
         {
+            yield return new WaitForSeconds(1f);
             Debug.Log("Until next level: " + (_maxExp-_currentExp) + " exp");
         }
-    }
 
-    private IEnumerator ShowEBar()
-    {
-        EBar.gameObject.GetComponent<Image>().enabled = true;
-
-        // update health bar
-        EBar.UpdateBar(_maxExp, _currentExp);
-        yield return new WaitForSeconds(1.5f);
-
-        EBar.gameObject.GetComponent<Image>().enabled = false;
+        EBar.GetComponent<Image>().enabled = false;
     }
 
     private IEnumerator LevelUp()
     {
-        IsLeveling = true;
-
         // increase level
         Level++;
 
@@ -217,18 +254,16 @@ public class PartyBase : FighterBase
 
         Sprite.material.SetColor("_FlashColor", Color.white);
 
-        HBar.UpdateBar(MaxHealth, CurrentHealth);
-        EBar.UpdateBar(_maxExp, _currentExp);
+        StartCoroutine(HBar.UpdateBar(MaxHealth, CurrentHealth));
+        StartCoroutine(EBar.UpdateBar(_maxExp, _currentExp));
 
         string text = charName + " grew to level " + Level + "!";
         DialogueController.Instance.BattleDialogue(this, text, "");
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
 
         if (GetComponent<Companion>())
             GetComponent<Companion>().EventDialogue = _levelDialogue;
-
-        IsLeveling = false;
     }
 }
 

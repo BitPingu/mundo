@@ -62,7 +62,6 @@ public class Battle : MonoBehaviour
             && _detectPlayer.Input.E)
         {
             Enemy enemy = GetComponentInParent<Enemy>();
-            enemy.CannotMove = true; // halt enemy movement
             if (_detectEnemy)
             {
                 // enemy allies
@@ -76,14 +75,19 @@ public class Battle : MonoBehaviour
             }
             StartCoroutine(_detectPlayer.Engage(enemy)); // player engages enemy
             OnTriggerExit2D(_detectPlayer.GetComponent<Collider2D>());
+
+            // camera
+            CameraController.Instance.follow = false;
         }
         else if (GetComponentInParent<Enemy>().IsNearPlayer)
         {
             Enemy enemy = GetComponentInParent<Enemy>();
-            enemy.CannotMove = true; // halt enemy movement
             StartCoroutine(enemy.Engage(_detectPlayer)); // enemy engages player
             OnTriggerExit2D(_detectPlayer.GetComponent<Collider2D>());
             enemy.IsNearPlayer = false;
+
+            // camera
+            CameraController.Instance.follow = false;
         }
     }
 }

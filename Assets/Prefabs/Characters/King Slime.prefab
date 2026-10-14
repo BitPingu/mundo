@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayerID: 378291169
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1881846817, guid: 96b1203d67a9c4626a840c668e3ba560, type: 3}
+  m_Sprite: {fileID: -1860616574122720680, guid: 31ca85e1444a1408eb9d1c1bffef5efb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -211,12 +211,9 @@ MonoBehaviour:
   MaxHealth: 20
   Strength: 4
   HBar: {fileID: 6348836242550008932}
+  target: {fileID: 0}
   _hitSound: {fileID: 8300000, guid: 35960fccc016f4913a9c6ec5fea7c48f, type: 3}
-  SightRadius: 0
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  _spawnPoint: {x: 0, y: 0}
+  SpawnPoint: {x: 0, y: 0, z: 0}
   _spawnRange: 3
   _minWaitTime: 3
   _maxWaitTime: 5

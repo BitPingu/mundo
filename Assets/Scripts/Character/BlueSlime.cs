@@ -33,6 +33,14 @@ public class BlueSlime : Slime
         }
     }
 
+    public override void Battle()
+    {
+        // call base class
+        base.Battle();
+
+        // ability
+    }
+
     // public void UseLunge()
     // {
     //     StartCoroutine(LungeRaycast());

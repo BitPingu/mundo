@@ -380,17 +380,22 @@ public class FirstQuest : EventBase
 
         SlimeChar1.StateMachine.Initialize(SlimeChar1.IdleState);
         SlimeChar2.StateMachine.Initialize(SlimeChar2.IdleState);
+        SlimeChar1.Allies.Add(SlimeChar2);
+        SlimeChar2.Allies.Add(SlimeChar1);
 
         PlayerChar.Opponents.AddRange(new List<FighterBase>{SlimeChar1, SlimeChar2});
         CompanionChar.Opponents.AddRange(new List<FighterBase>{SlimeChar1, SlimeChar2});
-
         SlimeChar1.Opponents.AddRange(new List<FighterBase>{PlayerChar, CompanionChar});
-        SlimeChar1.Allies.Add(SlimeChar2);
         SlimeChar2.Opponents.AddRange(new List<FighterBase>{PlayerChar, CompanionChar});
-        SlimeChar2.Allies.Add(SlimeChar1);
+
+        PlayerChar.SetCurrentOpponent(SlimeChar1);
+        CompanionChar.SetCurrentOpponent(SlimeChar1);
 
         // Slime goes first
         SlimeChar1.BattleTurn = true;
+
+        // camera
+        CameraController.Instance.follow = false;
     }
 
     private IEnumerator AmbushBattleDialogue()

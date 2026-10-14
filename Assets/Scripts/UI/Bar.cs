@@ -6,28 +6,21 @@ public class Bar : MonoBehaviour
 {
     [SerializeField] private float _timeToDrain = .25f;
     [SerializeField] private Gradient _barGradient;
-
     private float _target = 1f;
-
     private Color _newBarColor;
-
-    private Coroutine changeBarCoroutine;
 
     private void Start()
     {
         // set bar color
         GetComponent<Image>().color = _barGradient.Evaluate(_target);
-
         CheckBarGradientAmount();
     }
 
-    public void UpdateBar(float maxAmount, float currentAmount)
+    public IEnumerator UpdateBar(float maxAmount, float currentAmount)
     {
         _target = currentAmount / maxAmount;
-
-        changeBarCoroutine = StartCoroutine(ChangeBar());
-
         CheckBarGradientAmount();
+        yield return StartCoroutine(ChangeBar());
     }
 
     private IEnumerator ChangeBar()

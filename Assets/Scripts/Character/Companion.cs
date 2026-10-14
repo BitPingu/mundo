@@ -9,6 +9,8 @@ public class Companion : PartyBase
     [SerializeField] private float _followDistance = 1f;
     public Dialogue EventDialogue { get; set; }
 
+    [SerializeField] protected Dialogue _easyDialogue, _hardDialogue;
+
     protected override void Start()
     {
         // call base class
@@ -33,7 +35,7 @@ public class Companion : PartyBase
     {
         player.Party.Add(this);
         player.Allies.Add(this);
-        Party.Add(player);
+        Party.Insert(0, player);
         Allies.Add(player);
         Leader = player;
         Debug.Log(name + " joins the party!");
@@ -88,10 +90,14 @@ public class Companion : PartyBase
 
         IsAttacking = false;
 
+        // add opponents to battle
         foreach (Enemy opponent in Leader.Opponents)
         {
             Opponents.Add(opponent);
         }
+
+        // set current opponent
+        SetCurrentOpponent(Leader.CurrentOpponent);
     }
 
     private void AfterBattle()
@@ -110,6 +116,10 @@ public class Companion : PartyBase
         else if (CurrentHealth >= MaxHealth*.6f)
         {
             dialogue = _easyDialogue;
+        }
+        else if (CurrentHealth <= MaxHealth*.3f)
+        {
+            dialogue = _hardDialogue;
         }
 
         yield return new WaitForSeconds(.1f);
