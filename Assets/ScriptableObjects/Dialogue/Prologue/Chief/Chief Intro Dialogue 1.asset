@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Chief Intro Dialogue 1
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Chief Vandham
+  - charName: Chief
     line: Ah, there you two are. I was beginning to wonder if you had forgotten.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
-  - charName: Chief Vandham
+  - charName: Chief
     line: Very well, let us begin. Prepare yourselves, and give it your all!
     reaction: 
     choices: []

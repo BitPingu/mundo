@@ -9,6 +9,8 @@ public class Player : PartyBase
     public bool IsEntering { get; set; }
     public bool IsNearEnemy { get; set; }
     public bool IsNearInteractable { get; set; }
+    public delegate void Action();
+    public Action OnAction;
 
     public delegate void Enter();
     public Enter OnEnter;
@@ -47,7 +49,11 @@ public class Player : PartyBase
         base.Idle();
 
         // allow player movement
-        Move(new Vector2(Input.HorizontalInput, Input.VerticalInput));
+        Move(new Vector2(_input.HorizontalInput, _input.VerticalInput));
+
+        // allow player actions
+        if (_input.E)
+            OnAction?.Invoke(); // call delegates
     }
 
     public override IEnumerator Engage(FighterBase opponent)
@@ -188,7 +194,7 @@ public class Player : PartyBase
             // inventory
             _inventoryBox.SetActive(true);
 
-            if (Input.E)
+            if (_input.E)
             {
                 // TODO: need to make this more dynamic
                 ItemBase item = InventoryController.Instance.GetItem("Potion");

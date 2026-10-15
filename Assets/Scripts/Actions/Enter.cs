@@ -1,37 +1,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enter : MonoBehaviour
+public class Enter : Action
 {
-    private Player _detectPlayer;
-    private GameObject _activeIcon;
     [SerializeField] private Transform _location;
     [SerializeField] private bool _faceRight;
     [SerializeField] private Dialogue _dialogue;
-    [SerializeField] private GameObject _icon;
     [SerializeField] private AudioClip _sound;
     [SerializeField] private float _pitch = 1f;
 
     private bool _transition;
-
-    private void Start()
-    {
-        // set dialogue delegates
-        DialogueController.Instance.OnDialogueFinish += FinishEnter;
-    }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
         if (hitInfo.GetComponent<Player>() && !_detectPlayer)
         {
             _detectPlayer = hitInfo.GetComponent<Player>();
-            _detectPlayer.IsEntering = true;
 
-            Vector2 iconPos = new Vector2(_detectPlayer.transform.position.x, _detectPlayer.transform.position.y+1f);
             if (_detectPlayer.StateMachine.CurrentState == _detectPlayer.IdleState)
             {
+                _detectPlayer.IsEntering = true;
+
+                Vector2 iconPos = new Vector2(_detectPlayer.transform.position.x, _detectPlayer.transform.position.y+1f);
                 _activeIcon = Instantiate(_icon, iconPos, Quaternion.identity, _detectPlayer.transform);
             }
+
+            // set delegate
+            _detectPlayer.OnAction += Engage;
         }
     }
 
@@ -40,8 +35,8 @@ public class Enter : MonoBehaviour
         if (hitInfo.GetComponent<Player>())
         {
             Destroy(_activeIcon);
-
             _detectPlayer = hitInfo.GetComponent<Player>();
+            _detectPlayer.OnAction -= Engage; // unset delegate
             _detectPlayer.IsEntering = false;
             _detectPlayer = null;
         }
@@ -51,26 +46,6 @@ public class Enter : MonoBehaviour
     {
         if (_detectPlayer && _detectPlayer.StateMachine.CurrentState == _detectPlayer.IdleState)
         {
-            if (_detectPlayer.Input.E && !_detectPlayer.CannotEnter)
-            {
-                if (_location == null)
-                {
-                    _detectPlayer.StateMachine.End(); // disable movement
-                    _activeIcon.SetActive(false);
-                    // start dialogue
-                    DialogueController.Instance.StartDialogue(_dialogue, new List<CharacterBase>{_detectPlayer});
-                }
-                else
-                {
-                    ScreenTransition();
-                }
-            }
-            else if (_detectPlayer.Input.E && _detectPlayer.CannotEnter)
-            {
-                _detectPlayer.OnEnter(); // call delegates
-                _activeIcon.SetActive(false);
-            }
-
             if (!_activeIcon)
             {
                 // reinstantiate icon when already within bounds
@@ -93,6 +68,29 @@ public class Enter : MonoBehaviour
 
         if (_detectPlayer && _detectPlayer.StatusOn)
         {
+            _activeIcon.SetActive(false);
+        }
+    }
+
+    protected override void Engage()
+    {
+        if (!_detectPlayer.CannotEnter)
+        {
+            if (_location == null)
+            {
+                _detectPlayer.StateMachine.End(); // disable movement
+                _activeIcon.SetActive(false);
+                // start dialogue
+                DialogueController.Instance.StartDialogue(_dialogue, new List<CharacterBase>{_detectPlayer});
+            }
+            else
+            {
+                ScreenTransition();
+            }
+        }
+        else if (_detectPlayer.CannotEnter)
+        {
+            _detectPlayer.OnEnter(); // call delegates
             _activeIcon.SetActive(false);
         }
     }
@@ -126,7 +124,7 @@ public class Enter : MonoBehaviour
         player.StateMachine.Initialize(player.IdleState); // enable movement
     }
 
-    private void FinishEnter()
+    protected override void Finish()
     {
         if (!_detectPlayer)
             return;

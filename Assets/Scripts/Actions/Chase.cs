@@ -2,14 +2,20 @@ using UnityEngine;
 
 public class Chase : MonoBehaviour
 {
-    public Player DetectPlayer { get; set; }
+    public Player NearbyPlayer { get; set; }
+
+    private void Start()
+    {
+        // set delegate
+        GetComponentInParent<Enemy>().OnEngagePlayer += OnTriggerExit2D;
+    }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.GetComponent<Player>() && !DetectPlayer
+        if (hitInfo.GetComponent<Player>() && !NearbyPlayer
             && hitInfo.GetComponent<Player>().StateMachine.CurrentState == hitInfo.GetComponent<Player>().IdleState)
         {
-            DetectPlayer = hitInfo.GetComponent<Player>();
+            NearbyPlayer = hitInfo.GetComponent<Player>();
         }
     }
 
@@ -17,8 +23,8 @@ public class Chase : MonoBehaviour
     {
         if (hitInfo.GetComponent<Player>())
         {
-            DetectPlayer = hitInfo.GetComponent<Player>();
-            DetectPlayer = null;
+            NearbyPlayer = hitInfo.GetComponent<Player>();
+            NearbyPlayer = null;
         }
     }
 }

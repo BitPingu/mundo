@@ -2,29 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Open : MonoBehaviour
+public class Open : Action
 {
-    private Player _detectPlayer;
-    private GameObject _activeIcon;
-    [SerializeField] private GameObject _icon;
     [SerializeField] private Dialogue _dialogue;
     private bool _opened;
-
-    private void Start()
-    {
-        // set dialogue delegates
-        DialogueController.Instance.OnDialogueFinish += FinishOpen;
-    }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
         if (hitInfo.GetComponent<Player>() && !_detectPlayer && !_opened)
         {
             _detectPlayer = hitInfo.GetComponent<Player>();
-            _detectPlayer.IsNearInteractable = true;
 
-            Vector2 iconPos = new Vector2(transform.position.x, transform.position.y+.05f);
-            _activeIcon = Instantiate(_icon, iconPos, Quaternion.identity, transform);
+            if (_detectPlayer.StateMachine.CurrentState == _detectPlayer.IdleState)
+            {
+                _detectPlayer.IsNearInteractable = true;
+
+                Vector2 iconPos = new Vector2(transform.position.x, transform.position.y+.05f);
+                _activeIcon = Instantiate(_icon, iconPos, Quaternion.identity, transform);
+            }
+
+            // set delegate
+            _detectPlayer.OnAction += Engage;
         }
     }
 
@@ -33,22 +31,16 @@ public class Open : MonoBehaviour
         if (hitInfo.GetComponent<Player>())
         {
             Destroy(_activeIcon);
-
             _detectPlayer = hitInfo.GetComponent<Player>();
+            _detectPlayer.OnAction -= Engage; // unset delegate
             _detectPlayer.IsNearInteractable = false;
             _detectPlayer = null;
         }
     }
 
-    private void Update()
+    private void Engage()
     {
-        if (_detectPlayer && _detectPlayer.StateMachine.CurrentState == _detectPlayer.IdleState)
-        {
-            if (_detectPlayer.Input.E)
-            {
-                StartCoroutine(OpenChest());
-            }
-        }
+        StartCoroutine(OpenChest());
     }
 
     public IEnumerator OpenChest()
@@ -65,7 +57,7 @@ public class Open : MonoBehaviour
         DialogueController.Instance.StartDialogue(_dialogue, new List<CharacterBase>());
     }
 
-    private void FinishOpen()
+    protected override void Finish()
     {
         if (!_detectPlayer)
             return;

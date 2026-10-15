@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Chief Forest Dialogue 1
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Chief Vandham
+  - charName: Chief
     line: Hm? How goes the assignment?
     reaction: 
     choices: []

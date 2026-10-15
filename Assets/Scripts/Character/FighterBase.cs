@@ -67,6 +67,11 @@ public class FighterBase : CharacterBase
 
     protected virtual IEnumerator CallAttack()
     {
+        // battle dialogue
+        string text = charName + " attacks " + CurrentOpponent.charName + "!";
+        DialogueController.Instance.BattleDialogue(this, text, "");
+
+        // attack
         yield return StartCoroutine(Attack());
         StartCoroutine(AttackFinish());
     }
@@ -74,10 +79,6 @@ public class FighterBase : CharacterBase
     protected IEnumerator Attack()
     {
         IsAttacking = true;
-
-        // battle dialogue
-        string text = charName + " attacks " + CurrentOpponent.charName + "!";
-        DialogueController.Instance.BattleDialogue(this, text, "");
 
         // go to opponent
         float _distance = Vector2.Distance(CurrentOpponent.transform.position, transform.position);

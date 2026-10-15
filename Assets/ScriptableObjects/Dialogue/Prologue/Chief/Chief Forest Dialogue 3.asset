@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Chief Forest Dialogue 3
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Chief Vandham
+  - charName: Chief
     line: There's one more thing I'd like to ask from you two, but first I'd like
       to teach you both something.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
-  - charName: Chief Vandham
+  - charName: Chief
     line: Combat arts.
     reaction: 
     choices: []

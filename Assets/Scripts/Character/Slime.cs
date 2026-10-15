@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class Slime : Enemy
 {
@@ -18,6 +17,20 @@ public class Slime : Enemy
             Patrol();
         else
             Move(Vector2.zero);
+    }
+
+    public override void Battle()
+    {
+        // call base class
+        base.Battle();
+
+        // slime turn
+        if (BattleTurn)
+        {
+            TargetOpponent(); // choose target
+            StartCoroutine(CallAttack());
+            EndTurn();
+        }
     }
 }
 

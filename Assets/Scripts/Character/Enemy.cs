@@ -6,11 +6,16 @@ public class Enemy : FighterBase
     public Vector3 SpawnPoint;
     [SerializeField] private float _spawnRange = 3f;
     private Vector2 _curDir, _curPoint;
-    private float _moveCounter, _waitCounter, _waitTime, _artCooldownCounter;
+    private float _moveCounter, _waitCounter, _waitTime;
     [SerializeField] private float _minWaitTime = 3f, _maxWaitTime = 5f;
-    [SerializeField] private float _artCooldownTime;
+    protected int _artCooldownCounter;
+    [SerializeField] protected int _artCooldownTime;
+    protected bool _chargeAttack;
     public bool CannotMove { get; set; }
-    public bool IsNearPlayer { get; set; }
+
+    public delegate void EngagePlayer(Collider2D hitInfo);
+    public EngagePlayer OnEngagePlayer;
+
 
     protected override void Start()
     {
@@ -84,7 +89,8 @@ public class Enemy : FighterBase
         else
         {
             // stop
-            IsNearPlayer = true;
+            Move(Vector2.zero);
+            OnEngagePlayer(opponent.GetComponent<Collider2D>()); // call delegates
         }
     }
 
@@ -137,21 +143,7 @@ public class Enemy : FighterBase
         BattleTurn = true;
     }
 
-    public override void Battle()
-    {
-        // call base class
-        base.Battle();
-
-        // attack
-        if (BattleTurn)
-        {
-            TargetOpponent(); // choose target
-            StartCoroutine(CallAttack());
-            EndTurn();
-        }
-    }
-
-    private void TargetOpponent()
+    protected void TargetOpponent()
     {
         // current strat: prioritize opponents <= 50% health
         if (Opponents.Count > 1)

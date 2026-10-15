@@ -15,6 +15,9 @@ public class CharacterBase : MonoBehaviour
     public StateMachine StateMachine { get; set; }
     public StateBase IdleState { get; set; }
 
+    // conditions
+    public bool IsNearPlayer { get; set; }
+
     // dialogue
     public Dialogue CurrentDialogue { get; set; }
     public string charName;

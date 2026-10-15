@@ -214,11 +214,11 @@ MonoBehaviour:
   HBar: {fileID: 6348836242550008932}
   target: {fileID: 2831535199063017972}
   _hitSound: {fileID: 8300000, guid: 35960fccc016f4913a9c6ec5fea7c48f, type: 3}
-  SightRadius: 0
   SpawnPoint: {x: 0, y: 0, z: 0}
   _spawnRange: 3
   _minWaitTime: 3
   _maxWaitTime: 5
+  _artCooldownTime: 0
 --- !u!1 &3370967878987238475
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,22 +549,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5875741088350809275, guid: 341c6909b0d874b3aa8c42cfd01da55b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5875741088350809275, guid: 341c6909b0d874b3aa8c42cfd01da55b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5875741088350809275, guid: 341c6909b0d874b3aa8c42cfd01da55b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5875741088350809275, guid: 341c6909b0d874b3aa8c42cfd01da55b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5875741088350809275, guid: 341c6909b0d874b3aa8c42cfd01da55b, type: 3}
-      propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5875741088350809275, guid: 341c6909b0d874b3aa8c42cfd01da55b, type: 3}

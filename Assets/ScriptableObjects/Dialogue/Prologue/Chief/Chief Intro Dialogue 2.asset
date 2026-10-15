@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Chief Intro Dialogue 2
   m_EditorClassIdentifier: 
   Lines:
-  - charName: Chief Vandham
+  - charName: Chief
     line: That is enough. You have both fought well.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
-  - charName: Chief Vandham
+  - charName: Chief
     line: The winner is Ely!
     reaction: 
     choices: []
@@ -28,7 +28,7 @@ MonoBehaviour:
     reaction: 
     choices: []
     redirectDialogueIndex: -1
-  - charName: Chief Vandham
+  - charName: Chief
     line: Come, you two. Allow me to tend to your wounds.
     reaction: 
     choices: []

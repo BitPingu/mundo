@@ -8,7 +8,7 @@ public class PartyBase : FighterBase
 {
     public List<PartyBase> Party = new List<PartyBase>();
 
-    public PlayerController Input { get; set; }
+    protected PlayerController _input { get; set; }
 
     // stats
     [SerializeField] private int _maxExp = 100;
@@ -29,7 +29,7 @@ public class PartyBase : FighterBase
         base.Start();
 
         // set components
-        Input = GetComponent<PlayerController>();
+        _input = GetComponent<PlayerController>();
 
         // add to party
         Party.Add(this);
@@ -40,7 +40,7 @@ public class PartyBase : FighterBase
         // call base class
         base.Battle();
 
-        // attack
+        // party member turn
         if (BattleTurn)
         {
             if (!IsSparring)
@@ -54,7 +54,7 @@ public class PartyBase : FighterBase
                 // multiple enemies
                 if (CurrentOpponent.Allies.Count > 0)
                 {
-                    if (Input.Right || Input.Left)
+                    if (_input.Right || _input.Left)
                     {
                         CurrentOpponent.target.enabled = false;
 
@@ -85,7 +85,7 @@ public class PartyBase : FighterBase
                 }
 
                 // attack
-                if (Input.E)
+                if (_input.E)
                 {
                     StartCoroutine(CallAttack());
                     EndTurn();
@@ -173,6 +173,7 @@ public class PartyBase : FighterBase
         Opponents.Clear();
 
         // set dead anim
+        Move(Vector2.zero);
         Anim.SetTrigger("Dead");
 
         string text = charName + " was defeated!";

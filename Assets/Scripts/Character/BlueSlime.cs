@@ -1,22 +1,12 @@
+using System.Collections;
 using UnityEngine;
 
-public class BlueSlime : Slime
+public class BlueSlime : Enemy
 {
     protected override void Awake()
     {
         // call base class
         base.Awake();
-
-        // ability
-        // foreach (Ability ability in Abilities)
-        // {
-        //     if (ability.name == "Lunge")
-        //     {
-        //         Lunge = new AbilityStateMachine(ability, GetComponent<Enemy>(), KeyCode.None);
-        //         Lunge.State = AbilityStateMachine.AbilityState.cooldown;
-        //         Lunge.CurrentCooldownTime = 1f;
-        //     }
-        // }
     }
 
     public override void Idle()
@@ -26,8 +16,8 @@ public class BlueSlime : Slime
 
         if (!CannotMove)
         {
-            if (GetComponentInChildren<Chase>().DetectPlayer)
-                Chase(GetComponentInChildren<Chase>().DetectPlayer);
+            if (GetComponentInChildren<Chase>().NearbyPlayer)
+                Chase(GetComponentInChildren<Chase>().NearbyPlayer);
             else
                 Patrol();
         }
@@ -38,22 +28,56 @@ public class BlueSlime : Slime
         // call base class
         base.Battle();
 
-        // ability
+        // blue slime turn
+        if (BattleTurn)
+        {
+            if (_artCooldownCounter == 0 && !_chargeAttack)
+            {
+                // combat art charge
+                StartCoroutine(StartChargeAttack());
+                EndTurn();
+            }
+            else if (_artCooldownCounter == 0 && _chargeAttack)
+            {
+                // combat art release
+                TargetOpponent(); // choose target
+                StartCoroutine(CallChargeAttack());
+
+                // reset art cooldown time
+                _artCooldownCounter = _artCooldownTime+1;
+                _chargeAttack = false;
+                EndTurn();
+            }
+            else
+            {
+                TargetOpponent(); // choose target
+                StartCoroutine(CallAttack());
+                EndTurn();
+            }
+        }
     }
 
-    // public void UseLunge()
-    // {
-    //     StartCoroutine(LungeRaycast());
-    // }
+    private IEnumerator StartChargeAttack()
+    {
+        _chargeAttack = true;
 
-    // IEnumerator LungeRaycast()
-    // {
-    //     Lunge.Ability.IsActive = true;
+        // battle dialogue
+        string text = charName + " is charging up!";
+        DialogueController.Instance.BattleDialogue(this, text, "");
 
-    //     yield return new WaitForSeconds(1f);
-    //     Anim.SetTrigger("Attack");
-    //     yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f);
 
-    //     Lunge.Ability.IsActive = false;
-    // }
+        PassTurn();
+    }
+
+    private IEnumerator CallChargeAttack()
+    {
+        // battle dialogue
+        string text = charName + " used Body Slam on " + CurrentOpponent.charName + "!";
+        DialogueController.Instance.BattleDialogue(this, text, "");
+
+        // attack
+        yield return StartCoroutine(Attack());
+        StartCoroutine(AttackFinish());
+    }
 }

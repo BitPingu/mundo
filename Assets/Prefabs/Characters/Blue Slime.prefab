@@ -210,16 +210,16 @@ MonoBehaviour:
   Opponents: []
   Allies: []
   Level: 1
-  MaxHealth: 20
+  MaxHealth: 100
   Strength: 4
   HBar: {fileID: 6348836242550008932}
   target: {fileID: 2831535199063017972}
   _hitSound: {fileID: 8300000, guid: 35960fccc016f4913a9c6ec5fea7c48f, type: 3}
-  SightRadius: 0
   SpawnPoint: {x: 0, y: 0, z: 0}
   _spawnRange: 3
   _minWaitTime: 3
   _maxWaitTime: 5
+  _artCooldownTime: 2
 --- !u!1 &3370967878987238475
 GameObject:
   m_ObjectHideFlags: 0
