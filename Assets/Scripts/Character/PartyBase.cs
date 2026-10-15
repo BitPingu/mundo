@@ -113,7 +113,7 @@ public class PartyBase : FighterBase
         if (CurrentOpponent.CurrentHealth == 0)
         {
             CurrentOpponent.Die();
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
 
             // exp
             foreach (PartyBase member in Party)

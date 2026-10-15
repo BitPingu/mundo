@@ -65,7 +65,7 @@ public class BlueSlime : Enemy
         string text = charName + " is charging up!";
         DialogueController.Instance.BattleDialogue(this, text, "");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         PassTurn();
     }
@@ -77,7 +77,7 @@ public class BlueSlime : Enemy
         DialogueController.Instance.BattleDialogue(this, text, "");
 
         // attack
-        yield return StartCoroutine(Attack());
+        yield return StartCoroutine(Attack("Charge Attack"));
         StartCoroutine(AttackFinish());
     }
 }

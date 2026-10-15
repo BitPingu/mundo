@@ -15,6 +15,7 @@ public class Chase : Action
         if (hitInfo.GetComponent<Player>() && !_detectPlayer)
         {
             _detectPlayer = hitInfo.GetComponent<Player>();
+            NearbyPlayer = _detectPlayer;
         }
     }
 
@@ -24,21 +25,7 @@ public class Chase : Action
         {
             _detectPlayer = hitInfo.GetComponent<Player>();
             _detectPlayer = null;
-        }
-    }
-
-    private void Update()
-    {
-        if (_detectPlayer)
-        {
-            if (_detectPlayer.StateMachine.CurrentState == _detectPlayer.IdleState)
-            {
-                NearbyPlayer = _detectPlayer;
-            }
-            else
-            {
-                NearbyPlayer = null;
-            }
+            NearbyPlayer = _detectPlayer;
         }
     }
 }

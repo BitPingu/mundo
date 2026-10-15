@@ -72,28 +72,34 @@ public class FighterBase : CharacterBase
         DialogueController.Instance.BattleDialogue(this, text, "");
 
         // attack
-        yield return StartCoroutine(Attack());
+        yield return StartCoroutine(Attack("Attack"));
         StartCoroutine(AttackFinish());
     }
 
-    protected IEnumerator Attack()
+    protected IEnumerator Attack(string name)
     {
         IsAttacking = true;
 
         // go to opponent
         float _distance = Vector2.Distance(CurrentOpponent.transform.position, transform.position);
-        while (_distance > 0.7f)
+        while (_distance > 0.5f)
         {
             _distance = Vector2.Distance(CurrentOpponent.transform.position, transform.position);
             Move(CurrentOpponent.transform.position - transform.position);
             yield return new WaitForFixedUpdate();
         }
+        Move(Vector2.zero);
 
-        Anim.SetTrigger("Attack");
+        yield return new WaitForSeconds(.1f);
+
+        Anim.SetTrigger(name);
+
         yield return new WaitForSeconds(.1f);
 
         // damage
         CurrentOpponent.Damage(Strength);
+
+        yield return new WaitForSeconds(.2f);
 
         Vector3 attackDir = (CurrentOpponent.transform.position - transform.position).normalized;
         Vector3 attackPos = CurrentOpponent.transform.position - (attackDir*1.3f);
@@ -116,7 +122,7 @@ public class FighterBase : CharacterBase
         if (CurrentOpponent.CurrentHealth == 0)
         {
             CurrentOpponent.Die();
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
 
             if (CurrentOpponent.Allies.Count == 0)
             {

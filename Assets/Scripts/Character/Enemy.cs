@@ -82,7 +82,11 @@ public class Enemy : FighterBase
     {
         // chase opponent
         float distance = Vector2.Distance(opponent.transform.position, transform.position);
-        if (distance > 0.7f)
+        if (opponent.StateMachine.CurrentState != opponent.IdleState)
+        {
+            Move(Vector2.zero);
+        }
+        else if (distance > 0.7f)
         {
             Move(opponent.transform.position - transform.position);
         }
