@@ -38,7 +38,7 @@ public class Open : Action
         }
     }
 
-    private void Engage()
+    protected override void Engage()
     {
         StartCoroutine(OpenChest());
     }

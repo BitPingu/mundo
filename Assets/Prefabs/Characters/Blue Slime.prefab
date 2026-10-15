@@ -210,7 +210,7 @@ MonoBehaviour:
   Opponents: []
   Allies: []
   Level: 1
-  MaxHealth: 100
+  MaxHealth: 60
   Strength: 4
   HBar: {fileID: 6348836242550008932}
   target: {fileID: 2831535199063017972}

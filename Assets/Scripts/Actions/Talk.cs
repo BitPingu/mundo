@@ -23,14 +23,6 @@ public class Talk : Action
         {
             _detectPlayer = hitInfo.GetComponent<Player>();
 
-            if (_detectPlayer.StateMachine.CurrentState == _detectPlayer.IdleState)
-            {
-                _character.IsNearPlayer = true;
-
-                Vector2 iconPos = new Vector2(transform.position.x, transform.position.y);
-                _activeIcon = Instantiate(_icon, iconPos, Quaternion.identity, transform);
-            }
-
             // set delegate
             _detectPlayer.OnAction += Engage;
         }
@@ -55,44 +47,50 @@ public class Talk : Action
 
     private void Update()
     {
-        if (_detectPlayer && _detectPlayer.StateMachine.CurrentState == _detectPlayer.IdleState)
+        if (_detectPlayer)
         {
-            if (!_activeIcon)
-            {
-                // reinstantiate icon when already within bounds
-                Vector2 iconPos = new Vector2(transform.position.x, transform.position.y);
-                _activeIcon = Instantiate(_icon, iconPos, Quaternion.identity, transform);
-            }
-        }
-
-        if (_detectPlayer && (_detectPlayer.IsEntering || _detectPlayer.IsNearEnemy || _detectPlayer.IsNearInteractable))
-        {
+            // check if close enough to player
             // cancel when other actions are available
-            OnTriggerExit2D(_detectPlayer.GetComponent<Collider2D>());
-        }
-
-        if (_detectPlayer && _nearbyCharacter)
-        {
-            // check if other character is closer to player
-            if (Vector2.Distance(_detectPlayer.transform.position, _nearbyCharacter.transform.position) < Vector2.Distance(_detectPlayer.transform.position, _character.transform.position))
+            if (_detectPlayer.StateMachine.CurrentState == _detectPlayer.IdleState
+                && Vector2.Distance(_detectPlayer.transform.position, _character.transform.position) < .7f 
+                    && !_detectPlayer.IsEntering && !_detectPlayer.IsNearEnemy && !_detectPlayer.IsNearInteractable)
             {
-                _nearbyCharacter.IsNearPlayer = true;
-                _character.IsNearPlayer = false;
+                if (!_activeIcon)
+                {
+                    Vector2 iconPos = new Vector2(transform.position.x, transform.position.y);
+                    _activeIcon = Instantiate(_icon, iconPos, Quaternion.identity, transform);
+                }
+                else
+                {
+                    _activeIcon.SetActive(true);
+                }
+
+                if (_nearbyCharacter)
+                {
+                    // check if other character is closer to player
+                    if (Vector2.Distance(_detectPlayer.transform.position, _nearbyCharacter.transform.position) < Vector2.Distance(_detectPlayer.transform.position, _character.transform.position))
+                    {
+                        _nearbyCharacter.IsNearPlayer = true;
+                        _character.IsNearPlayer = false;
+                        _activeIcon.SetActive(false);
+                    }
+                    else
+                    {
+                        _character.IsNearPlayer = true;
+                        _nearbyCharacter.IsNearPlayer = false;
+                    }
+                }
+                else
+                {
+                    _character.IsNearPlayer = true;
+                }
             }
             else
             {
-                _character.IsNearPlayer = true;
-                _nearbyCharacter.IsNearPlayer = false;
+                if (_activeIcon)
+                    _activeIcon.SetActive(false);
+                _character.IsNearPlayer = false;
             }
-        }
-
-        if (_detectPlayer && _character.IsNearPlayer && !_talking)
-        {
-            _activeIcon.SetActive(true);
-        }
-        else if (_detectPlayer && !_character.IsNearPlayer && !_talking)
-        {
-            _activeIcon.SetActive(false);
         }
 
         if (_detectPlayer && _detectPlayer.StatusOn)

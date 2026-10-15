@@ -101,7 +101,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2585198199552577836}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -217,6 +217,7 @@ MonoBehaviour:
   _spawnRange: 3
   _minWaitTime: 3
   _maxWaitTime: 5
+  _artCooldownTime: 0
 --- !u!1 &6407241798954548515
 GameObject:
   m_ObjectHideFlags: 0
