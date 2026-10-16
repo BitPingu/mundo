@@ -708,13 +708,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charName: Reina
   _portraits:
-  - sprite: {fileID: 21300000, guid: 0cae8d185b43b408186fc8d80099e68e, type: 3}
+  - sprite: {fileID: 21300000, guid: c4ea0958a54f8430b911e0684efe0eb1, type: 3}
     reaction: 
-  - sprite: {fileID: 21300000, guid: 57162d5448142477384736c2d153e4e3, type: 3}
+  - sprite: {fileID: 21300000, guid: 378e12a3abf604d06b019eca1097a644, type: 3}
     reaction: surprised
-  - sprite: {fileID: 21300000, guid: d954ce84c34cb43e0bb0308006b7b963, type: 3}
+  - sprite: {fileID: 21300000, guid: 54611fdbfd1e34ec486f1996ee309846, type: 3}
     reaction: hurt
-  - sprite: {fileID: 21300000, guid: 2bc495ea16de74465919f34c996db34c, type: 3}
+  - sprite: {fileID: 21300000, guid: 65584caa33d30426291ce46b98bd38a7, type: 3}
     reaction: tired
   voiceSound: {fileID: 8300000, guid: fb638b115793a403a950f41ef22ee07e, type: 3}
   voicePitch: 0.67

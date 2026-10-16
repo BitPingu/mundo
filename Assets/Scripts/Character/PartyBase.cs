@@ -18,8 +18,9 @@ public class PartyBase : FighterBase
     public Bar EBar;
     public GameObject BattleHUD;
 
-    private bool _battlePrompt, _lowHealth;
+    private bool _battlePrompt, _targeting, _lowHealth;
     public bool IsSparring { get; set; }
+    protected bool _cannotSwitch { get; set; }
 
     [SerializeField] protected Dialogue _levelDialogue, _lowHealthDialogue;
 
@@ -48,27 +49,6 @@ public class PartyBase : FighterBase
                 // show HUD
                 BattleHUD.SetActive(true);
 
-                // target icon
-                CurrentOpponent.target.enabled = true;
-
-                // multiple enemies
-                if (CurrentOpponent.Allies.Count > 0)
-                {
-                    if (_input.Right || _input.Left)
-                    {
-                        CurrentOpponent.target.enabled = false;
-
-                        // target selected opponent
-                        SetCurrentOpponent(CurrentOpponent.Allies[0]);
-                        foreach (FighterBase ally in Allies)
-                        {
-                            ally.SetCurrentOpponent(CurrentOpponent);
-                        }
-
-                        CurrentOpponent.target.enabled = true;
-                    }
-                }
-
                 // battle dialogue
                 if (!_battlePrompt)
                 {
@@ -87,8 +67,45 @@ public class PartyBase : FighterBase
                 // attack
                 if (_input.E)
                 {
-                    StartCoroutine(CallAttack());
-                    EndTurn();
+                    if (CurrentOpponent.Allies.Count > 0 && !_targeting)
+                    {
+                        // multiple enemies
+                        string text = "Target which one?";
+                        DialogueController.Instance.BattleDialogue(this, text, "show");
+                        _targeting = true;
+                    }
+                    else
+                    {
+                        StartCoroutine(CallAttack());
+                        EndTurn();
+                    }
+                }
+
+                // switch
+                if (!_targeting && !_cannotSwitch && Allies.Count > 0 && !Allies[0].FinishTurn 
+                    && (_input.Right || _input.Left))
+                {
+                    StartCoroutine(SwitchTurn());
+                }
+
+                // target
+                if (_targeting)
+                {
+                    // target icon
+                    CurrentOpponent.target.enabled = true;
+                    if (_input.Right || _input.Left)
+                    {
+                        CurrentOpponent.target.enabled = false;
+
+                        // target selected opponent
+                        SetCurrentOpponent(CurrentOpponent.Allies[0]);
+                        foreach (FighterBase ally in Allies)
+                        {
+                            ally.SetCurrentOpponent(CurrentOpponent);
+                        }
+
+                        CurrentOpponent.target.enabled = true;
+                    }
                 }
             }
             else
@@ -100,10 +117,23 @@ public class PartyBase : FighterBase
         }
     }
 
+    private IEnumerator SwitchTurn()
+    {
+        Allies[0].GetComponent<PartyBase>()._cannotSwitch = true;
+
+        EndTurn();
+        PassTurn();
+
+        yield return new WaitForSeconds(.1f);
+
+        Allies[0].GetComponent<PartyBase>()._cannotSwitch = false;
+    }
+
     protected override void EndTurn()
     {
         BattleTurn = false;
         _battlePrompt = false;
+        _targeting = false;
         CurrentOpponent.target.enabled = false;
         BattleHUD.SetActive(false);
     }
@@ -134,6 +164,7 @@ public class PartyBase : FighterBase
             }
         }
 
+        FinishTurn = true;
         PassTurn();
     }
 
@@ -261,7 +292,7 @@ public class PartyBase : FighterBase
         string text = charName + " grew to level " + Level + "!";
         DialogueController.Instance.BattleDialogue(this, text, "");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         if (GetComponent<Companion>())
             GetComponent<Companion>().EventDialogue = _levelDialogue;

@@ -9,7 +9,6 @@ public class FighterBase : CharacterBase
     public FighterBase CurrentOpponent { get; set; }
     public List<FighterBase> Opponents = new List<FighterBase>();
     public List<FighterBase> Allies = new List<FighterBase>();
-    public int CurrentTurn { get; set; }
 
     // stats
     public int Level = 1;
@@ -20,6 +19,7 @@ public class FighterBase : CharacterBase
     // conditions
     public bool BattleTurn { get; set; }
     public bool IsAttacking { get; set; }
+    public bool FinishTurn { get; set; }
 
     // UI
     public Bar HBar;
@@ -135,35 +135,41 @@ public class FighterBase : CharacterBase
             }
         }
 
+        FinishTurn = true;
         PassTurn();
     }
 
     protected void PassTurn()
     {
-        if (Allies.Count > 0 && CurrentTurn < Allies.Count)
+        if (Allies.Count > 0)
         {
-            // ally turn
             foreach (FighterBase ally in Allies)
             {
-                if (ally && ally.CurrentHealth > 0)
+                if (ally && ally.CurrentHealth > 0 && !ally.FinishTurn)
                 {
-                    ally.CurrentTurn = CurrentTurn+1;
+                    // ally turn
                     ally.BattleTurn = true;
-                    break;
+                    return;
                 }
             }
         }
-        else
+
+        // reset enemy turn
+        foreach (FighterBase opponent in Opponents)
         {
-            // enemy turn
-            foreach (FighterBase opponent in Opponents)
+            if (opponent && opponent.CurrentHealth > 0)
             {
-                if (opponent && opponent.CurrentHealth > 0)
-                {
-                    opponent.CurrentTurn = 0;
-                    opponent.BattleTurn = true;
-                    break;
-                }
+                opponent.FinishTurn = false;
+            }
+        }
+
+        foreach (FighterBase opponent in Opponents)
+        {
+            if (opponent && !opponent.FinishTurn)
+            {
+                // enemy turn
+                opponent.BattleTurn = true;
+                break;
             }
         }
     }
@@ -194,8 +200,9 @@ public class FighterBase : CharacterBase
             ally.Opponents.Clear();
         
         // reset conditions
-        CurrentTurn = 0;
-        BattleTurn = false;
+        FinishTurn = false;
+        foreach (FighterBase ally in Allies)
+            ally.FinishTurn = false;
 
         // end battle dialogue
         DialogueController.Instance.EndBattleDialogue();

@@ -8,12 +8,6 @@ TextureImporter:
   - first:
       213: 8683556332560997559
     second: blue_slime_attack_1
-  - first:
-      213: 6652968612320580472
-    second: blue_slime_attack_2
-  - first:
-      213: 8255750018873402259
-    second: blue_slime_attack_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -165,55 +159,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: blue_slime_attack_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.05}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 873113734b7145c50800000000000000
-      internalID: 6652968612320580472
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: blue_slime_attack_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.05}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 393af5db6e0529270800000000000000
-      internalID: 8255750018873402259
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: fea4813abeb9847659c5b7dee1cb323d
+    spriteID: d218d5b06152343d0b7bfe4714873816
     internalID: 0
     vertices: []
     indices: 
@@ -225,8 +175,6 @@ TextureImporter:
     nameFileIdTable:
       blue_slime_attack_0: 5798214039804716396
       blue_slime_attack_1: 8683556332560997559
-      blue_slime_attack_2: 6652968612320580472
-      blue_slime_attack_3: 8255750018873402259
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

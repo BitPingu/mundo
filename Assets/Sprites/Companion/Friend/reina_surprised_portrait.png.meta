@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 57162d5448142477384736c2d153e4e3
+guid: 378e12a3abf604d06b019eca1097a644
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8349737488876739605
-    second: reina_surprised_portrait_0
+      213: 8867672599654576894
+    second: reina_surprised_portrait 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: reina_surprised_portrait_0
+      name: reina_surprised_portrait 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: be36dbf1ef5cf1c80800000000000000
-      internalID: -8349737488876739605
+      spriteID: ef230e61f3d401b70800000000000000
+      internalID: 8867672599654576894
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      reina_surprised_portrait_0: -8349737488876739605
+      reina_surprised_portrait 1_0: 8867672599654576894
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

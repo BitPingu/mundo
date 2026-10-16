@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2bc495ea16de74465919f34c996db34c
+guid: 65584caa33d30426291ce46b98bd38a7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1008473696265811773
-    second: reina_tired_portrait_0
+      213: -8406114886790986564
+    second: reina_tired_portrait 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: reina_tired_portrait_0
+      name: reina_tired_portrait 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d37bf3fcb71defd00800000000000000
-      internalID: 1008473696265811773
+      spriteID: cb443b74c0b775b80800000000000000
+      internalID: -8406114886790986564
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      reina_tired_portrait_0: 1008473696265811773
+      reina_tired_portrait 1_0: -8406114886790986564
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

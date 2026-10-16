@@ -180,7 +180,6 @@ public class Enemy : FighterBase
         BattleTurn = false;
         if (_artCooldownCounter > 0)
             _artCooldownCounter--;
-        Debug.Log("counter: " + _artCooldownCounter);
     }
 
     protected override void EndBattle()

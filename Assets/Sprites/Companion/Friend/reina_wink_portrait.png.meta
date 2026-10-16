@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d954ce84c34cb43e0bb0308006b7b963
+guid: 54611fdbfd1e34ec486f1996ee309846
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7193664768618090576
-    second: reina_wink_portrait_0
+      213: -8030910059249986006
+    second: reina_wink_portrait 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: reina_wink_portrait_0
+      name: reina_wink_portrait 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 05059be4ef705d360800000000000000
-      internalID: 7193664768618090576
+      spriteID: a261b47c9d97c8090800000000000000
+      internalID: -8030910059249986006
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      reina_wink_portrait_0: 7193664768618090576
+      reina_wink_portrait 1_0: -8030910059249986006
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
