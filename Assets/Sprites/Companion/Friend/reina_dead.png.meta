@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 98fb6e0f7d4424776bc7ad1bb126e2c1
+guid: d372c2c48d44148f68fd7f28546c7ef3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6496244533129719796
-    second: friend 1_0
+      213: -5119338720668798244
+    second: reina_dead_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: friend 1_0
+      name: reina_dead_0
       rect:
         serializedVersion: 2
         x: 0
@@ -121,15 +121,15 @@ TextureImporter:
         width: 16
         height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4ff254bfbfb472a50800000000000000
-      internalID: 6496244533129719796
+      spriteID: cd232a59e8474f8b0800000000000000
+      internalID: -5119338720668798244
       vertices: []
       indices: 
       edges: []
@@ -139,7 +139,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      friend 1_0: 6496244533129719796
+      reina_dead_0: -5119338720668798244
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

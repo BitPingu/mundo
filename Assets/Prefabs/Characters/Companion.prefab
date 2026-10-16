@@ -588,7 +588,7 @@ SpriteRenderer:
   m_SortingLayerID: 378291169
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1213028593, guid: 1cb0dcefc7612440883b392ab2350ae6, type: 3}
+  m_Sprite: {fileID: 4324029948285922343, guid: 0ac250b6a5b994dbb89bdba3766edd4d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -708,13 +708,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charName: Reina
   _portraits:
-  - sprite: {fileID: 21300000, guid: 367b383abb86a4777b787aceeafbf3af, type: 3}
+  - sprite: {fileID: 21300000, guid: 0cae8d185b43b408186fc8d80099e68e, type: 3}
     reaction: 
-  - sprite: {fileID: 21300000, guid: 242d9ee763cb046a6b47ccef8a330900, type: 3}
+  - sprite: {fileID: 21300000, guid: 57162d5448142477384736c2d153e4e3, type: 3}
     reaction: surprised
-  - sprite: {fileID: 21300000, guid: 8917847ed41b54c2faeb769fea74c79f, type: 3}
+  - sprite: {fileID: 21300000, guid: d954ce84c34cb43e0bb0308006b7b963, type: 3}
     reaction: hurt
-  - sprite: {fileID: 21300000, guid: 95f8819e3188241288eec68bfb649505, type: 3}
+  - sprite: {fileID: 21300000, guid: 2bc495ea16de74465919f34c996db34c, type: 3}
     reaction: tired
   voiceSound: {fileID: 8300000, guid: fb638b115793a403a950f41ef22ee07e, type: 3}
   voicePitch: 0.67

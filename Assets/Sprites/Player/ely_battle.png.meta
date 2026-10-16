@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 8917847ed41b54c2faeb769fea74c79f
+guid: 0f909fd682fd64889b86f7e57ff045da
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6392806857994407924
-    second: friend_hurt_portrait 1_0
+      213: -4951684401811425431
+    second: ely_battle_0
+  - first:
+      213: 3540125096747981377
+    second: ely_battle_1
+  - first:
+      213: 5251029817167884006
+    second: ely_battle_2
+  - first:
+      213: -3695767934967907438
+    second: ely_battle_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +55,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,23 +122,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: friend_hurt_portrait 1_0
+      name: ely_battle_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4ff007087ffc7b850800000000000000
-      internalID: 6392806857994407924
+      spriteID: 967ff2e8545184bb0800000000000000
+      internalID: -4951684401811425431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ely_battle_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14adb14e40d012130800000000000000
+      internalID: 3540125096747981377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ely_battle_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6eea64d2cc76fd840800000000000000
+      internalID: 5251029817167884006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ely_battle_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29b75f7e4aef5bcc0800000000000000
+      internalID: -3695767934967907438
       vertices: []
       indices: 
       edges: []
@@ -138,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 1e46721bc43f44d73a26fdcbd58c6298
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      friend_hurt_portrait 1_0: 6392806857994407924
+      ely_battle_0: -4951684401811425431
+      ely_battle_1: 3540125096747981377
+      ely_battle_2: 5251029817167884006
+      ely_battle_3: -3695767934967907438
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -703,7 +703,7 @@ SpriteRenderer:
   m_SortingLayerID: 378291169
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 437890139, guid: c1584fdbf5ed740d5813b685c538c1d0, type: 3}
+  m_Sprite: {fileID: 8045055861642738463, guid: 5941bac2279114368a71ce9fe4c3b85b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -859,9 +859,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charName: Ely
   _portraits:
-  - sprite: {fileID: 21300000, guid: 2747284ce7b114015a96483482bfcaee, type: 3}
+  - sprite: {fileID: 21300000, guid: 0e93f1ece72a24501aad238b6de5aa48, type: 3}
     reaction: 
-  - sprite: {fileID: 21300000, guid: be9dbc659e7ed45ad8aae57b5cb1149c, type: 3}
+  - sprite: {fileID: 21300000, guid: 9cd768a257bb14c1cb80687bd945e30e, type: 3}
     reaction: tired
   voiceSound: {fileID: 8300000, guid: fb638b115793a403a950f41ef22ee07e, type: 3}
   voicePitch: 0.4

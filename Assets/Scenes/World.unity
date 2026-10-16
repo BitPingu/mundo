@@ -4436,7 +4436,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7990249944024980896, guid: 6fada48a0ed35472697d5598f14b7caa, type: 3}
       propertyPath: m_Name
-      value: Companion
+      value: Reina
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -61849,7 +61849,7 @@ Transform:
   m_GameObject: {fileID: 904777746}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.6, y: 67, z: 0}
+  m_LocalPosition: {x: 10, y: 71, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -86869,7 +86869,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6840031793578140923, guid: 3ea85f25ef08d4cbb888177fc63d3da4, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Ely
       objectReference: {fileID: 0}
     - target: {fileID: 7912921093878090320, guid: 3ea85f25ef08d4cbb888177fc63d3da4, type: 3}
       propertyPath: m_LocalPosition.x

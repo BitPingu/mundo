@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: be9dbc659e7ed45ad8aae57b5cb1149c
+guid: 5941bac2279114368a71ce9fe4c3b85b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1124447836182684780
-    second: player_tired_portrait_0
+      213: 8045055861642738463
+    second: ely_move_0
+  - first:
+      213: 7742758094646143582
+    second: ely_move_1
+  - first:
+      213: 1371954984492515600
+    second: ely_move_2
+  - first:
+      213: 1256062863234124080
+    second: ely_move_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +55,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,23 +122,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_tired_portrait_0
+      name: ely_move_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 31
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 49bdfdb86a82560f0800000000000000
-      internalID: -1124447836182684780
+      spriteID: f1bb36f7ea7c5af60800000000000000
+      internalID: 8045055861642738463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ely_move_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5ae925d67dc37b60800000000000000
+      internalID: 7742758094646143582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ely_move_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 011c08a1ac92a0310800000000000000
+      internalID: 1371954984492515600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ely_move_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03941aae48e6e6110800000000000000
+      internalID: 1256062863234124080
       vertices: []
       indices: 
       edges: []
@@ -138,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: efc6468866e1b4ceb9daf4b465dd3079
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      player_tired_portrait_0: -1124447836182684780
+      ely_move_0: 8045055861642738463
+      ely_move_1: 7742758094646143582
+      ely_move_2: 1371954984492515600
+      ely_move_3: 1256062863234124080
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

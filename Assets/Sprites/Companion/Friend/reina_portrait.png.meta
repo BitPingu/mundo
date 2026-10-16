@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 1cb0dcefc7612440883b392ab2350ae6
+guid: 0cae8d185b43b408186fc8d80099e68e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4097239316992917258
-    second: fiona 1_0
-  - first:
-      213: 6684044230902615353
-    second: fiona 1_1
-  - first:
-      213: -4019099765132251164
-    second: fiona 1_2
-  - first:
-      213: -9193372066516617060
-    second: fiona 1_3
+      213: 6491156718979595923
+    second: reina_portrait_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -55,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -122,89 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: friend_0
+      name: reina_portrait_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.05}
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: fb4ab98ee37c842aa8fd153163007d03
-      internalID: 1213028593
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: friend_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.05}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5b416581e3be04498a2246d5dffb400b
-      internalID: -343779310
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: friend_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.05}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ff21d50b3d10e4a6bbb1cfa011dc8a5c
-      internalID: -2035464626
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: friend_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.05}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cfcd3590c1bad46d89d0a4da776ec34e
-      internalID: -1443534817
+      spriteID: 39e3b20f4a8351a50800000000000000
+      internalID: 6491156718979595923
       vertices: []
       indices: 
       edges: []
@@ -213,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: c8d5ad3bc42984d6cb71c5dc2699b20e
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -223,10 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      friend_0: 1213028593
-      friend_1: -343779310
-      friend_2: -2035464626
-      friend_3: -1443534817
+      reina_portrait_0: 6491156718979595923
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

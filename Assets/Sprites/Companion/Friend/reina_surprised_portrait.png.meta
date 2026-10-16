@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: e01d713a30c8f486baf2928a6ea1ca03
+guid: 57162d5448142477384736c2d153e4e3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4032364912126229281
-    second: fiona_attack 1_0
-  - first:
-      213: 3526790905430827712
-    second: fiona_attack 1_1
-  - first:
-      213: 8522256996572691366
-    second: fiona_attack 1_2
-  - first:
-      213: -6619019806543515114
-    second: fiona_attack 1_3
+      213: -8349737488876739605
+    second: reina_surprised_portrait_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -55,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -122,89 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: friend_attack_0
+      name: reina_surprised_portrait_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.05}
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 8362e69a73e404ba7a30e8bc8d644af0
-      internalID: 1906464748
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: friend_attack_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.05}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cbfa3cec7eae54394b0fa9381ec3dfa9
-      internalID: 1378981630
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: friend_attack_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.05}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6c33bcc3fc706402aa92b8e831aed85b
-      internalID: -131492568
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: friend_attack_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.05}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4d4899e005ca64329b6e458ef95fc3cd
-      internalID: -895672314
+      spriteID: be36dbf1ef5cf1c80800000000000000
+      internalID: -8349737488876739605
       vertices: []
       indices: 
       edges: []
@@ -213,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ec682ea93a82f4602ac1698bb62438d4
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -223,10 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      friend_attack_0: 1906464748
-      friend_attack_1: 1378981630
-      friend_attack_2: -131492568
-      friend_attack_3: -895672314
+      reina_surprised_portrait_0: -8349737488876739605
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

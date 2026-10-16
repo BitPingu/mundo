@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 242d9ee763cb046a6b47ccef8a330900
+guid: 0ac250b6a5b994dbb89bdba3766edd4d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8160916660986603853
-    second: friend_surprised_portrait 1_0
+      213: 4324029948285922343
+    second: reina_move_0
+  - first:
+      213: -3775930642250124320
+    second: reina_move_1
+  - first:
+      213: -8206385541496967501
+    second: reina_move_2
+  - first:
+      213: -5910171821667953910
+    second: reina_move_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +55,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,23 +122,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: friend_surprised_portrait 1_0
+      name: reina_move_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d496cabf676614170800000000000000
-      internalID: 8160916660986603853
+      spriteID: 72cabb9045a020c30800000000000000
+      internalID: 4324029948285922343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reina_move_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e33b2c2613399bc0800000000000000
+      internalID: -3775930642250124320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reina_move_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3beeb2d44df0d1e80800000000000000
+      internalID: -8206385541496967501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reina_move_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0355f7aa0adafda0800000000000000
+      internalID: -5910171821667953910
       vertices: []
       indices: 
       edges: []
@@ -138,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 1bcd08ad141b645ccaf8c2bb6044b186
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      friend_surprised_portrait 1_0: 8160916660986603853
+      reina_move_0: 4324029948285922343
+      reina_move_1: -3775930642250124320
+      reina_move_2: -8206385541496967501
+      reina_move_3: -5910171821667953910
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

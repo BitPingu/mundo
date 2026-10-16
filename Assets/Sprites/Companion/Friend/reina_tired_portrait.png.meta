@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 7385aa9fc5c8c49af923d370a9b29754
+guid: 2bc495ea16de74465919f34c996db34c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -792409741013755574
-    second: player_attack 1_0
-  - first:
-      213: 5714151171649210254
-    second: player_attack 1_1
-  - first:
-      213: -356737305971440056
-    second: player_attack 1_2
-  - first:
-      213: -3532218064957594548
-    second: player_attack 1_3
+      213: 1008473696265811773
+    second: reina_tired_portrait_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -55,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -122,89 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_attack_0
+      name: reina_tired_portrait_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.05}
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 36354702937724f86a3dc21e8e2d3dad
-      internalID: 48699624
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_attack_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.05}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7199105ae88724d6d8f851014d8195fa
-      internalID: -516152536
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_attack_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.05}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e67cc31b9e2c540509ce7df4df0494be
-      internalID: 568275066
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_attack_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.05}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5831642f15ff147fca26fedef0608bc8
-      internalID: 1900973635
+      spriteID: d37bf3fcb71defd00800000000000000
+      internalID: 1008473696265811773
       vertices: []
       indices: 
       edges: []
@@ -213,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e4f83efe23f7a46b38c0f2b42a1efd8a
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -223,10 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      player_attack_0: 48699624
-      player_attack_1: -516152536
-      player_attack_2: 568275066
-      player_attack_3: 1900973635
+      reina_tired_portrait_0: 1008473696265811773
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

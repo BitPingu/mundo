@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2747284ce7b114015a96483482bfcaee
+guid: 9cd768a257bb14c1cb80687bd945e30e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2466188639796166283
-    second: player_portrait 1_0
+      213: -2681928185325862077
+    second: ely_tired_portrait_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_portrait 1_0
+      name: ely_tired_portrait_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b8e77206089a93220800000000000000
-      internalID: 2466188639796166283
+      spriteID: 3434b806680e7cad0800000000000000
+      internalID: -2681928185325862077
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      player_portrait 1_0: 2466188639796166283
+      ely_tired_portrait_0: -2681928185325862077
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

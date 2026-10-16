@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: f342d4dcbbde94829ba86e29de16fd79
+guid: a9cc376691f304ca0b4aedd712fd18ab
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4695757800554494884
-    second: fiona_battle_0
+      213: 7368994464342508679
+    second: ely_attack_0
   - first:
-      213: -8709656530331506152
-    second: fiona_battle_1
+      213: 1258488660715057811
+    second: ely_attack_1
   - first:
-      213: 2021809122927492953
-    second: fiona_battle_2
+      213: 8716743107505585017
+    second: ely_attack_2
   - first:
-      213: 4389316280696263604
-    second: fiona_battle_3
+      213: 499967918772433987
+    second: ely_attack_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -122,7 +122,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: friend_battle_0
+      name: ely_attack_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4abf15527deaa2140800000000000000
-      internalID: 4695757800554494884
+      spriteID: 78484f63c6de34660800000000000000
+      internalID: 7368994464342508679
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: friend_battle_1
+      name: ely_attack_1
       rect:
         serializedVersion: 2
         x: 16
@@ -159,14 +159,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 81aede90885112780800000000000000
-      internalID: -8709656530331506152
+      spriteID: 39237c7e4cc077110800000000000000
+      internalID: 1258488660715057811
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: friend_battle_2
+      name: ely_attack_2
       rect:
         serializedVersion: 2
         x: 32
@@ -181,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 95fbcbf6fa8ee0c10800000000000000
-      internalID: 2021809122927492953
+      spriteID: 97b74394ca718f870800000000000000
+      internalID: 8716743107505585017
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: friend_battle_3
+      name: ely_attack_3
       rect:
         serializedVersion: 2
         x: 48
@@ -203,8 +203,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4b35db5d6ebf9ec30800000000000000
-      internalID: 4389316280696263604
+      spriteID: 344b5855c2e30f600800000000000000
+      internalID: 499967918772433987
       vertices: []
       indices: 
       edges: []
@@ -213,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 03e2f438dd9254682bf30235fd9782cc
+    spriteID: ae7da536581ce4974a1ba6b553ed5349
     internalID: 0
     vertices: []
     indices: 
@@ -223,10 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      friend_battle_0: 4695757800554494884
-      friend_battle_1: -8709656530331506152
-      friend_battle_2: 2021809122927492953
-      friend_battle_3: 4389316280696263604
+      ely_attack_0: 7368994464342508679
+      ely_attack_1: 1258488660715057811
+      ely_attack_2: 8716743107505585017
+      ely_attack_3: 499967918772433987
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

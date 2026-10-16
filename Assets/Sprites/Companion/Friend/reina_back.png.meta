@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 63b9d9086f06d498e876e077cae74d30
+guid: f13981a3297624ec48d021008088870c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1764977377305423967
-    second: player_dead_0
+      213: 6012180707830450161
+    second: reina_back_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_dead_0
+      name: reina_back_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 3
         y: 0
-        width: 16
-        height: 7
+        width: 11
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1af0c153d6a8187e0800000000000000
-      internalID: -1764977377305423967
+      spriteID: 1f7c0b7ff7e8f6350800000000000000
+      internalID: 6012180707830450161
       vertices: []
       indices: 
       edges: []
@@ -139,7 +139,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      player_dead_0: -1764977377305423967
+      reina_back_0: 6012180707830450161
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 367b383abb86a4777b787aceeafbf3af
+guid: 4276096f31955460e8a733ace25b6bb9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7693395935881900481
-    second: friend_portrait 1_0
+      213: 995530180246073666
+    second: reina_battle_0
+  - first:
+      213: -9115132742303794967
+    second: reina_battle_1
+  - first:
+      213: 8527527866795999392
+    second: reina_battle_2
+  - first:
+      213: 4584741931739777849
+    second: reina_battle_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +55,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,23 +122,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: friend_portrait 1_0
+      name: reina_battle_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f3e435d58219b3590800000000000000
-      internalID: -7693395935881900481
+      spriteID: 2417fb4ac65d0dd00800000000000000
+      internalID: 995530180246073666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reina_battle_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e8337e901b808180800000000000000
+      internalID: -9115132742303794967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reina_battle_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a0ce900a6dd75670800000000000000
+      internalID: 8527527866795999392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reina_battle_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93b0034fe7640af30800000000000000
+      internalID: 4584741931739777849
       vertices: []
       indices: 
       edges: []
@@ -148,7 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      friend_portrait 1_0: -7693395935881900481
+      reina_battle_0: 995530180246073666
+      reina_battle_1: -9115132742303794967
+      reina_battle_2: 8527527866795999392
+      reina_battle_3: 4584741931739777849
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

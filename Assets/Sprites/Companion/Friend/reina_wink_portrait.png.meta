@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: b661360d88e6d442989214e7a54b0ecb
+guid: d954ce84c34cb43e0bb0308006b7b963
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3296723903060209260
-    second: player_battle 1_0
-  - first:
-      213: -989168466838208826
-    second: player_battle 1_1
-  - first:
-      213: -8646435103187297631
-    second: player_battle 1_2
-  - first:
-      213: -7677908728630006047
-    second: player_battle 1_3
+      213: 7193664768618090576
+    second: reina_wink_portrait_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -55,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -122,89 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_battle_0
+      name: reina_wink_portrait_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.05}
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 31d42ab0a764340169861752cf7dde5d
-      internalID: 1926456271
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_battle_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.05}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a3f0346cf24d34c86915b0ddf20f77c4
-      internalID: -1176609844
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_battle_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.05}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ed40d826d86d64e5e8cf7e807a2d1a96
-      internalID: 1047660138
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_battle_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.05}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: df1cf3b046b7e41058a362b5aaa7be87
-      internalID: 118856646
+      spriteID: 05059be4ef705d360800000000000000
+      internalID: 7193664768618090576
       vertices: []
       indices: 
       edges: []
@@ -213,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9f0ac9f0bcd734db3a9c83e3e289a619
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -223,10 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      player_battle_0: 1926456271
-      player_battle_1: -1176609844
-      player_battle_2: 1047660138
-      player_battle_3: 118856646
+      reina_wink_portrait_0: 7193664768618090576
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
