@@ -154,17 +154,6 @@ public class Player : PartyBase
         }
     }
 
-    protected override IEnumerator CallChargeAttack()
-    {
-        // battle dialogue
-        string text = charName + " used Wrath Strike on " + CurrentOpponent.charName + "!";
-        DialogueController.Instance.BattleDialogue(this, text, "");
-
-        // attack
-        yield return StartCoroutine(Attack("Charge Attack"));
-        StartCoroutine(AttackFinish());
-    }
-
     public IEnumerator Run()
     {
         string text = "Got away safely!";

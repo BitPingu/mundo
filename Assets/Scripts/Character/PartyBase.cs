@@ -18,7 +18,7 @@ public class PartyBase : FighterBase
     public Bar EBar;
     public GameObject BattleHUD;
 
-    private bool _battlePrompt, _targeting, _chargeAttack, _lowHealth;
+    private bool _battlePrompt, _targeting, _attack, _chargeAttack, _lowHealth;
     public bool IsSparring { get; set; }
     protected bool _cannotSwitch { get; set; }
 
@@ -46,12 +46,16 @@ public class PartyBase : FighterBase
         {
             if (!IsSparring)
             {
-                // show HUD
-                BattleHUD.SetActive(true);
-
                 // battle dialogue
                 if (!_battlePrompt)
                 {
+                    // show HUD
+                    BattleHUD.SetActive(true);
+                    foreach (Transform child in BattleHUD.transform)
+                    {
+                        child.gameObject.SetActive(true);
+                    }
+
                     string text = "What will " + charName + " do?";
                     if (CurrentHealth <= MaxHealth*.25f)
                     {
@@ -65,7 +69,7 @@ public class PartyBase : FighterBase
                 }
 
                 // attack
-                if (_input.E)
+                if (_input.E && !_chargeAttack)
                 {
                     if (CurrentOpponent.Allies.Count > 0 && !_targeting)
                     {
@@ -73,34 +77,46 @@ public class PartyBase : FighterBase
                         string text = "Target which one?";
                         DialogueController.Instance.BattleDialogue(this, text, "show");
                         _targeting = true;
-                    }
-                    else if (!_chargeAttack)
-                    {
-                        StartCoroutine(CallAttack());
-                        EndTurn();
-                    }
-                }
-
-                if (_input.R)
-                {
-                    if (CurrentOpponent.Allies.Count > 0 && !_targeting)
-                    {
-                        // multiple enemies
-                        string text = "Target which one?";
-                        DialogueController.Instance.BattleDialogue(this, text, "show");
-                        _targeting = true;
-                        _chargeAttack = true;
+                        _attack = true;
+                        BattleHUD.transform.GetChild(1).gameObject.SetActive(false);
                     }
                     else
                     {
-                        StartCoroutine(CallChargeAttack());
+                        StartCoroutine(CallAttack());
                         EndTurn();
-                        _chargeAttack = false;
+                        _attack = false;
+                    }
+                }
+
+                if (_input.R && !_attack)
+                {
+                    if (!_chargeAttack)
+                    {
+                        string text = "> " + Arts[0].artName + ": " + Arts[0].description;
+                        DialogueController.Instance.BattleDialogue(this, text, "show");
+                        _chargeAttack = true;
+                        BattleHUD.transform.GetChild(0).gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        if (CurrentOpponent.Allies.Count > 0 && !_targeting)
+                        {
+                            // multiple enemies
+                            string text = "Target which one?";
+                            DialogueController.Instance.BattleDialogue(this, text, "show");
+                            _targeting = true;
+                        }
+                        else
+                        {
+                            StartCoroutine(CallChargeAttack(Arts[0]));
+                            EndTurn();
+                            _chargeAttack = false;
+                        }
                     }
                 }
 
                 // switch
-                if (!_targeting && !_cannotSwitch && Allies.Count > 0 && !Allies[0].FinishTurn 
+                if (!_attack && !_chargeAttack && !_cannotSwitch && Allies.Count > 0 && !Allies[0].FinishTurn 
                     && (_input.Right || _input.Left))
                 {
                     StartCoroutine(SwitchTurn());

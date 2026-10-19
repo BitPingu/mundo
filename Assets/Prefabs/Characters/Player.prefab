@@ -163,12 +163,12 @@ GameObject:
   - component: {fileID: 5672836430530505984}
   - component: {fileID: 2618957068634860166}
   m_Layer: 6
-  m_Name: RunImage
+  m_Name: CombatArtImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5441250371109307068
 RectTransform:
   m_ObjectHideFlags: 0
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 36a8bb362abc14ff5a950d7bc997eed1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d104de84995ea4799b82dafd6f3d076b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -871,6 +871,8 @@ MonoBehaviour:
   Level: 1
   MaxHealth: 20
   Strength: 6
+  Arts:
+  - {fileID: 11400000, guid: be26d9e402aaf468ca84b67666fd3c09, type: 2}
   HBar: {fileID: 363618131193408213}
   target: {fileID: 4077321530019250279}
   _hitSound: {fileID: 8300000, guid: c9c39983af9d441278cf44370e151cf1, type: 3}

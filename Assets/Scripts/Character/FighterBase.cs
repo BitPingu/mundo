@@ -16,6 +16,9 @@ public class FighterBase : CharacterBase
     public int CurrentHealth { get; set; }
     public int Strength = 4;
 
+    // combat arts
+    public List<CombatArt> Arts = new List<CombatArt>();
+
     // conditions
     public bool BattleTurn { get; set; }
     public bool IsAttacking { get; set; }
@@ -65,24 +68,30 @@ public class FighterBase : CharacterBase
         
     }
 
-    protected virtual IEnumerator CallAttack()
+    protected IEnumerator CallAttack()
     {
         // battle dialogue
         string text = charName + " attacks " + CurrentOpponent.charName + "!";
         DialogueController.Instance.BattleDialogue(this, text, "");
 
         // attack
-        yield return StartCoroutine(Attack("Attack"));
+        yield return StartCoroutine(Attack("Attack", 1f, .1f, .2f));
         yield return new WaitForSeconds(.5f);
         StartCoroutine(AttackFinish());
     }
 
-    protected virtual IEnumerator CallChargeAttack()
+    protected IEnumerator CallChargeAttack(CombatArt art)
     {
-        yield return null;
+        // battle dialogue
+        string text = charName + " used " + art.artName + " on " + CurrentOpponent.charName + "!";
+        DialogueController.Instance.BattleDialogue(this, text, "");
+
+        // attack
+        yield return StartCoroutine(Attack("Charge Attack", art.multiplier, art.delay1, art.delay2));
+        StartCoroutine(AttackFinish());
     }
 
-    protected IEnumerator Attack(string name)
+    protected IEnumerator Attack(string type, float multiplier, float delay1, float delay2)
     {
         IsAttacking = true;
 
@@ -98,14 +107,14 @@ public class FighterBase : CharacterBase
 
         yield return new WaitForSeconds(.1f);
 
-        Anim.SetTrigger(name);
+        Anim.SetTrigger(type);
 
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(delay1);
 
         // damage
-        CurrentOpponent.Damage(Strength);
+        CurrentOpponent.Damage(Mathf.RoundToInt(Strength*multiplier));
 
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(delay2);
 
         Vector3 attackDir = (CurrentOpponent.transform.position - transform.position).normalized;
         Vector3 attackPos = CurrentOpponent.transform.position - (attackDir*1.3f);
@@ -214,6 +223,11 @@ public class FighterBase : CharacterBase
 
         // end battle dialogue
         DialogueController.Instance.EndBattleDialogue();
+
+        // reset anim
+        Anim.Rebind();
+        foreach (FighterBase ally in Allies)
+            ally.Anim.Rebind();
 
         // camera
         CameraController.Instance.follow = true;

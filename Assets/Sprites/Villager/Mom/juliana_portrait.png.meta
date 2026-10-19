@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      juliana_portrait_0: -8035941370962894095
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

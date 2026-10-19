@@ -99,17 +99,6 @@ public class Companion : PartyBase
         SetCurrentOpponent(Leader.CurrentOpponent);
     }
 
-    protected override IEnumerator CallChargeAttack()
-    {
-        // battle dialogue
-        string text = charName + " used Slit Edge on " + CurrentOpponent.charName + "!";
-        DialogueController.Instance.BattleDialogue(this, text, "");
-
-        // attack
-        yield return StartCoroutine(Attack("Charge Attack"));
-        StartCoroutine(AttackFinish());
-    }
-
     private void AfterBattle()
     {
         StartCoroutine(AfterBattleDialogue());

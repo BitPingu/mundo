@@ -4390,10 +4390,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 904777747}
     m_Modifications:
-    - target: {fileID: 739479309176889996, guid: 6fada48a0ed35472697d5598f14b7caa, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
     - target: {fileID: 4043908946708894468, guid: 6fada48a0ed35472697d5598f14b7caa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.13
@@ -61849,7 +61845,7 @@ Transform:
   m_GameObject: {fileID: 904777746}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.19, y: 0.74, z: 0}
+  m_LocalPosition: {x: 18.24, y: 38.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -82545,6 +82541,7 @@ MonoBehaviour:
   Level: 1
   MaxHealth: 20
   Strength: 4
+  Arts: []
   HBar: {fileID: 19928247}
   target: {fileID: 0}
   _hitSound: {fileID: 8300000, guid: c9c39983af9d441278cf44370e151cf1, type: 3}
@@ -87644,7 +87641,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Events:
-  - {fileID: 2594605836150673444, guid: 046f856f2c9224f459bd7f766401176a, type: 3}
   - {fileID: 3184691118879588049, guid: a879d8965692b40ef8569b52b495c670, type: 3}
   CurrentEvent: {fileID: 0}
   EventIndex: -1

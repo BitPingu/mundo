@@ -21,6 +21,10 @@ public class BlueSlime : Enemy
             else
                 Patrol();
         }
+        else
+        {
+            Move(Vector2.zero);
+        }
     }
 
     public override void Battle()
@@ -41,7 +45,7 @@ public class BlueSlime : Enemy
             {
                 // combat art release
                 TargetOpponent(); // choose target
-                StartCoroutine(CallChargeAttack());
+                StartCoroutine(CallChargeAttack(Arts[0]));
 
                 // reset art cooldown time
                 _artCooldownCounter = _artCooldownTime+1;
@@ -68,16 +72,5 @@ public class BlueSlime : Enemy
         yield return new WaitForSeconds(2f);
 
         PassTurn();
-    }
-
-    protected override IEnumerator CallChargeAttack()
-    {
-        // battle dialogue
-        string text = charName + " used Body Slam on " + CurrentOpponent.charName + "!";
-        DialogueController.Instance.BattleDialogue(this, text, "");
-
-        // attack
-        yield return StartCoroutine(Attack("Charge Attack"));
-        StartCoroutine(AttackFinish());
     }
 }
