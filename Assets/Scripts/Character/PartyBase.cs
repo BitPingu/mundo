@@ -11,14 +11,16 @@ public class PartyBase : FighterBase
     protected PlayerController _input { get; set; }
 
     // stats
+    [SerializeField] private int _maxAP = 3;
+    private int _currentAP;
     [SerializeField] private int _maxExp = 100;
     private int _currentExp = 0;
 
     // UI
-    public Bar EBar;
+    public Bar ABar, EBar;
     public GameObject BattleHUD;
 
-    private bool _battlePrompt, _targeting, _attack, _chargeAttack, _lowHealth;
+    private bool _battlePrompt, _noAP, _targeting, _attack, _chargeAttack, _lowHealth;
     public bool IsSparring { get; set; }
     protected bool _cannotSwitch { get; set; }
 
@@ -32,6 +34,9 @@ public class PartyBase : FighterBase
         // set components
         _input = GetComponent<PlayerController>();
 
+        // set parameters
+        _currentAP = _maxAP;
+
         // add to party
         Party.Add(this);
     }
@@ -40,6 +45,9 @@ public class PartyBase : FighterBase
     {
         // call base class
         base.Battle();
+
+        foreach (PartyBase member in Party)
+            member.ABar.GetComponent<Image>().enabled = true;
 
         // party member turn
         if (BattleTurn)
@@ -55,16 +63,7 @@ public class PartyBase : FighterBase
                     {
                         child.gameObject.SetActive(true);
                     }
-
-                    string text = "What will " + charName + " do?";
-                    if (CurrentHealth <= MaxHealth*.25f)
-                    {
-                        DialogueController.Instance.BattleDialogue(this, text, "tired");
-                    }
-                    else
-                    {
-                        DialogueController.Instance.BattleDialogue(this, text, "show");
-                    }
+                    BattlePrompt();
                     _battlePrompt = true;
                 }
 
@@ -88,9 +87,15 @@ public class PartyBase : FighterBase
                     }
                 }
 
+                // combat art
                 if (_input.R && !_attack)
                 {
-                    if (!_chargeAttack)
+                    if (_currentAP == 0)
+                    {
+                        StartCoroutine(NoAP());
+                        _noAP = true;
+                    }
+                    else if (!_chargeAttack)
                     {
                         string text = "> " + Arts[0].artName + ": " + Arts[0].description;
                         DialogueController.Instance.BattleDialogue(this, text, "show");
@@ -108,6 +113,7 @@ public class PartyBase : FighterBase
                         }
                         else
                         {
+                            StartCoroutine(ABar.UpdateBar(_maxAP, --_currentAP));
                             StartCoroutine(CallChargeAttack(Arts[0]));
                             EndTurn();
                             _chargeAttack = false;
@@ -151,6 +157,34 @@ public class PartyBase : FighterBase
         }
     }
 
+    private void BattlePrompt()
+    {
+        string text = "What will " + charName + " do?";
+        if (CurrentHealth <= MaxHealth*.25f)
+        {
+            DialogueController.Instance.BattleDialogue(this, text, "tired");
+        }
+        else
+        {
+            DialogueController.Instance.BattleDialogue(this, text, "show");
+        }
+    }
+
+    private IEnumerator NoAP()
+    {
+        if (_noAP)
+            yield break;
+
+        string text = "Not enough AP!";
+        DialogueController.Instance.BattleDialogue(this, text, "show");
+
+        yield return new WaitForSeconds(1f);
+
+        BattlePrompt();
+
+        _noAP = false;
+    }
+
     private IEnumerator SwitchTurn()
     {
         Allies[0].GetComponent<PartyBase>()._cannotSwitch = true;
@@ -189,6 +223,8 @@ public class PartyBase : FighterBase
             if (CurrentOpponent.Allies.Count == 0)
             {
                 Revive(); // revive fallen members
+                foreach (PartyBase member in Party)
+                    member.ABar.GetComponent<Image>().enabled = false;
                 EndBattle();
                 yield break;
             }
