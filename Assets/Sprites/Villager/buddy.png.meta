@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 798ccca103f3e450bba3a975081917ff
+guid: a3ed5a6939f124432aba46f38becc8c1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1591659966645858061
-    second: villager_male_portrait 1_0
+      213: 3314912917647438430
+    second: buddy_0
+  - first:
+      213: -3312684380623742107
+    second: buddy_1
+  - first:
+      213: 6192457007071050792
+    second: buddy_2
+  - first:
+      213: -4252302516445499765
+    second: buddy_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +55,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,23 +122,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: villager_male_portrait 1_0
+      name: buddy_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 30
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3f01ddc71b949e9e0800000000000000
-      internalID: -1591659966645858061
+      spriteID: e52bab54cbfe00e20800000000000000
+      internalID: 3314912917647438430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buddy_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56bdfef6b1bf602d0800000000000000
+      internalID: -3312684380623742107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buddy_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82c3951c6d600f550800000000000000
+      internalID: 6192457007071050792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buddy_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8e24c51469ccf4c0800000000000000
+      internalID: -4252302516445499765
       vertices: []
       indices: 
       edges: []
@@ -138,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: c347d72c0c21f4457b245ea6f66547f1
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      villager_male_portrait 1_0: -1591659966645858061
+      buddy_0: 3314912917647438430
+      buddy_1: -3312684380623742107
+      buddy_2: 6192457007071050792
+      buddy_3: -4252302516445499765
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

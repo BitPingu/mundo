@@ -118,7 +118,7 @@ public class Intro : EventBase
                 CompanionChar.Anim.Rebind();
                 CompanionChar.Anim.enabled = false;
 
-                // set spawn
+                // set positions
                 PlayerChar.transform.position = new Vector2(Chief.transform.position.x+.65f, Chief.transform.position.y-1f);
                 CompanionChar.transform.position = new Vector2(Chief.transform.position.x-.65f, Chief.transform.position.y-1f);
                 
@@ -146,7 +146,7 @@ public class Intro : EventBase
                 CompanionChar.Anim.Rebind();
                 CompanionChar.Anim.enabled = false;
 
-                // set spawn
+                // set positions
                 PlayerChar.transform.position = new Vector2(Chief.transform.position.x+.2f, Chief.transform.position.y-.2f);
                 CompanionChar.transform.position = new Vector2(Chief.transform.position.x-.2f, Chief.transform.position.y-.2f);
 
@@ -171,7 +171,7 @@ public class Intro : EventBase
                 CompanionChar.Anim.Rebind();
                 CompanionChar.Anim.enabled = false;
 
-                // set spawn
+                // set positions
                 PlayerChar.transform.position = new Vector2(Chief.transform.position.x+.65f, Chief.transform.position.y-1f);
                 CompanionChar.transform.position = new Vector2(Chief.transform.position.x-.65f, Chief.transform.position.y-1f);
 

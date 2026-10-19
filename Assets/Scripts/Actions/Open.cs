@@ -22,7 +22,7 @@ public class Open : Action
             }
 
             // set delegate
-            _detectPlayer.OnAction += Engage;
+            _detectPlayer.OnAction += Active;
         }
     }
 
@@ -32,13 +32,13 @@ public class Open : Action
         {
             Destroy(_activeIcon);
             _detectPlayer = hitInfo.GetComponent<Player>();
-            _detectPlayer.OnAction -= Engage; // unset delegate
+            _detectPlayer.OnAction -= Active; // unset delegate
             _detectPlayer.IsNearInteractable = false;
             _detectPlayer = null;
         }
     }
 
-    protected override void Engage()
+    protected override void Active()
     {
         StartCoroutine(OpenChest());
     }

@@ -14634,8 +14634,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 104, y: 70}
-  m_SizeDelta: {x: 620, y: 50}
+  m_AnchoredPosition: {x: 95, y: 75}
+  m_SizeDelta: {x: 600, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &476072111
 MonoBehaviour:
@@ -14686,13 +14686,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -15635,8 +15635,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 104, y: -10}
-  m_SizeDelta: {x: 620, y: 100}
+  m_AnchoredPosition: {x: 95, y: -10}
+  m_SizeDelta: {x: 600, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &504140587
 MonoBehaviour:
@@ -61849,7 +61849,7 @@ Transform:
   m_GameObject: {fileID: 904777746}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.1, y: 12.1, z: 0}
+  m_LocalPosition: {x: 11.19, y: 0.74, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -64014,6 +64014,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6122720899678808909}
     m_Modifications:
+    - target: {fileID: 822375130368306691, guid: 1a32f92706ad34a72a287d57514ac4e9, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 859539728394518098, guid: 1a32f92706ad34a72a287d57514ac4e9, type: 3}
       propertyPath: m_Name
       value: Mom
@@ -66574,8 +66578,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 104, y: 70}
-  m_SizeDelta: {x: 620, y: 50}
+  m_AnchoredPosition: {x: 95, y: 75}
+  m_SizeDelta: {x: 600, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1065673682
 MonoBehaviour:
@@ -66626,13 +66630,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -82215,8 +82219,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 104, y: -10}
-  m_SizeDelta: {x: 620, y: 100}
+  m_AnchoredPosition: {x: 95, y: -10}
+  m_SizeDelta: {x: 600, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1503278990
 MonoBehaviour:
@@ -85802,7 +85806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charName: Chief
   _portraits:
-  - sprite: {fileID: 21300000, guid: e5251aecc8db44b9ba2f843bdf637613, type: 3}
+  - sprite: {fileID: 21300000, guid: d091ce7041a57491c97f3cbf2f994359, type: 3}
     reaction: 
   voiceSound: {fileID: 8300000, guid: fb638b115793a403a950f41ef22ee07e, type: 3}
   voicePitch: 0.3
@@ -85924,7 +85928,7 @@ SpriteRenderer:
   m_SortingLayerID: 378291169
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1829395342, guid: 6b326d6f8dc914f4fb8610a3a2b617b5, type: 3}
+  m_Sprite: {fileID: 992177377, guid: 9fda84126af984575a7aec331cb9c37c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87640,6 +87644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Events:
+  - {fileID: 2594605836150673444, guid: 046f856f2c9224f459bd7f766401176a, type: 3}
   - {fileID: 3184691118879588049, guid: a879d8965692b40ef8569b52b495c670, type: 3}
   CurrentEvent: {fileID: 0}
   EventIndex: -1
@@ -322129,7 +322134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charName: Rico
   _portraits:
-  - sprite: {fileID: 21300000, guid: 8d854518d1fed4aee96bd0e2e452d036, type: 3}
+  - sprite: {fileID: 21300000, guid: 4608a567ff0294ced8f342e62235f518, type: 3}
     reaction: 
   voiceSound: {fileID: 8300000, guid: fb638b115793a403a950f41ef22ee07e, type: 3}
   voicePitch: 0.65
@@ -322251,7 +322256,7 @@ SpriteRenderer:
   m_SortingLayerID: 378291169
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9178756841482082224, guid: bac8fb03f3f38421da16c3e811b1a208, type: 3}
+  m_Sprite: {fileID: -575494032358419764, guid: 31ad23e1dca9241dbb78a67a3d79f715, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -325024,7 +325029,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charName: Juliana
   _portraits:
-  - sprite: {fileID: 21300000, guid: ae8b1f747bd1d48aaa8744df89abd7f1, type: 3}
+  - sprite: {fileID: 21300000, guid: e09c39370470d40d6a9e6e425051f11d, type: 3}
     reaction: 
   voiceSound: {fileID: 8300000, guid: fb638b115793a403a950f41ef22ee07e, type: 3}
   voicePitch: 0.62
@@ -325146,7 +325151,7 @@ SpriteRenderer:
   m_SortingLayerID: 378291169
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5736393571252660362, guid: dda95a2d7b0ee42a8a317a1d690caf47, type: 3}
+  m_Sprite: {fileID: -3629273731398517952, guid: 36e110d6bb16748819a5e767b3d0bfcf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -329950,7 +329955,7 @@ SpriteRenderer:
   m_SortingLayerID: 378291169
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1319817925, guid: 320933757ca4c4fba950d1abfa47228c, type: 3}
+  m_Sprite: {fileID: 3314912917647438430, guid: a3ed5a6939f124432aba46f38becc8c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -331046,7 +331051,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charName: Buddy
   _portraits:
-  - sprite: {fileID: 21300000, guid: 798ccca103f3e450bba3a975081917ff, type: 3}
+  - sprite: {fileID: 21300000, guid: a5b9c4eb128194d7dac0604a10297a93, type: 3}
     reaction: 
   voiceSound: {fileID: 8300000, guid: fb638b115793a403a950f41ef22ee07e, type: 3}
   voicePitch: 0.5

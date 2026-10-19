@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: dda95a2d7b0ee42a8a317a1d690caf47
+guid: 31ad23e1dca9241dbb78a67a3d79f715
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5736393571252660362
-    second: villager_female_0
+      213: -575494032358419764
+    second: rico_0
   - first:
-      213: 8119597247393123421
-    second: villager_female_1
+      213: -8009996782219918778
+    second: rico_1
   - first:
-      213: -3689545500009805628
-    second: villager_female_2
+      213: 2641277639881255091
+    second: rico_2
   - first:
-      213: -1999082662292804483
-    second: villager_female_3
+      213: 5727380083613720215
+    second: rico_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -122,7 +122,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: villager_female_0
+      name: rico_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a8869527f83cb9f40800000000000000
-      internalID: 5736393571252660362
+      spriteID: cc25be60a3f6308f0800000000000000
+      internalID: -575494032358419764
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: villager_female_1
+      name: rico_1
       rect:
         serializedVersion: 2
         x: 16
@@ -159,14 +159,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d5c4b125daa9ea070800000000000000
-      internalID: 8119597247393123421
+      spriteID: 64282c78d56c6d090800000000000000
+      internalID: -8009996782219918778
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: villager_female_2
+      name: rico_2
       rect:
         serializedVersion: 2
         x: 32
@@ -181,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4c846417ae91cccc0800000000000000
-      internalID: -3689545500009805628
+      spriteID: 3b8ed46f404b7a420800000000000000
+      internalID: 2641277639881255091
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: villager_female_3
+      name: rico_3
       rect:
         serializedVersion: 2
         x: 48
@@ -203,8 +203,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d7c256509e4d144e0800000000000000
-      internalID: -1999082662292804483
+      spriteID: 79e517157ddbb7f40800000000000000
+      internalID: 5727380083613720215
       vertices: []
       indices: 
       edges: []
@@ -213,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ce045490d723144a8a7d81356e35f8e6
+    spriteID: 0bbe582d85f994ef19932bbb2199efc6
     internalID: 0
     vertices: []
     indices: 
@@ -223,10 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      villager_female_0: 5736393571252660362
-      villager_female_1: 8119597247393123421
-      villager_female_2: -3689545500009805628
-      villager_female_3: -1999082662292804483
+      rico_0: -575494032358419764
+      rico_1: -8009996782219918778
+      rico_2: 2641277639881255091
+      rico_3: 5727380083613720215
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

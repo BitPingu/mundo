@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 378291169
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1261296362, guid: 418985c3af2794c29901b1f445b2ca3b, type: 3}
+  m_Sprite: {fileID: -493841785, guid: 36af8d89eab094981953b354fb2c25ba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charName: Mom
   _portraits:
-  - sprite: {fileID: 21300000, guid: 9991208118bef4f96b1e58e973b19f5c, type: 3}
+  - sprite: {fileID: 21300000, guid: 84d47d3e079664318a95571bf642a42e, type: 3}
     reaction: 
   voiceSound: {fileID: 8300000, guid: fb638b115793a403a950f41ef22ee07e, type: 3}
   voicePitch: 0.6

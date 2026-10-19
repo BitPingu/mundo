@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     public float VerticalInput { get; set; }
 
     public bool E { get; set; }
+    public bool R { get; set; }
     public bool Q { get; set; }
 
     public bool Left { get; set; }
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
         // key inputs
         E = Input.GetKeyDown(KeyCode.E);
+        R = Input.GetKeyDown(KeyCode.R);
         Q = Input.GetKeyDown(KeyCode.Q);
 
         // enemy targeting

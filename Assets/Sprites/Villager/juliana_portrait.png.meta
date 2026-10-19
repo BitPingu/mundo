@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ae8b1f747bd1d48aaa8744df89abd7f1
+guid: e09c39370470d40d6a9e6e425051f11d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1990302031426976189
-    second: villager_female_portrait 1_0
+      213: -2421702422849585092
+    second: juliana_portrait 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: villager_female_portrait 1_0
+      name: juliana_portrait 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3468e05f8d60164e0800000000000000
-      internalID: -1990302031426976189
+      spriteID: c3009562a72646ed0800000000000000
+      internalID: -2421702422849585092
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      villager_female_portrait 1_0: -1990302031426976189
+      juliana_portrait 1_0: -2421702422849585092
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -16,7 +16,7 @@ public class Enter : Action
             _detectPlayer = hitInfo.GetComponent<Player>();
 
             // set delegate
-            _detectPlayer.OnAction += Engage;
+            _detectPlayer.OnAction += Active;
         }
     }
 
@@ -26,7 +26,7 @@ public class Enter : Action
         {
             Destroy(_activeIcon);
             _detectPlayer = hitInfo.GetComponent<Player>();
-            _detectPlayer.OnAction -= Engage; // unset delegate
+            _detectPlayer.OnAction -= Active; // unset delegate
             _detectPlayer.IsEntering = false;
             _detectPlayer = null;
         }
@@ -63,7 +63,7 @@ public class Enter : Action
         }
     }
 
-    protected override void Engage()
+    protected override void Active()
     {
         if (!_detectPlayer.CannotEnter)
         {

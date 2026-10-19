@@ -73,7 +73,13 @@ public class FighterBase : CharacterBase
 
         // attack
         yield return StartCoroutine(Attack("Attack"));
+        yield return new WaitForSeconds(.5f);
         StartCoroutine(AttackFinish());
+    }
+
+    protected virtual IEnumerator CallChargeAttack()
+    {
+        yield return null;
     }
 
     protected IEnumerator Attack(string name)
@@ -113,6 +119,8 @@ public class FighterBase : CharacterBase
             yield return new WaitForFixedUpdate();
         }
         Move(Vector2.zero);
+
+        transform.position = attackPos;
 
         IsAttacking = false;
     }
@@ -198,7 +206,7 @@ public class FighterBase : CharacterBase
         Opponents.Clear();
         foreach (FighterBase ally in Allies)
             ally.Opponents.Clear();
-        
+
         // reset conditions
         FinishTurn = false;
         foreach (FighterBase ally in Allies)
@@ -228,7 +236,7 @@ public class FighterBase : CharacterBase
         // battle dialogue
         string text = charName + " took " + damageTaken + " damage.";
         DialogueController.Instance.BattleDialogue(this, text, "");
-        Debug.Log("Current health: " + CurrentHealth + "/" + MaxHealth);
+        // Debug.Log("Current health: " + CurrentHealth + "/" + MaxHealth);
     }
 
     public void CallDamageFlash()
@@ -275,8 +283,8 @@ public class FighterBase : CharacterBase
         // update health bar
         StartCoroutine(HBar.UpdateBar(MaxHealth, CurrentHealth));
 
-        Debug.Log(name + " restored " + healAmount + " health.");
-        Debug.Log("Current health: " + CurrentHealth + "/" + MaxHealth);
+        // Debug.Log(name + " restored " + healAmount + " health.");
+        // Debug.Log("Current health: " + CurrentHealth + "/" + MaxHealth);
     }
 }
 

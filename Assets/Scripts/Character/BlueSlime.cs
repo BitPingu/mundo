@@ -70,7 +70,7 @@ public class BlueSlime : Enemy
         PassTurn();
     }
 
-    private IEnumerator CallChargeAttack()
+    protected override IEnumerator CallChargeAttack()
     {
         // battle dialogue
         string text = charName + " used Body Slam on " + CurrentOpponent.charName + "!";

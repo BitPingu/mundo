@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 8d854518d1fed4aee96bd0e2e452d036
+guid: 36e110d6bb16748819a5e767b3d0bfcf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2228167337426352930
-    second: villager_boy_portrait 1_0
+      213: -3629273731398517952
+    second: juliana_0
+  - first:
+      213: -9031906034488146686
+    second: juliana_1
+  - first:
+      213: -957094794494976448
+    second: juliana_2
+  - first:
+      213: -8173360746770168635
+    second: juliana_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +55,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,23 +122,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: villager_boy_portrait 1_0
+      name: juliana_0
       rect:
         serializedVersion: 2
-        x: 4
+        x: 0
         y: 0
-        width: 27
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 22bfc67536a0cee10800000000000000
-      internalID: 2228167337426352930
+      spriteID: 04bb55f15ca32adc0800000000000000
+      internalID: -3629273731398517952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: juliana_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20580a1905938a280800000000000000
+      internalID: -9031906034488146686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: juliana_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04e50c5fa57b7b2f0800000000000000
+      internalID: -957094794494976448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: juliana_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c484a384b3629e80800000000000000
+      internalID: -8173360746770168635
       vertices: []
       indices: 
       edges: []
@@ -138,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: da8e04a64583a48a38fa284bc2f2a30c
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      villager_boy_portrait 1_0: 2228167337426352930
+      juliana_0: -3629273731398517952
+      juliana_1: -9031906034488146686
+      juliana_2: -957094794494976448
+      juliana_3: -8173360746770168635
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

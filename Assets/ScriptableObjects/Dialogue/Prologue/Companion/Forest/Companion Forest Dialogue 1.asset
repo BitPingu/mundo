@@ -24,7 +24,8 @@ MonoBehaviour:
     choices: []
     redirectDialogueIndex: -1
   - charName: 
-    line: To engage in enemy combat, approach the enemy and press E.
+    line: To engage an enemy in combat, approach it until an icon appears, then press
+      E.
     reaction: 
     choices: []
     redirectDialogueIndex: -1

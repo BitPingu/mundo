@@ -12,7 +12,7 @@ public class Action : MonoBehaviour
         DialogueController.Instance.OnDialogueFinish += Finish;
     }
 
-    protected virtual void Engage()
+    protected virtual void Active()
     {
         
     }

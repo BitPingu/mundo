@@ -23,7 +23,7 @@ public class Interact : Action
             }
 
             // set delegate
-            _detectPlayer.OnAction += Engage;
+            _detectPlayer.OnAction += Active;
         }
     }
 
@@ -33,7 +33,7 @@ public class Interact : Action
         {
             Destroy(_activeIcon);
             _detectPlayer = hitInfo.GetComponent<Player>();
-            _detectPlayer.OnAction -= Engage; // unset delegate
+            _detectPlayer.OnAction -= Active; // unset delegate
             _detectPlayer.IsNearInteractable = false;
             _detectPlayer = null;
         }
@@ -55,7 +55,7 @@ public class Interact : Action
         }
     }
 
-    protected override void Engage()
+    protected override void Active()
     {
         if (_dialogue)
         {

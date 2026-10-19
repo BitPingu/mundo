@@ -1,19 +1,13 @@
 fileFormatVersion: 2
-guid: bac8fb03f3f38421da16c3e811b1a208
+guid: 713822a2cf6804dfb9717032e7c11807
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9178756841482082224
-    second: villager_boy_0
+      213: 5146088431352433170
+    second: reina_attack_2_0
   - first:
-      213: 5211533181871217907
-    second: villager_boy_1
-  - first:
-      213: 2861514025421950709
-    second: villager_boy_2
-  - first:
-      213: -3997582127691359047
-    second: villager_boy_3
+      213: -1910021509637156143
+    second: reina_attack_2_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -122,7 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: villager_boy_0
+      name: reina_attack_2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 05826c7a8418e9080800000000000000
-      internalID: -9178756841482082224
+      spriteID: 21a4285c9249a6740800000000000000
+      internalID: 5146088431352433170
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: villager_boy_1
+      name: reina_attack_2_1
       rect:
         serializedVersion: 2
         x: 16
@@ -159,52 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3fc589821d5135840800000000000000
-      internalID: 5211533181871217907
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: villager_boy_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.05}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5fec21d58d326b720800000000000000
-      internalID: 2861514025421950709
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: villager_boy_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.05}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9bc91862c3cb588c0800000000000000
-      internalID: -3997582127691359047
+      spriteID: 1d2d8b48e8d3e75e0800000000000000
+      internalID: -1910021509637156143
       vertices: []
       indices: 
       edges: []
@@ -213,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f0d1cdf737c6b48a28593d99c4ddb21a
+    spriteID: 5c94a498ed10540b48488a5db571fead
     internalID: 0
     vertices: []
     indices: 
@@ -223,10 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      villager_boy_0: -9178756841482082224
-      villager_boy_1: 5211533181871217907
-      villager_boy_2: 2861514025421950709
-      villager_boy_3: -3997582127691359047
+      reina_attack_2_0: 5146088431352433170
+      reina_attack_2_1: -1910021509637156143
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

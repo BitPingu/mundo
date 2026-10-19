@@ -24,7 +24,7 @@ public class Talk : Action
             _detectPlayer = hitInfo.GetComponent<Player>();
 
             // set delegate
-            _detectPlayer.OnAction += Engage;
+            _detectPlayer.OnAction += Active;
         }
 
         // nearby character
@@ -40,7 +40,7 @@ public class Talk : Action
         {
             Destroy(_activeIcon);
             _detectPlayer = hitInfo.GetComponent<Player>();
-            _detectPlayer.OnAction -= Engage; // unset delegate
+            _detectPlayer.OnAction -= Active; // unset delegate
             _detectPlayer = null;
         }
     }
@@ -99,7 +99,7 @@ public class Talk : Action
         }
     }
 
-    protected override void Engage()
+    protected override void Active()
     {
         if (!_character.IsNearPlayer)
             return;
@@ -107,9 +107,7 @@ public class Talk : Action
         _activeIcon.SetActive(false);
 
         if (_character.GetComponent<Companion>())
-        {
             _character.Anim.Rebind(); // TODO: workaround when using back sprites
-        }
 
         if (_character && _character.Anim)
             _character.Anim.enabled = false;

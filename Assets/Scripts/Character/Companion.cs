@@ -51,7 +51,6 @@ public class Companion : PartyBase
         Debug.Log(name + " left the party!");
     }
 
-
     private void Follow()
     {
         float distance = Vector2.Distance(Leader.transform.position, transform.position);
@@ -98,6 +97,17 @@ public class Companion : PartyBase
 
         // set current opponent
         SetCurrentOpponent(Leader.CurrentOpponent);
+    }
+
+    protected override IEnumerator CallChargeAttack()
+    {
+        // battle dialogue
+        string text = charName + " used Slit Edge on " + CurrentOpponent.charName + "!";
+        DialogueController.Instance.BattleDialogue(this, text, "");
+
+        // attack
+        yield return StartCoroutine(Attack("Charge Attack"));
+        StartCoroutine(AttackFinish());
     }
 
     private void AfterBattle()

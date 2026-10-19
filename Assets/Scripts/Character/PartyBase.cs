@@ -18,7 +18,7 @@ public class PartyBase : FighterBase
     public Bar EBar;
     public GameObject BattleHUD;
 
-    private bool _battlePrompt, _targeting, _lowHealth;
+    private bool _battlePrompt, _targeting, _chargeAttack, _lowHealth;
     public bool IsSparring { get; set; }
     protected bool _cannotSwitch { get; set; }
 
@@ -74,10 +74,28 @@ public class PartyBase : FighterBase
                         DialogueController.Instance.BattleDialogue(this, text, "show");
                         _targeting = true;
                     }
-                    else
+                    else if (!_chargeAttack)
                     {
                         StartCoroutine(CallAttack());
                         EndTurn();
+                    }
+                }
+
+                if (_input.R)
+                {
+                    if (CurrentOpponent.Allies.Count > 0 && !_targeting)
+                    {
+                        // multiple enemies
+                        string text = "Target which one?";
+                        DialogueController.Instance.BattleDialogue(this, text, "show");
+                        _targeting = true;
+                        _chargeAttack = true;
+                    }
+                    else
+                    {
+                        StartCoroutine(CallChargeAttack());
+                        EndTurn();
+                        _chargeAttack = false;
                     }
                 }
 
@@ -173,11 +191,14 @@ public class PartyBase : FighterBase
         // call base class
         base.Damage(damageAmount);
 
-        if (!_lowHealth && CurrentHealth <= MaxHealth*.25f && !IsSparring)
+        if (!_lowHealth && CurrentHealth <= MaxHealth*.25f && CurrentHealth > 0f && !IsSparring)
         {
             _lowHealth = true;
             StartCoroutine(LowHealthDialogue());
         }
+
+        if (CurrentHealth == 0)
+            Anim.Rebind(); // reset anim
     }
 
     private IEnumerator LowHealthDialogue()
@@ -188,9 +209,13 @@ public class PartyBase : FighterBase
 
     public override void Die()
     {
+        string text = charName + " was defeated!";
+        DialogueController.Instance.BattleDialogue(this, text, "");
+
         if (IsSparring)
         {
-            StartCoroutine(Defeat());
+            Anim.enabled = false;
+            FinishTurn = false;
             return;
         }
 
@@ -204,23 +229,7 @@ public class PartyBase : FighterBase
         Opponents.Clear();
 
         // set dead anim
-        Move(Vector2.zero);
         Anim.SetTrigger("Dead");
-
-        string text = charName + " was defeated!";
-        DialogueController.Instance.BattleDialogue(this, text, "");
-    }
-
-    private IEnumerator Defeat()
-    {
-        Anim.Rebind();
-
-        // for sparring matches
-        yield return new WaitForSeconds(1f);
-        Anim.enabled = false;
-
-        string text = charName + " was defeated!";
-        DialogueController.Instance.BattleDialogue(this, text, "");
     }
 
     private void Revive()
@@ -256,7 +265,7 @@ public class PartyBase : FighterBase
         else
         {
             yield return new WaitForSeconds(1f);
-            Debug.Log("Until next level: " + (_maxExp-_currentExp) + " exp");
+            // Debug.Log("Until next level: " + (_maxExp-_currentExp) + " exp");
         }
 
         EBar.GetComponent<Image>().enabled = false;
