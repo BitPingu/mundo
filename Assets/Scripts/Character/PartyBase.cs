@@ -63,7 +63,7 @@ public class PartyBase : FighterBase
                     {
                         child.gameObject.SetActive(true);
                     }
-                    BattlePrompt();
+                    BattlePrompt("What will " + charName + " do?");
                     _battlePrompt = true;
                 }
 
@@ -73,8 +73,7 @@ public class PartyBase : FighterBase
                     if (CurrentOpponent.Allies.Count > 0 && !_targeting)
                     {
                         // multiple enemies
-                        string text = "Target which one?";
-                        DialogueController.Instance.BattleDialogue(this, text, "show");
+                        BattlePrompt("Target which one?");
                         _targeting = true;
                         _attack = true;
                         BattleHUD.transform.GetChild(1).gameObject.SetActive(false);
@@ -97,8 +96,7 @@ public class PartyBase : FighterBase
                     }
                     else if (!_chargeAttack)
                     {
-                        string text = "> " + Arts[0].artName + ": " + Arts[0].description;
-                        DialogueController.Instance.BattleDialogue(this, text, "show");
+                        BattlePrompt("> " + Arts[0].artName + ": " + Arts[0].description);
                         _chargeAttack = true;
                         BattleHUD.transform.GetChild(0).gameObject.SetActive(false);
                     }
@@ -107,14 +105,13 @@ public class PartyBase : FighterBase
                         if (CurrentOpponent.Allies.Count > 0 && !_targeting)
                         {
                             // multiple enemies
-                            string text = "Target which one?";
-                            DialogueController.Instance.BattleDialogue(this, text, "show");
+                            BattlePrompt("Target which one?");
                             _targeting = true;
                         }
                         else
                         {
                             StartCoroutine(ABar.UpdateBar(_maxAP, --_currentAP));
-                            StartCoroutine(CallChargeAttack(Arts[0]));
+                            StartCoroutine(CallCombatArt(Arts[0]));
                             EndTurn();
                             _chargeAttack = false;
                         }
@@ -157,9 +154,8 @@ public class PartyBase : FighterBase
         }
     }
 
-    private void BattlePrompt()
+    private void BattlePrompt(string text)
     {
-        string text = "What will " + charName + " do?";
         if (CurrentHealth <= MaxHealth*.25f)
         {
             DialogueController.Instance.BattleDialogue(this, text, "tired");
@@ -175,12 +171,12 @@ public class PartyBase : FighterBase
         if (_noAP)
             yield break;
 
-        string text = "Not enough AP!";
-        DialogueController.Instance.BattleDialogue(this, text, "show");
+        BattlePrompt("Not enough AP!");
 
         yield return new WaitForSeconds(1f);
 
-        BattlePrompt();
+        if (BattleTurn)
+            BattlePrompt("What will " + charName + " do?");
 
         _noAP = false;
     }

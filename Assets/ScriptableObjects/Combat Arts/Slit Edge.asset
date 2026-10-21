@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   artName: Slit Edge
   description: Deals moderate damage to a single enemy and lowers its defence.
-  multiplier: 1.2
+  damageMultiplier: 1.2
+  debuffStat: Defence
+  debuffMultiplier: 1
   delay1: 0.2
   delay2: 1

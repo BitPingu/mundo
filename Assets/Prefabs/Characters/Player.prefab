@@ -991,12 +991,14 @@ MonoBehaviour:
   Level: 1
   MaxHealth: 20
   Strength: 6
+  Defence: 3
   Arts:
   - {fileID: 11400000, guid: be26d9e402aaf468ca84b67666fd3c09, type: 2}
   HBar: {fileID: 363618131193408213}
   target: {fileID: 4077321530019250279}
   _hitSound: {fileID: 8300000, guid: c9c39983af9d441278cf44370e151cf1, type: 3}
   Party: []
+  _maxAP: 3
   _maxExp: 100
   ABar: {fileID: 708196666350182123}
   EBar: {fileID: 6456204773656379936}

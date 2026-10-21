@@ -211,6 +211,8 @@ MonoBehaviour:
   Level: 1
   MaxHealth: 20
   Strength: 4
+  Defence: 1
+  Arts: []
   HBar: {fileID: 6348836242550008932}
   target: {fileID: 2831535199063017972}
   _hitSound: {fileID: 8300000, guid: 35960fccc016f4913a9c6ec5fea7c48f, type: 3}

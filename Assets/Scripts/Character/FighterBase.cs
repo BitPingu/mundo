@@ -15,6 +15,10 @@ public class FighterBase : CharacterBase
     public int MaxHealth = 20;
     public int CurrentHealth { get; set; }
     public int Strength = 4;
+    public int Defence = 2;
+    public int CurrentDefence { get; set; }
+
+    public int DebuffTurns;
 
     // combat arts
     public List<CombatArt> Arts = new List<CombatArt>();
@@ -37,6 +41,7 @@ public class FighterBase : CharacterBase
 
         // set parameters
         CurrentHealth = MaxHealth;
+        CurrentDefence = Defence;
 
         // states
         BattleState = new BattleState(this, StateMachine);
@@ -80,14 +85,16 @@ public class FighterBase : CharacterBase
         StartCoroutine(AttackFinish());
     }
 
-    protected IEnumerator CallChargeAttack(CombatArt art)
+    protected IEnumerator CallCombatArt(CombatArt art)
     {
         // battle dialogue
         string text = charName + " used " + art.artName + " on " + CurrentOpponent.charName + "!";
         DialogueController.Instance.BattleDialogue(this, text, "");
 
         // attack
-        yield return StartCoroutine(Attack("Charge Attack", art.multiplier, art.delay1, art.delay2));
+        yield return StartCoroutine(Attack("Charge Attack", art.damageMultiplier, art.delay1, art.delay2));
+        if (!string.IsNullOrEmpty(art.debuffStat))
+            yield return StartCoroutine(ApplyDebuff(art.debuffStat, art.debuffMultiplier));
         StartCoroutine(AttackFinish());
     }
 
@@ -134,6 +141,22 @@ public class FighterBase : CharacterBase
         IsAttacking = false;
     }
 
+    private IEnumerator ApplyDebuff(string stat, float multiplier)
+    {
+        if (stat.Equals("Defence"))
+        {
+            CurrentOpponent.CurrentDefence -= Mathf.Max(0, Mathf.RoundToInt(CurrentOpponent.Defence/multiplier));
+
+            // battle dialogue
+            string text = CurrentOpponent.charName + "'s Defence fell!";
+            DialogueController.Instance.BattleDialogue(this, text, "");
+
+            yield return new WaitForSeconds(2f);
+        }
+
+        CurrentOpponent.DebuffTurns = 1; // by default
+    }
+
     protected virtual IEnumerator AttackFinish()
     {
         if (CurrentOpponent.CurrentHealth == 0)
@@ -171,6 +194,13 @@ public class FighterBase : CharacterBase
             }
         }
 
+        StartCoroutine(OpponentTurn());
+    }
+
+    private IEnumerator OpponentTurn()
+    {
+        yield return StartCoroutine(CheckDebuff());
+
         // reset enemy turn
         foreach (FighterBase opponent in Opponents)
         {
@@ -187,6 +217,23 @@ public class FighterBase : CharacterBase
                 // enemy turn
                 opponent.BattleTurn = true;
                 break;
+            }
+        }
+    }
+
+    protected IEnumerator CheckDebuff()
+    {
+        if (CurrentOpponent.DebuffTurns > 0 && --CurrentOpponent.DebuffTurns == 0)
+        {
+            if (CurrentOpponent.CurrentDefence != CurrentOpponent.Defence)
+            {
+                CurrentOpponent.CurrentDefence = CurrentOpponent.Defence;
+
+                // battle dialogue
+                string text = CurrentOpponent.charName + "'s Defence returned to normal!";
+                DialogueController.Instance.BattleDialogue(this, text, "");
+
+                yield return new WaitForSeconds(2f);
             }
         }
     }
@@ -235,8 +282,11 @@ public class FighterBase : CharacterBase
 
     public virtual void Damage(int damageAmount)
     {
+        // defence
+        int reducedDamage = Mathf.Max(1, damageAmount-CurrentDefence);
+
         // prevent negative
-        int damageTaken = Mathf.Min(damageAmount, CurrentHealth);
+        int damageTaken = Mathf.Min(reducedDamage, CurrentHealth);
 
         // take damage
         CurrentHealth -= damageTaken;

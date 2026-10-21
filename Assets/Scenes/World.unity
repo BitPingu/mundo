@@ -61845,7 +61845,7 @@ Transform:
   m_GameObject: {fileID: 904777746}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.2, y: 71.6, z: 0}
+  m_LocalPosition: {x: 7.1, y: 72.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -82541,6 +82541,8 @@ MonoBehaviour:
   Level: 1
   MaxHealth: 20
   Strength: 4
+  Defence: 0
+  DebuffTurns: 0
   Arts: []
   HBar: {fileID: 19928247}
   target: {fileID: 0}

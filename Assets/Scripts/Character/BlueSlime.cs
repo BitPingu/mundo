@@ -45,7 +45,7 @@ public class BlueSlime : Enemy
             {
                 // combat art release
                 TargetOpponent(); // choose target
-                StartCoroutine(CallChargeAttack(Arts[0]));
+                StartCoroutine(CallCombatArt(Arts[0]));
 
                 // reset art cooldown time
                 _artCooldownCounter = _artCooldownTime+1;

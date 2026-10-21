@@ -212,6 +212,8 @@ MonoBehaviour:
   Level: 1
   MaxHealth: 60
   Strength: 4
+  Defence: 4
+  DebuffTurns: 0
   Arts:
   - {fileID: 11400000, guid: 600923e4d7fcd4560a2a92a97f47100e, type: 2}
   HBar: {fileID: 6348836242550008932}

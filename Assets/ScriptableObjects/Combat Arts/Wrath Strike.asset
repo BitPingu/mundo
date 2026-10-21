@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   artName: Wrath Strike
   description: Deals heavy damage to a single enemy.
-  multiplier: 2
+  damageMultiplier: 2
+  debuffStat: 
+  debuffMultiplier: 0
   delay1: 0.7
   delay2: 1
