@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Reina
-    line: We did it! Let's keep on going.
+    line: We strike first! Use the arrow keys to choose who attacks first.
     reaction: 
     choices: []
     redirectDialogueIndex: -1

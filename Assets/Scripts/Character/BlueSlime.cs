@@ -3,12 +3,6 @@ using UnityEngine;
 
 public class BlueSlime : Enemy
 {
-    protected override void Awake()
-    {
-        // call base class
-        base.Awake();
-    }
-
     public override void Idle()
     {
         // call base class
@@ -55,7 +49,7 @@ public class BlueSlime : Enemy
             else
             {
                 TargetOpponent(); // choose target
-                StartCoroutine(CallAttack());
+                StartCoroutine(CallAttack(1f, .3f, .2f));
                 EndTurn();
             }
         }
@@ -69,7 +63,7 @@ public class BlueSlime : Enemy
         string text = charName + " is charging up!";
         DialogueController.Instance.BattleDialogue(this, text, "");
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
 
         PassTurn();
     }

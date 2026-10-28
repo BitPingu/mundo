@@ -85,7 +85,8 @@ public class CharacterBase : MonoBehaviour
         RB.linearVelocity = inputVector * _moveSpeed;
 
         // animate
-        Anim.SetFloat("Movement", RB.linearVelocity.magnitude / _moveSpeed);
+        if (Anim.runtimeAnimatorController)
+            Anim.SetFloat("Movement", RB.linearVelocity.magnitude / _moveSpeed);
     }
 
     public void Face(CharacterBase character)

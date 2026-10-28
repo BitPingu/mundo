@@ -2,12 +2,6 @@ using UnityEngine;
 
 public class Slime : Enemy
 {
-    protected override void Awake()
-    {
-        // call base class
-        base.Awake();
-    }
-
     public override void Idle()
     {
         // call base class
@@ -28,7 +22,7 @@ public class Slime : Enemy
         if (BattleTurn)
         {
             TargetOpponent(); // choose target
-            StartCoroutine(CallAttack());
+            StartCoroutine(CallAttack(1f, .3f, .2f));
             EndTurn();
         }
     }

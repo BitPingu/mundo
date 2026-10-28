@@ -53,6 +53,7 @@ MonoBehaviour:
   _slimeDialogue: {fileID: 11400000, guid: 76d4367af9a9a484d91bd1583a842004, type: 2}
   _companionDialogue2: {fileID: 11400000, guid: f863bc52012bb4af497d7b5441180c12, type: 2}
   _outBoundsDialogue: {fileID: 11400000, guid: c31b4e231ab9a4ccdad50cc533309b79, type: 2}
+  _firstBattleDialogue: {fileID: 11400000, guid: 1cc462169f19841e88050ffc96c06270, type: 2}
   _slimeDialogue2: {fileID: 11400000, guid: 0feb00a6f53514461b077f991e230b3d, type: 2}
   _companionDialogue3: {fileID: 11400000, guid: 2fb32ec0264ee4c8d8df4ffdad8dd193, type: 2}
   _chestDialogue: {fileID: 11400000, guid: 4703ec5f1568143c7b118f96bfe57103, type: 2}

@@ -7,8 +7,8 @@ public class Companion : PartyBase
     public Player Leader { get; set; }
 
     [SerializeField] private float _followDistance = 1f;
-    public Dialogue EventDialogue { get; set; }
 
+    public Dialogue EventDialogue { get; set; }
     [SerializeField] protected Dialogue _easyDialogue, _hardDialogue;
 
     protected override void Start()
@@ -97,6 +97,65 @@ public class Companion : PartyBase
 
         // set current opponent
         SetCurrentOpponent(Leader.CurrentOpponent);
+    }
+
+    public override void Battle()
+    {
+        // companion only battle options go here
+        if (BattleTurn)
+        {
+            if (!Leader)
+            {
+                // act as enemy
+                StartCoroutine(CallAttack(1f, .1f, .2f));
+                BattleTurn = false;
+            }
+            else
+            {
+                // call base class
+                base.Battle();
+            }
+        }
+    }
+
+    public override void Damage(int damageAmount)
+    {
+        // call base class
+        base.Damage(damageAmount);
+
+        if (!_lowHealth && CurrentHealth <= MaxHealth*.25f && CurrentHealth > 0f && Leader)
+        {
+            _lowHealth = true;
+            StartCoroutine(LowHealthDialogue());
+        }
+
+        if (CurrentHealth == 0)
+            Anim.Rebind(); // reset anim
+    }
+
+    public override void Die()
+    {
+        string text = charName + " was defeated!";
+        DialogueController.Instance.BattleDialogue(this, text, "");
+
+        if (!Leader)
+        {
+            Anim.enabled = false;
+            FinishTurn = false;
+            return;
+        }
+
+        foreach (FighterBase ally in Allies)
+            ally.Allies.Remove(this);
+
+        // exit battle
+        CurrentOpponent.Opponents.Remove(this);
+        foreach (FighterBase opponentAlly in CurrentOpponent.Allies)
+            opponentAlly.Opponents.Remove(this);
+        Opponents.Clear();
+
+        // set dead anim
+        Anim.SetTrigger("Dead");
     }
 
     private void AfterBattle()

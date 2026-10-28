@@ -17,8 +17,9 @@ public class FighterBase : CharacterBase
     public int Strength = 4;
     public int Defence = 2;
     public int CurrentDefence { get; set; }
+    public int RewardExp = 0;
 
-    public int DebuffTurns;
+    protected int DebuffTurns;
 
     // combat arts
     public List<CombatArt> Arts = new List<CombatArt>();
@@ -73,14 +74,14 @@ public class FighterBase : CharacterBase
         
     }
 
-    protected IEnumerator CallAttack()
+    protected IEnumerator CallAttack(float multiplier, float delay1, float delay2)
     {
         // battle dialogue
         string text = charName + " attacks " + CurrentOpponent.charName + "!";
         DialogueController.Instance.BattleDialogue(this, text, "");
 
         // attack
-        yield return StartCoroutine(Attack("Attack", 1f, .1f, .2f));
+        yield return StartCoroutine(Attack("Attack", multiplier, delay1, delay2));
         yield return new WaitForSeconds(.5f);
         StartCoroutine(AttackFinish());
     }
@@ -151,7 +152,7 @@ public class FighterBase : CharacterBase
             string text = CurrentOpponent.charName + "'s Defence fell!";
             DialogueController.Instance.BattleDialogue(this, text, "");
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1.5f);
         }
 
         CurrentOpponent.DebuffTurns = 1; // by default
@@ -233,7 +234,7 @@ public class FighterBase : CharacterBase
                 string text = CurrentOpponent.charName + "'s Defence returned to normal!";
                 DialogueController.Instance.BattleDialogue(this, text, "");
 
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(1.5f);
             }
         }
     }
@@ -329,8 +330,28 @@ public class FighterBase : CharacterBase
 
     public virtual void Die()
     {
-        foreach (FighterBase ally in Allies)
-            ally.Allies.Remove(this);
+
+    }
+
+    protected IEnumerator Fade()
+    {
+        // set color
+        Sprite.material.SetFloat("_FlashAmount", 1f);
+        float flashTime = 1.5f;
+
+        float currentFlashAmount;
+        float elapsedTime = 0f;
+        while (elapsedTime < flashTime)
+        {
+            elapsedTime += Time.deltaTime;
+            // lerp flash amount
+            currentFlashAmount = Mathf.Lerp(0f, 1f, (elapsedTime / flashTime));
+            // set flash amount
+            Sprite.material.SetFloat("_Alpha", currentFlashAmount);
+            yield return null;
+        }
+
+        Destroy(gameObject);
     }
 
     public void Heal(int healAmount)

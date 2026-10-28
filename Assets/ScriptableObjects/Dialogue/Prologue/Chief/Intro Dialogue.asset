@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a0ebe69b3164f6e91f94a88da27730, type: 3}
+  m_Name: Intro Dialogue
+  m_EditorClassIdentifier: 
+  Lines:
+  - charName: 
+    line: Hello! Welcome to Mundo!
+    reaction: 
+    choices: []
+    redirectDialogueIndex: 0
+  - charName: Chief
+    line: My name is Vandham. But everyone calls me Chief.
+    reaction: 
+    choices: []
+    redirectDialogueIndex: 0
+  - charName: Chief
+    line: I'll be your guide to this mysterious world known as Mundo.
+    reaction: 
+    choices: []
+    redirectDialogueIndex: 0
+  - charName: Chief
+    line: This world is widely inhabited by creatures.
+    reaction: 
+    choices: []
+    redirectDialogueIndex: 0
+  - charName: Chief
+    line: You will play as a young man named Ely.
+    reaction: 
+    choices: []
+    redirectDialogueIndex: 0
+  - charName: Chief
+    line: Ely! Are you ready?
+    reaction: 
+    choices: []
+    redirectDialogueIndex: 0
+  - charName: Chief
+    line: Your very own tale of grand adventure is about to unfold.
+    reaction: 
+    choices: []
+    redirectDialogueIndex: 0
+  - charName: Chief
+    line: Fun experiences, difficult experiences, there's so much waiting for you!
+    reaction: 
+    choices: []
+    redirectDialogueIndex: 0
+  - charName: Chief
+    line: Dreams! Adventure! Let's go to Mundo!
+    reaction: 
+    choices: []
+    redirectDialogueIndex: 0
+  - charName: Chief
+    line: I'll see you later!
+    reaction: 
+    choices: []
+    redirectDialogueIndex: 0

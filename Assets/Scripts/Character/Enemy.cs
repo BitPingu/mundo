@@ -5,17 +5,20 @@ public class Enemy : FighterBase
 {
     public Vector3 SpawnPoint;
     [SerializeField] private float _spawnRange = 3f;
+
     private Vector2 _curDir, _curPoint;
+
     private float _moveCounter, _waitCounter, _waitTime;
     [SerializeField] private float _minWaitTime = 3f, _maxWaitTime = 5f;
+
     protected int _artCooldownCounter;
     [SerializeField] protected int _artCooldownTime;
+
     protected bool _chargeAttack;
     public bool CannotMove { get; set; }
 
     public delegate void EngagePlayer(Collider2D hitInfo);
     public EngagePlayer OnEngagePlayer;
-
 
     protected override void Start()
     {
@@ -191,34 +194,13 @@ public class Enemy : FighterBase
 
     public override void Die()
     {
-        // call base class
-        base.Die();
+        foreach (FighterBase ally in Allies)
+            ally.Allies.Remove(this);
 
         StartCoroutine(Fade());
 
         string text = "Enemy " + charName + " was defeated!";
         DialogueController.Instance.BattleDialogue(this, text, "");
-    }
-
-    private IEnumerator Fade()
-    {
-        // set color
-        Sprite.material.SetFloat("_FlashAmount", 1f);
-        float flashTime = 1.5f;
-
-        float currentFlashAmount;
-        float elapsedTime = 0f;
-        while (elapsedTime < flashTime)
-        {
-            elapsedTime += Time.deltaTime;
-            // lerp flash amount
-            currentFlashAmount = Mathf.Lerp(0f, 1f, (elapsedTime / flashTime));
-            // set flash amount
-            Sprite.material.SetFloat("_Alpha", currentFlashAmount);
-            yield return null;
-        }
-
-        Destroy(gameObject);
     }
 
     // void OnDrawGizmosSelected()

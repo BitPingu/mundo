@@ -8,19 +8,22 @@ public class Intro : EventBase
     public Companion CompanionChar { get; set; }
     public Villager Mom { get; set; }
     public Villager Chief { get; set; }
+    public Dummy DummyChar { get; set; }
     public GameObject House { get; set; }
     public GameObject HouseIndoor { get; set; }
     public Boundary MatchBoundary { get; set; }
     public Destination MomTrigger { get; set; }
     public Destination CompanionTrigger { get; set; }
     public Destination ChiefTrigger { get; set; }
-    [SerializeField] private GameObject _reactIcon;
+    [SerializeField] private GameObject _reactIcon, _dummy;
     [SerializeField] private Dialogue _wakeDialogue, _momDialogue, _meetDialogue, _companionDialogue, 
         _outBoundsDialogue, _reachDialogue, _chiefDialogue, _damageDialogue, _chiefDialogue2, 
-        _restoreDialogue, _chiefDialogue3, _afterMatchDialogue;
+        _restoreDialogue, _chiefDialogue3, _chiefDialogue4, _chiefDialogue5, _chiefDialogue6, 
+        _chiefDialogue7, _afterMatchDialogue;
     private bool _momEncounter, _companionEncounter, _entered, _chiefEncounter, _moveToMatch, 
-        _matchReady, _chiefDialogueActive, _companionHurt, _chiefDialogue2Active, _moveToChief, 
-        _healthRestored, _moveBack, _moveBack2, _origPos, _chiefDialogue3Active, _introEnd;
+        _matchReady, _chiefDialogueActive, _sparringMatch, _companionHurt, _chiefDialogue2Active, 
+        _moveToChief, _moveBack, _moveBack2, _startDummy, _placeDummy, _placeDummy2, _combatArt1,
+        _tutorialMatch, _combatArt2, _finishTutorial, _chiefDialogueFinish, _introEnd;
     private int _inPos;
 
     private void Start()
@@ -36,6 +39,10 @@ public class Intro : EventBase
         DialogueController.Instance.OnBattleDialogueFinish += FinishMatch;
         DialogueController.Instance.OnDialogueFinish += RestoreHealth;
         DialogueController.Instance.OnDialogueFinish += RestoreHealth2;
+        DialogueController.Instance.OnDialogueFinish += PlaceDummy;
+        DialogueController.Instance.OnDialogueFinish += CombatArt1;
+        DialogueController.Instance.OnBattleDialogueFinish += FinishTutorial;
+        DialogueController.Instance.OnDialogueFinish += QuestDialogue;
         DialogueController.Instance.OnDialogueFinish += ChiefReturns;
         DialogueController.Instance.OnDialogueFinish += FinishEvent;
 
@@ -111,8 +118,9 @@ public class Intro : EventBase
             }
 
             // setup match
-            if (_chiefEncounter && _inPos == 2 && !_matchReady)
+            if (_matchReady && _inPos == 2)
             {
+                _matchReady = false;
                 _inPos = 0;
 
                 CompanionChar.Anim.Rebind();
@@ -127,7 +135,6 @@ public class Intro : EventBase
 
                 // start chief dialogue
                 DialogueController.Instance.StartDialogue(_chiefDialogue, new List<CharacterBase>{Chief, CompanionChar});
-                _matchReady = true;
                 _chiefDialogueActive = true;
             }
 
@@ -139,8 +146,9 @@ public class Intro : EventBase
             }
 
             // after match
-            if (_moveToChief && _inPos == 2 && !_healthRestored)
+            if (_moveToChief && _inPos == 2)
             {
+                _moveToChief = false;
                 _inPos = 0;
 
                 CompanionChar.Anim.Rebind();
@@ -159,13 +167,13 @@ public class Intro : EventBase
 
                 // restore dialogue
                 DialogueController.Instance.StartDialogue(_restoreDialogue, new List<CharacterBase>{});
-                _healthRestored = true;
                 _moveBack = true;
             }
 
             // return to original position
-            if (_moveBack2 && _inPos == 2 && !_origPos)
+            if (_moveBack2 && _inPos == 2)
             {
+                _moveBack2 = false;
                 _inPos = 0;
 
                 CompanionChar.Anim.Rebind();
@@ -178,10 +186,41 @@ public class Intro : EventBase
                 PlayerChar.Face(Chief);
                 CompanionChar.Face(Chief);
 
-                // start quest dialogue
+                // start combat art dialogue
                 DialogueController.Instance.StartDialogue(_chiefDialogue3, new List<CharacterBase>{Chief});
-                StartCoroutine(DelayNextDialogue2());
-                _origPos = true;
+                _startDummy = true;
+            }
+
+            // place dummy
+            if (_placeDummy && _inPos == 1)
+            {
+                _placeDummy = false;
+                _inPos = 0;
+
+                Vector2 dummyPos = new Vector2(Chief.transform.position.x, Chief.transform.position.y-.1f);
+                DummyChar = Instantiate(_dummy, dummyPos, Quaternion.identity).GetComponent<Dummy>();
+
+                StartCoroutine(PlaceDummy2());
+            }
+
+            // after place dummy
+            if (_placeDummy2 && _inPos == 1)
+            {
+                _placeDummy2 = false;
+                _inPos = 0;
+
+                Chief.StateMachine.Initialize(Chief.IdleState);
+
+                // start reina combat art dialogue
+                DialogueController.Instance.StartDialogue(_chiefDialogue4, new List<CharacterBase>{Chief, CompanionChar});
+                _combatArt1 = true;
+            }
+
+            // ely combat art dialogue
+            if (!_combatArt2 && DummyChar && PlayerChar.BattleTurn)
+            {
+                StartCoroutine(CombatArt2());
+                _combatArt2 = true;
             }
         }
     }
@@ -302,11 +341,12 @@ public class Intro : EventBase
         CompanionChar.Anim.enabled = true;
 
         // before battle
-        StartCoroutine(GoToChief(PlayerChar, new Vector2(Chief.transform.position.x+.65f, Chief.transform.position.y-1f)));
-        StartCoroutine(GoToChief(CompanionChar, new Vector2(Chief.transform.position.x-.65f, Chief.transform.position.y-1f)));
+        StartCoroutine(GoTo(PlayerChar, new Vector2(Chief.transform.position.x+.65f, Chief.transform.position.y-1f)));
+        StartCoroutine(GoTo(CompanionChar, new Vector2(Chief.transform.position.x-.65f, Chief.transform.position.y-1f)));
+        _matchReady = true;
     }
 
-    private IEnumerator GoToChief(CharacterBase character, Vector3 destination)
+    private IEnumerator GoTo(CharacterBase character, Vector3 destination)
     {
         // move to battle position
         float distance = Vector2.Distance(destination, character.transform.position);
@@ -319,7 +359,6 @@ public class Intro : EventBase
         }
 
         character.Move(Vector2.zero);
-        character.Face(Chief);
 
         _inPos++;
     }
@@ -337,7 +376,9 @@ public class Intro : EventBase
         CompanionChar.Anim.enabled = true;
 
         CompanionChar.Leave(PlayerChar);
-        CompanionChar.IsSparring = true;
+
+        PlayerChar.DisableArts = true;
+        CompanionChar.DisableArts = true;
 
         PlayerChar.Opponents.Add(CompanionChar);
         CompanionChar.Opponents.Add(PlayerChar);
@@ -350,6 +391,8 @@ public class Intro : EventBase
 
         // camera
         CameraController.Instance.follow = false;
+
+        _sparringMatch = true;
     }
 
     private IEnumerator SparringDialogue()
@@ -362,13 +405,18 @@ public class Intro : EventBase
 
     private void FinishMatch()
     {
-        if (!CompanionChar.IsSparring)
+        if (!_sparringMatch)
             return;
+        
+        _sparringMatch = false;
 
         PlayerChar.Opponents.Clear();
         CompanionChar.Opponents.Clear();
 
-        CompanionChar.IsSparring = false;
+        CompanionChar.Join(PlayerChar); // rejoin party
+
+        PlayerChar.DisableArts = false;
+        CompanionChar.DisableArts = false;
 
         PlayerChar.StateMachine.End(); // stop movement (and combat)
 
@@ -394,8 +442,8 @@ public class Intro : EventBase
         CompanionChar.Anim.enabled = true;
 
         // go to chief
-        StartCoroutine(GoToChief(PlayerChar, new Vector2(Chief.transform.position.x+.2f, Chief.transform.position.y-.2f)));
-        StartCoroutine(GoToChief(CompanionChar, new Vector2(Chief.transform.position.x-.2f, Chief.transform.position.y-.2f)));
+        StartCoroutine(GoTo(PlayerChar, new Vector2(Chief.transform.position.x+.2f, Chief.transform.position.y-.2f)));
+        StartCoroutine(GoTo(CompanionChar, new Vector2(Chief.transform.position.x-.2f, Chief.transform.position.y-.2f)));
         _moveToChief = true;
     }
 
@@ -409,23 +457,122 @@ public class Intro : EventBase
         CompanionChar.Anim.enabled = true;
 
         // return
-        StartCoroutine(GoToChief(PlayerChar, new Vector2(Chief.transform.position.x+.65f, Chief.transform.position.y-1f)));
-        StartCoroutine(GoToChief(CompanionChar, new Vector2(Chief.transform.position.x-.65f, Chief.transform.position.y-1f)));
+        StartCoroutine(GoTo(PlayerChar, new Vector2(Chief.transform.position.x+.65f, Chief.transform.position.y-1f)));
+        StartCoroutine(GoTo(CompanionChar, new Vector2(Chief.transform.position.x-.65f, Chief.transform.position.y-1f)));
         _moveBack2 = true;
+    }
+
+    private void PlaceDummy()
+    {
+        if (!_startDummy)
+            return;
+        
+        _startDummy = false;
+
+        Chief.StateMachine.End();
+        StartCoroutine(GoTo(Chief, new Vector2(Chief.transform.position.x, PlayerChar.transform.position.y)));
+        _placeDummy = true;
+    }
+
+    private IEnumerator PlaceDummy2()
+    {
+        yield return new WaitForSeconds(.4f);
+        StartCoroutine(GoTo(Chief, new Vector2(15.53f,-2.53f)));
+        _placeDummy2 = true;
+    }
+
+    private void CombatArt1()
+    {
+        if (!_combatArt1)
+            return;
+        
+        _combatArt1 = false;
+
+        PlayerChar.StateMachine.Initialize(PlayerChar.IdleState);
+        CompanionChar.StateMachine.Initialize(CompanionChar.IdleState);
+        CompanionChar.Anim.enabled = true;
+
+        PlayerChar.DisableAttacks = true;
+        PlayerChar.DisableSwitch = true;
+        CompanionChar.DisableAttacks = true;
+        CompanionChar.DisableSwitch = true;
+
+        PlayerChar.Opponents.Add(DummyChar);
+        CompanionChar.Opponents.Add(DummyChar);
+        DummyChar.Opponents.AddRange(new List<FighterBase>{PlayerChar, CompanionChar});
+
+        PlayerChar.SetCurrentOpponent(DummyChar);
+        CompanionChar.SetCurrentOpponent(DummyChar);        
+
+        CompanionChar.BattleTurn = true;
+
+        CameraController.Instance.follow = false;
+
+        _tutorialMatch = true;
+    }
+
+    private IEnumerator CombatArt2()
+    {
+        yield return new WaitForSeconds(1f);
+
+        // dialogue during battle
+        SecondaryDialogueController.Instance.StartDialogue(_chiefDialogue5, new List<CharacterBase>{Chief}, 3f);
+    }
+
+    private void FinishTutorial()
+    {
+        if (!_tutorialMatch)
+            return;
+
+        _tutorialMatch = false;
+
+        PlayerChar.DisableAttacks = false;
+        PlayerChar.DisableSwitch = false;
+        CompanionChar.DisableAttacks = false;
+        CompanionChar.DisableSwitch = false;
+
+        PlayerChar.StateMachine.End(); // stop movement (and combat)
+        CompanionChar.StateMachine.End(); // stop movement (and combat)
+
+        CompanionChar.Anim.Rebind();
+        CompanionChar.Anim.enabled = false;
+
+        StartCoroutine(DelayNextDialogue2());
     }
 
     private IEnumerator DelayNextDialogue2()
     {
         yield return new WaitForSeconds(.4f);
-        _chiefDialogue3Active = true;
+
+        // start dialogue
+        DialogueController.Instance.StartDialogue(_chiefDialogue6, new List<CharacterBase>{Chief, CompanionChar});
+        _finishTutorial = true;
+    }
+
+    private void QuestDialogue()
+    {
+        if (!_finishTutorial)
+            return;
+
+        _finishTutorial = false;
+
+        // start dialogue
+        DialogueController.Instance.StartDialogue(_chiefDialogue7, new List<CharacterBase>{Chief});
+        StartCoroutine(ChiefDialogueFinish());
+    }
+
+    private IEnumerator ChiefDialogueFinish()
+    {
+        yield return new WaitForSeconds(.4f);
+        _chiefDialogueFinish = true;
     }
 
     private void ChiefReturns()
     {
-        if (!_chiefDialogue3Active)
+        if (!_chiefDialogueFinish)
             return;
 
-        _chiefDialogue3Active = false;
+        _chiefDialogueFinish = false;
 
         Chief.StateMachine.End();
         StartCoroutine(MoveChief());
@@ -498,6 +645,10 @@ public class Intro : EventBase
         DialogueController.Instance.OnBattleDialogueFinish -= FinishMatch;
         DialogueController.Instance.OnDialogueFinish -= RestoreHealth;
         DialogueController.Instance.OnDialogueFinish -= RestoreHealth2;
+        DialogueController.Instance.OnDialogueFinish -= PlaceDummy;
+        DialogueController.Instance.OnDialogueFinish -= CombatArt1;
+        DialogueController.Instance.OnBattleDialogueFinish -= FinishTutorial;
+        DialogueController.Instance.OnDialogueFinish -= QuestDialogue;
         DialogueController.Instance.OnDialogueFinish -= ChiefReturns;
         DialogueController.Instance.OnDialogueFinish -= FinishEvent;
     }

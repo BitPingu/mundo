@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Reina
-    line: Oh no, it's an ambush!
-    reaction: surprised
+    line: We need to find out where these slimes are coming from.
+    reaction: 
     choices: []
     redirectDialogueIndex: -1

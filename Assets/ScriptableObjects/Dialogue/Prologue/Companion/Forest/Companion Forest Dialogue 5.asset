@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Reina
-    line: We need to find out where these slimes are coming from.
+    line: We did it! Let's keep on going.
     reaction: 
     choices: []
     redirectDialogueIndex: -1

@@ -14,35 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Chief
-    line: Now then, you two have proven yourselves ready. I have an assignment for
-      you both.
+    line: You two have a good grasp of the fundamentals. But your usual attacks alone
+      won't be enough.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Chief
-    line: Recently, the slimes have grown increasingly restless in the nearby forest.
-    reaction: 
-    choices: []
-    redirectDialogueIndex: -1
-  - charName: Chief
-    line: With so many roaming around, they pose a serious threat to the safety of
-      our village.
-    reaction: 
-    choices: []
-    redirectDialogueIndex: -1
-  - charName: Chief
-    line: I want you two to investigate the forest and determine what is causing
-      this.
-    reaction: 
-    choices: []
-    redirectDialogueIndex: -1
-  - charName: Chief
-    line: Report back to me when you have finished. I trust that you two will succeed.
-    reaction: 
-    choices: []
-    redirectDialogueIndex: -1
-  - charName: Chief
-    line: May the gods keep you well.
+    line: Out there, you'll face enemies that require you to work together. That's
+      where Combat Arts come in.
     reaction: 
     choices: []
     redirectDialogueIndex: -1

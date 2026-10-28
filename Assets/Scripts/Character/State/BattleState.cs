@@ -23,6 +23,10 @@ public class BattleState : StateBase
 
         // show health bar
         _fighter.HBar.gameObject.GetComponent<Image>().enabled = true;
+
+        // show action bar
+        if (_fighter.GetComponent<PartyBase>() && !_fighter.GetComponent<PartyBase>().DisableArts)
+            _fighter.GetComponent<PartyBase>().ABar.GetComponent<Image>().enabled = true;
     }
 
     // code that runs when we exit the state
@@ -36,6 +40,10 @@ public class BattleState : StateBase
 
         // hide health bar
         _fighter.HBar.gameObject.GetComponent<Image>().enabled = false;
+
+        // hide action bar
+        if (_fighter.GetComponent<PartyBase>())
+            _fighter.GetComponent<PartyBase>().ABar.GetComponent<Image>().enabled = false;
     }
 
     public override void FrameUpdate()

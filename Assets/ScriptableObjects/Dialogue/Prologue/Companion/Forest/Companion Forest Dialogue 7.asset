@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Reina
-    line: We're facing multiple enemies this time! Use the arrow keys to target one.
-    reaction: 
+    line: Oh no, it's an ambush!
+    reaction: surprised
     choices: []
     redirectDialogueIndex: -1

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2618556916465876722}
   - component: {fileID: 7277077499189231271}
   - component: {fileID: 2139543103515026167}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 5290441918224714513}
   - component: {fileID: 2023605722811066744}
   - component: {fileID: 7171911943853123272}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: AttackImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 5441250371109307068}
   - component: {fileID: 5672836430530505984}
   - component: {fileID: 2618957068634860166}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: CombatArtImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 8794797586606270969}
   - component: {fileID: 466991920782986495}
   - component: {fileID: 7930124001438856986}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 2555184251389138136}
   - component: {fileID: 1500854735158663833}
   - component: {fileID: 708196666350182123}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: ActionBarImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -433,7 +433,7 @@ GameObject:
   - component: {fileID: 690974544495986677}
   - component: {fileID: 4605573332490622664}
   - component: {fileID: 6456204773656379936}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: ExpBarImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -551,7 +551,7 @@ GameObject:
   - component: {fileID: 6693586847814020711}
   - component: {fileID: 552779802846150216}
   - component: {fileID: 3788134972525458700}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: ItemIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -627,7 +627,7 @@ GameObject:
   - component: {fileID: 3669268368398887804}
   - component: {fileID: 3610397485579441945}
   - component: {fileID: 363618131193408213}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: HealthBarImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -751,7 +751,7 @@ GameObject:
   - component: {fileID: 927640501372081843}
   - component: {fileID: 1737939773625099332}
   - component: {fileID: 2060143471550759656}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -992,6 +992,7 @@ MonoBehaviour:
   MaxHealth: 20
   Strength: 6
   Defence: 3
+  DebuffTurns: 0
   Arts:
   - {fileID: 11400000, guid: be26d9e402aaf468ca84b67666fd3c09, type: 2}
   HBar: {fileID: 363618131193408213}
@@ -1043,7 +1044,7 @@ GameObject:
   - component: {fileID: 7888119487479119912}
   - component: {fileID: 400709218866717882}
   - component: {fileID: 8378369249827240465}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: ExpBarCANVAS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1145,7 +1146,7 @@ GameObject:
   - component: {fileID: 5266770161684259928}
   - component: {fileID: 3216919154628295624}
   - component: {fileID: 2971346873593252518}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: InventoryCANVAS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1247,7 +1248,7 @@ GameObject:
   - component: {fileID: 1046853878157382468}
   - component: {fileID: 1287482863564173155}
   - component: {fileID: 7418992185650967612}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: ActionBarCANVAS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1349,7 +1350,7 @@ GameObject:
   - component: {fileID: 6946394037425152179}
   - component: {fileID: 6930505131665280408}
   - component: {fileID: 8230407257525611143}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: HealthBarCANVAS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1451,7 +1452,7 @@ GameObject:
   - component: {fileID: 339914761514553411}
   - component: {fileID: 5765925537783959381}
   - component: {fileID: 39956361297134275}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: BattleHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1552,7 +1553,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3642105116027711487}
   - component: {fileID: 4077321530019250279}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: target
   m_TagString: Untagged
   m_Icon: {fileID: 0}

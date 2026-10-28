@@ -20,9 +20,11 @@ public class PartyBase : FighterBase
     public Bar ABar, EBar;
     public GameObject BattleHUD;
 
-    private bool _battlePrompt, _noAP, _targeting, _attack, _chargeAttack, _lowHealth;
-    public bool IsSparring { get; set; }
-    protected bool _cannotSwitch { get; set; }
+    private bool _battlePrompt, _noAP, _targeting, _attack, _chargeAttack;
+    protected bool _lowHealth;
+    public bool DisableAttacks { get; set; }
+    public bool DisableArts { get; set; }
+    public bool DisableSwitch { get; set; }
 
     [SerializeField] protected Dialogue _levelDialogue, _lowHealthDialogue;
 
@@ -46,110 +48,103 @@ public class PartyBase : FighterBase
         // call base class
         base.Battle();
 
-        foreach (PartyBase member in Party)
-            member.ABar.GetComponent<Image>().enabled = true;
-
         // party member turn
         if (BattleTurn)
         {
-            if (!IsSparring)
+            // battle dialogue
+            if (!_battlePrompt)
             {
-                // battle dialogue
-                if (!_battlePrompt)
+                // show HUD
+                BattleHUD.SetActive(true);
+                foreach (Transform child in BattleHUD.transform)
                 {
-                    // show HUD
-                    BattleHUD.SetActive(true);
-                    foreach (Transform child in BattleHUD.transform)
-                    {
-                        child.gameObject.SetActive(true);
-                    }
-                    BattlePrompt("What will " + charName + " do?");
-                    _battlePrompt = true;
+                    child.gameObject.SetActive(true);
                 }
+                BattlePrompt("What will " + charName + " do?");
+                _battlePrompt = true;
 
-                // attack
-                if (_input.E && !_chargeAttack)
+                if (DisableAttacks)
+                    BattleHUD.transform.GetChild(0).gameObject.SetActive(false);
+                if (DisableArts)
+                    BattleHUD.transform.GetChild(1).gameObject.SetActive(false);
+            }
+
+            // attack
+            if (_input.E && !_chargeAttack && !DisableAttacks)
+            {
+                if (CurrentOpponent.Allies.Count > 0 && !_targeting)
+                {
+                    // multiple enemies
+                    BattlePrompt("Target which one?");
+                    _targeting = true;
+                    _attack = true;
+                    BattleHUD.transform.GetChild(1).gameObject.SetActive(false);
+                }
+                else
+                {
+                    StartCoroutine(CallAttack(1f, .1f, .2f));
+                    EndTurn();
+                    _attack = false;
+                }
+            }
+
+            // combat art
+            if (_input.R && !_attack && !DisableArts)
+            {
+                if (_currentAP == 0)
+                {
+                    StartCoroutine(NoAP());
+                    _noAP = true;
+                }
+                else if (!_chargeAttack)
+                {
+                    BattlePrompt("> " + Arts[0].artName + ": " + Arts[0].description);
+                    _chargeAttack = true;
+                    BattleHUD.transform.GetChild(0).gameObject.SetActive(false);
+                }
+                else
                 {
                     if (CurrentOpponent.Allies.Count > 0 && !_targeting)
                     {
                         // multiple enemies
                         BattlePrompt("Target which one?");
                         _targeting = true;
-                        _attack = true;
-                        BattleHUD.transform.GetChild(1).gameObject.SetActive(false);
                     }
                     else
                     {
-                        StartCoroutine(CallAttack());
+                        StartCoroutine(ABar.UpdateBar(_maxAP, --_currentAP));
+                        StartCoroutine(CallCombatArt(Arts[0]));
                         EndTurn();
-                        _attack = false;
-                    }
-                }
-
-                // combat art
-                if (_input.R && !_attack)
-                {
-                    if (_currentAP == 0)
-                    {
-                        StartCoroutine(NoAP());
-                        _noAP = true;
-                    }
-                    else if (!_chargeAttack)
-                    {
-                        BattlePrompt("> " + Arts[0].artName + ": " + Arts[0].description);
-                        _chargeAttack = true;
-                        BattleHUD.transform.GetChild(0).gameObject.SetActive(false);
-                    }
-                    else
-                    {
-                        if (CurrentOpponent.Allies.Count > 0 && !_targeting)
-                        {
-                            // multiple enemies
-                            BattlePrompt("Target which one?");
-                            _targeting = true;
-                        }
-                        else
-                        {
-                            StartCoroutine(ABar.UpdateBar(_maxAP, --_currentAP));
-                            StartCoroutine(CallCombatArt(Arts[0]));
-                            EndTurn();
-                            _chargeAttack = false;
-                        }
-                    }
-                }
-
-                // switch
-                if (!_attack && !_chargeAttack && !_cannotSwitch && Allies.Count > 0 && !Allies[0].FinishTurn 
-                    && (_input.Right || _input.Left))
-                {
-                    StartCoroutine(SwitchTurn());
-                }
-
-                // target
-                if (_targeting)
-                {
-                    // target icon
-                    CurrentOpponent.target.enabled = true;
-                    if (_input.Right || _input.Left)
-                    {
-                        CurrentOpponent.target.enabled = false;
-
-                        // target selected opponent
-                        SetCurrentOpponent(CurrentOpponent.Allies[0]);
-                        foreach (FighterBase ally in Allies)
-                        {
-                            ally.SetCurrentOpponent(CurrentOpponent);
-                        }
-
-                        CurrentOpponent.target.enabled = true;
+                        _chargeAttack = false;
                     }
                 }
             }
-            else
+
+            // switch
+            if (!_attack && !_chargeAttack && !DisableSwitch && Allies.Count > 0 && !Allies[0].FinishTurn 
+                && (_input.Right || _input.Left))
             {
-                // act as enemy
-                StartCoroutine(CallAttack());
-                BattleTurn = false;
+                StartCoroutine(SwitchTurn());
+            }
+
+            // target
+            if (_targeting)
+            {
+                // target icon
+                CurrentOpponent.target.enabled = true;
+                if (_input.Right || _input.Left)
+                {
+                    CurrentOpponent.target.enabled = false;
+
+                    // target selected opponent
+                    SetCurrentOpponent(CurrentOpponent.Allies[0]);
+                    foreach (FighterBase ally in Allies)
+                    {
+                        ally.SetCurrentOpponent(CurrentOpponent);
+                    }
+
+                    CurrentOpponent.target.enabled = true;
+                }
             }
         }
     }
@@ -183,14 +178,14 @@ public class PartyBase : FighterBase
 
     private IEnumerator SwitchTurn()
     {
-        Allies[0].GetComponent<PartyBase>()._cannotSwitch = true;
+        Allies[0].GetComponent<PartyBase>().DisableSwitch = true;
 
         EndTurn();
         PassTurn();
 
         yield return new WaitForSeconds(.1f);
 
-        Allies[0].GetComponent<PartyBase>()._cannotSwitch = false;
+        Allies[0].GetComponent<PartyBase>().DisableSwitch = false;
     }
 
     protected override void EndTurn()
@@ -198,7 +193,8 @@ public class PartyBase : FighterBase
         BattleTurn = false;
         _battlePrompt = false;
         _targeting = false;
-        CurrentOpponent.target.enabled = false;
+        if (CurrentOpponent.target)
+            CurrentOpponent.target.enabled = false;
         BattleHUD.SetActive(false);
     }
 
@@ -206,21 +202,24 @@ public class PartyBase : FighterBase
     {
         if (CurrentOpponent.CurrentHealth == 0)
         {
+            int exp = CurrentOpponent.RewardExp;
+
             CurrentOpponent.Die();
             yield return new WaitForSeconds(2f);
 
             // exp
-            foreach (PartyBase member in Party)
+            if (exp > 0)
             {
-                if (member.CurrentHealth > 0)
-                    yield return StartCoroutine(member.GainExperience(40));
+                foreach (PartyBase member in Party)
+                {
+                    if (member.CurrentHealth > 0)
+                        yield return StartCoroutine(member.GainExperience(exp));
+                }
             }
 
             if (CurrentOpponent.Allies.Count == 0)
             {
                 Revive(); // revive fallen members
-                foreach (PartyBase member in Party)
-                    member.ABar.GetComponent<Image>().enabled = false;
                 EndBattle();
                 yield break;
             }
@@ -234,22 +233,7 @@ public class PartyBase : FighterBase
         PassTurn();
     }
 
-    public override void Damage(int damageAmount)
-    {
-        // call base class
-        base.Damage(damageAmount);
-
-        if (!_lowHealth && CurrentHealth <= MaxHealth*.25f && CurrentHealth > 0f && !IsSparring)
-        {
-            _lowHealth = true;
-            StartCoroutine(LowHealthDialogue());
-        }
-
-        if (CurrentHealth == 0)
-            Anim.Rebind(); // reset anim
-    }
-
-    private IEnumerator LowHealthDialogue()
+    protected IEnumerator LowHealthDialogue()
     {
         yield return new WaitForSeconds(1f);
         SecondaryDialogueController.Instance.StartDialogue(_lowHealthDialogue, new List<CharacterBase>{this}, 1.5f);
@@ -260,15 +244,8 @@ public class PartyBase : FighterBase
         string text = charName + " was defeated!";
         DialogueController.Instance.BattleDialogue(this, text, "");
 
-        if (IsSparring)
-        {
-            Anim.enabled = false;
-            FinishTurn = false;
-            return;
-        }
-
-        // call base class
-        base.Die();
+        foreach (FighterBase ally in Allies)
+            ally.Allies.Remove(this);
 
         // exit battle
         CurrentOpponent.Opponents.Remove(this);
@@ -312,7 +289,7 @@ public class PartyBase : FighterBase
         }
         else
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.5f);
             // Debug.Log("Until next level: " + (_maxExp-_currentExp) + " exp");
         }
 

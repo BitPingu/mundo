@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5010386609107474011}
   - component: {fileID: 2043397505468901247}
   - component: {fileID: 3121319332342121884}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Blue Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ MonoBehaviour:
   MaxHealth: 60
   Strength: 4
   Defence: 4
-  DebuffTurns: 0
+  RewardExp: 60
   Arts:
   - {fileID: 11400000, guid: 600923e4d7fcd4560a2a92a97f47100e, type: 2}
   HBar: {fileID: 6348836242550008932}
@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 5785328605836063736}
   - component: {fileID: 2279371417514611194}
   - component: {fileID: 6348836242550008932}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: HealthBarImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -442,7 +442,7 @@ GameObject:
   - component: {fileID: 8881337200395046124}
   - component: {fileID: 6401656207349560747}
   - component: {fileID: 5209226561401500476}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: HealthBarCANVAS
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -18,12 +18,6 @@ public class Player : PartyBase
     public bool StatusOn { get; set; }
     [SerializeField] private GameObject _inventoryBox;
 
-    protected override void Start()
-    {
-        // call base class
-        base.Start();
-    }
-
     protected override void Update()
     {
         // call base class
@@ -80,8 +74,7 @@ public class Player : PartyBase
         // companion engage
         foreach (Companion ally in Allies)
         {
-            if (!ally.IsSparring)
-                yield return StartCoroutine(ally.Engage(attackPos, opponent.transform.position, distanceFromEnemy));
+            yield return StartCoroutine(ally.Engage(attackPos, opponent.transform.position, distanceFromEnemy));
         }
 
         IsAttacking = true;
@@ -152,6 +145,21 @@ public class Player : PartyBase
             //     }
             // }
         }
+    }
+
+    public override void Damage(int damageAmount)
+    {
+        // call base class
+        base.Damage(damageAmount);
+
+        if (!_lowHealth && CurrentHealth <= MaxHealth*.25f && CurrentHealth > 0f)
+        {
+            _lowHealth = true;
+            StartCoroutine(LowHealthDialogue());
+        }
+
+        if (CurrentHealth == 0)
+            Anim.Rebind(); // reset anim
     }
 
     public IEnumerator Run()

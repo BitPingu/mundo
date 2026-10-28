@@ -940,7 +940,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4294967295
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -1022,12 +1022,15 @@ MonoBehaviour:
   Level: 1
   MaxHealth: 20
   Strength: 4
+  Defence: 2
+  RewardExp: 40
   Arts:
   - {fileID: 11400000, guid: 2333c6fb077854f359da95cd3b38913c, type: 2}
   HBar: {fileID: 2643750145137607703}
   target: {fileID: 6675659552124294162}
   _hitSound: {fileID: 8300000, guid: c9c39983af9d441278cf44370e151cf1, type: 3}
   Party: []
+  _maxAP: 3
   _maxExp: 100
   ABar: {fileID: 2921747034947258938}
   EBar: {fileID: 8792345666785891725}

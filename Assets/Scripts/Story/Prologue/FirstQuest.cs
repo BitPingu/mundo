@@ -28,12 +28,12 @@ public class FirstQuest : EventBase
     public Destination SenseTrigger { get; set; }
     [SerializeField] private GameObject _reactIcon;
     [SerializeField] private Dialogue _companionDialogue, _chiefDialogue, _momDialogue, _shopkeeperDialogue, 
-        _slimeDialogue, _companionDialogue2, _outBoundsDialogue, _slimeDialogue2, _companionDialogue3, _chestDialogue, 
-        _ambushDialogue, _ambushBattleDialogue, _afterAmbushDialogue, _travellerDialogue, _vinesDialogue, 
+        _slimeDialogue, _companionDialogue2, _outBoundsDialogue, _firstBattleDialogue, _slimeDialogue2, _companionDialogue3, 
+        _chestDialogue, _ambushDialogue, _ambushBattleDialogue, _afterAmbushDialogue, _travellerDialogue, _vinesDialogue, 
         _companionDialogue4, _crystalDialogue, _companionDialogue5, _companionDialogue6, _removeVinesDialogue, 
         _companionDialogue7, _restDialogue, _nostalgiaDialogue, _restoreDialogue, _companionDialogue8, _senseDialogue,
         _companionDialogue9;
-    private bool _slimeEncounter, _firstSlimeDefeat, _firstSlimeDefeat2, _findChest, _ambush,
+    private bool _slimeEncounter, _switchTutorial, _firstSlimeDefeat, _firstSlimeDefeat2, _findChest, _ambush,
         _ambushTutorial, _vines, _crystal, _crystalEncounter, _crystalSlimeDefeat, _vinesRemoved,
         _rest, _rest2, _rested, _healthRestored, _sense, _sensed;
     private int _inPos;
@@ -71,7 +71,8 @@ public class FirstQuest : EventBase
         Mom.transform.position = new Vector3(.73f,-43.48f,0);
         Mom.Sprite.flipX = false;
 
-        CompanionChar.Join(PlayerChar); // rejoin party
+        if (!CompanionChar.Leader)
+            CompanionChar.Join(PlayerChar); // rejoin party
 
         // available quests
         Vector2 iconPos = new Vector2(Traveller.transform.position.x, Traveller.transform.position.y+1f);
@@ -115,6 +116,13 @@ public class FirstQuest : EventBase
 
                 // start dialogue
                 DialogueController.Instance.StartDialogue(_outBoundsDialogue, new List<CharacterBase>{CompanionChar});
+            }
+
+            // battle dialogue
+            if (PlayerChar.BattleTurn && _slimeEncounter && !_switchTutorial)
+            {
+                StartCoroutine(FirstBattleDialogue());
+                _switchTutorial = true;
             }
         }
 
@@ -280,6 +288,14 @@ public class FirstQuest : EventBase
         PlayerChar.StateMachine.Initialize(PlayerChar.IdleState); // enable movement
         
         SlimeBoundary.DetectPlayer = null;
+    }
+
+    private IEnumerator FirstBattleDialogue()
+    {
+        yield return new WaitForSeconds(1f);
+
+        // dialogue during battle
+        SecondaryDialogueController.Instance.StartDialogue(_firstBattleDialogue, new List<CharacterBase>{CompanionChar}, 3f);
     }
 
     private void SlimeDefeat()
