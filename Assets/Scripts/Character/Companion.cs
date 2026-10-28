@@ -101,6 +101,14 @@ public class Companion : PartyBase
 
     public override void Battle()
     {
+        // face opponent
+        if (CurrentOpponent)
+            Face(CurrentOpponent);
+
+        // idle when not attacking
+        if (!IsAttacking)
+            Move(Vector2.zero);
+
         // companion only battle options go here
         if (BattleTurn)
         {

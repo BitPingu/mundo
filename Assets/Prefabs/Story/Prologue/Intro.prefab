@@ -53,13 +53,15 @@ MonoBehaviour:
   _companionDialogue: {fileID: 11400000, guid: 65a8d4cf9bbe04f8ba05e996aba7544a, type: 2}
   _outBoundsDialogue: {fileID: 11400000, guid: 1cba9b3744285411e94cd8c5edd890c5, type: 2}
   _reachDialogue: {fileID: 11400000, guid: c998a2fade45c40399454dd063761d6a, type: 2}
-  _chiefDialogue: {fileID: 11400000, guid: a57eade50fde54347a8208253a190bce, type: 2}
+  _startMatchDialogue: {fileID: 11400000, guid: a57eade50fde54347a8208253a190bce, type: 2}
   _damageDialogue: {fileID: 11400000, guid: aed81be899702441986aaf8233662165, type: 2}
-  _chiefDialogue2: {fileID: 11400000, guid: 728ae53c705f6488c892fdb97162a0b3, type: 2}
+  _finishMatchDialogue: {fileID: 11400000, guid: 728ae53c705f6488c892fdb97162a0b3, type: 2}
   _restoreDialogue: {fileID: 11400000, guid: 6ac5bfbda808842e1b7a92eaafd7c64b, type: 2}
-  _chiefDialogue3: {fileID: 11400000, guid: 98f19314649af4a6181037b807c39a74, type: 2}
-  _chiefDialogue4: {fileID: 11400000, guid: a2cb88d01e4cf44268218aa847a9b62e, type: 2}
-  _chiefDialogue5: {fileID: 11400000, guid: c5cf6762153a146919aeacd8fd476112, type: 2}
-  _chiefDialogue6: {fileID: 11400000, guid: b2306116f228f42e4b2bc3c46153db69, type: 2}
-  _chiefDialogue7: {fileID: 11400000, guid: 77f316969d97b4af4a5c75c76f8b22b4, type: 2}
-  _afterMatchDialogue: {fileID: 11400000, guid: 1a2a86cf5d70a44b994cdf80282ffb55, type: 2}
+  _startTutorialDialogue: {fileID: 11400000, guid: 98f19314649af4a6181037b807c39a74, type: 2}
+  _tryAttackDialogue: {fileID: 11400000, guid: aabf9b2dec300478bb0511dd911237f0, type: 2}
+  _failedAttackDialogue: {fileID: 11400000, guid: dcd3b7c42eaad439684073c2173533e8, type: 2}
+  _combatArt1Dialogue: {fileID: 11400000, guid: a2cb88d01e4cf44268218aa847a9b62e, type: 2}
+  _combatArt2Dialogue: {fileID: 11400000, guid: c5cf6762153a146919aeacd8fd476112, type: 2}
+  _finishTutorialDialogue: {fileID: 11400000, guid: b2306116f228f42e4b2bc3c46153db69, type: 2}
+  _questDialogue: {fileID: 11400000, guid: 77f316969d97b4af4a5c75c76f8b22b4, type: 2}
+  _questStartDialogue: {fileID: 11400000, guid: 1a2a86cf5d70a44b994cdf80282ffb55, type: 2}

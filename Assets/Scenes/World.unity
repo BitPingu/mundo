@@ -691,11 +691,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3601785585954692323, guid: 22b3fe195d55c41d19293f5a1dec3e7d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.7
+      value: -13.94
       objectReference: {fileID: 0}
     - target: {fileID: 3601785585954692323, guid: 22b3fe195d55c41d19293f5a1dec3e7d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.68
+      value: -0.77
       objectReference: {fileID: 0}
     - target: {fileID: 3601785585954692323, guid: 22b3fe195d55c41d19293f5a1dec3e7d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1328,6 +1328,10 @@ PrefabInstance:
     - target: {fileID: 9002851882244230898, guid: 675cbe5f88ab24ad8ab585f7a94b2ba5, type: 3}
       propertyPath: m_Name
       value: Talk
+      objectReference: {fileID: 0}
+    - target: {fileID: 9002851882244230898, guid: 675cbe5f88ab24ad8ab585f7a94b2ba5, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2459,7 +2463,7 @@ GameObject:
   - component: {fileID: 52798618}
   - component: {fileID: 52798622}
   - component: {fileID: 52798617}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Elon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61855,7 +61859,7 @@ Transform:
   m_GameObject: {fileID: 904777746}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.22, y: 1.09, z: 0}
+  m_LocalPosition: {x: 10.96, y: 17.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -64027,6 +64031,14 @@ PrefabInstance:
     - target: {fileID: 859539728394518098, guid: 1a32f92706ad34a72a287d57514ac4e9, type: 3}
       propertyPath: m_Name
       value: Mom
+      objectReference: {fileID: 0}
+    - target: {fileID: 859539728394518098, guid: 1a32f92706ad34a72a287d57514ac4e9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2578461279204117743, guid: 1a32f92706ad34a72a287d57514ac4e9, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7470214378281033146, guid: 1a32f92706ad34a72a287d57514ac4e9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -68617,11 +68629,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9078691814344115187, guid: 890444e17dd7147fcbc6369df78374e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.62
+      value: -14.92
       objectReference: {fileID: 0}
     - target: {fileID: 9078691814344115187, guid: 890444e17dd7147fcbc6369df78374e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.45
+      value: -0.36
       objectReference: {fileID: 0}
     - target: {fileID: 9078691814344115187, guid: 890444e17dd7147fcbc6369df78374e7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -85786,7 +85798,7 @@ GameObject:
   - component: {fileID: 1603337782}
   - component: {fileID: 1603337786}
   - component: {fileID: 1603337781}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Chief
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87165,6 +87177,10 @@ PrefabInstance:
     - target: {fileID: 9002851882244230898, guid: 675cbe5f88ab24ad8ab585f7a94b2ba5, type: 3}
       propertyPath: m_Name
       value: Talk
+      objectReference: {fileID: 0}
+    - target: {fileID: 9002851882244230898, guid: 675cbe5f88ab24ad8ab585f7a94b2ba5, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -316129,6 +316145,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Talk
       objectReference: {fileID: 0}
+    - target: {fileID: 9002851882244230898, guid: 675cbe5f88ab24ad8ab585f7a94b2ba5, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -322114,7 +322134,7 @@ GameObject:
   - component: {fileID: 1932101211}
   - component: {fileID: 1932101215}
   - component: {fileID: 1932101210}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rico
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323911,6 +323931,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Talk
       objectReference: {fileID: 0}
+    - target: {fileID: 9002851882244230898, guid: 675cbe5f88ab24ad8ab585f7a94b2ba5, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -325009,7 +325033,7 @@ GameObject:
   - component: {fileID: 2009943673}
   - component: {fileID: 2009943677}
   - component: {fileID: 2009943672}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Juliana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327469,6 +327493,10 @@ PrefabInstance:
     - target: {fileID: 9002851882244230898, guid: 675cbe5f88ab24ad8ab585f7a94b2ba5, type: 3}
       propertyPath: m_Name
       value: Talk
+      objectReference: {fileID: 0}
+    - target: {fileID: 9002851882244230898, guid: 675cbe5f88ab24ad8ab585f7a94b2ba5, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -329981,7 +330009,7 @@ GameObject:
   - component: {fileID: 6617820123358612658}
   - component: {fileID: 8794975618682201463}
   - component: {fileID: 8794975618682201462}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Buddy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

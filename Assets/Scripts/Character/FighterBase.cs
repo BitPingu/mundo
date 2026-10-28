@@ -94,7 +94,7 @@ public class FighterBase : CharacterBase
 
         // attack
         yield return StartCoroutine(Attack("Charge Attack", art.damageMultiplier, art.delay1, art.delay2));
-        if (!string.IsNullOrEmpty(art.debuffStat))
+        if (!string.IsNullOrEmpty(art.debuffStat) && CurrentOpponent.CurrentHealth > 0)
             yield return StartCoroutine(ApplyDebuff(art.debuffStat, art.debuffMultiplier));
         StartCoroutine(AttackFinish());
     }
@@ -103,12 +103,15 @@ public class FighterBase : CharacterBase
     {
         IsAttacking = true;
 
+        Vector3 opponentPos = CurrentOpponent.transform.position;
+        Vector3 attackPos = transform.position;
+
         // go to opponent
-        float _distance = Vector2.Distance(CurrentOpponent.transform.position, transform.position);
+        float _distance = Vector2.Distance(opponentPos, transform.position);
         while (_distance > 0.5f)
         {
-            _distance = Vector2.Distance(CurrentOpponent.transform.position, transform.position);
-            Move(CurrentOpponent.transform.position - transform.position);
+            _distance = Vector2.Distance(opponentPos, transform.position);
+            Move(opponentPos - transform.position);
             yield return new WaitForFixedUpdate();
         }
         Move(Vector2.zero);
@@ -123,9 +126,6 @@ public class FighterBase : CharacterBase
         CurrentOpponent.Damage(Mathf.RoundToInt(Strength*multiplier));
 
         yield return new WaitForSeconds(delay2);
-
-        Vector3 attackDir = (CurrentOpponent.transform.position - transform.position).normalized;
-        Vector3 attackPos = CurrentOpponent.transform.position - (attackDir*1.3f);
 
         // return to pos
         _distance = Vector2.Distance(attackPos, transform.position);

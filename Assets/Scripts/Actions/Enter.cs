@@ -8,6 +8,7 @@ public class Enter : Action
     [SerializeField] private Dialogue _dialogue;
     [SerializeField] private AudioClip _sound;
     [SerializeField] private float _pitch = 1f;
+    private bool _teleporting;
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
@@ -27,7 +28,8 @@ public class Enter : Action
             Destroy(_activeIcon);
             _detectPlayer = hitInfo.GetComponent<Player>();
             _detectPlayer.OnAction -= Active; // unset delegate
-            _detectPlayer.IsEntering = false;
+            if (!_teleporting)
+                _detectPlayer.IsEntering = false;
             _detectPlayer = null;
         }
     }
@@ -101,12 +103,16 @@ public class Enter : Action
         else
             player.Sprite.flipX = true;
 
+        _teleporting = true;
+
         // move characters
         player.transform.position = _location.position + new Vector3(_location.GetComponent<BoxCollider2D>().offset.x/2f, _location.GetComponent<BoxCollider2D>().offset.y/2f);
         if (player.Allies.Count > 0 && player.Allies[0])
         {
-            player.Allies[0].transform.position = new Vector2(player.transform.position.x+.3f, player.transform.position.y+.1f);
+            player.Allies[0].transform.position = new Vector2(player.transform.position.x, player.transform.position.y+.1f);
         }
+
+        _teleporting = false;
 
         await Transition.Instance.FadeIn();
 

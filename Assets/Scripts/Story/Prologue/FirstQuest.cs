@@ -154,8 +154,8 @@ public class FirstQuest : EventBase
                 SlimeChar1.StateMachine.End();
                 SlimeChar2.StateMachine.End();
 
-                StartCoroutine(MoveSlime(SlimeChar1, new Vector2(PlayerChar.transform.position.x-1.6f, PlayerChar.transform.position.y+.5f)));
-                StartCoroutine(MoveSlime(SlimeChar2, new Vector2(CompanionChar.transform.position.x+1.6f, CompanionChar.transform.position.y-.3f)));
+                StartCoroutine(MoveSlime(SlimeChar1, new Vector2(PlayerChar.transform.position.x-1f, PlayerChar.transform.position.y+.3f)));
+                StartCoroutine(MoveSlime(SlimeChar2, new Vector2(CompanionChar.transform.position.x+1f, CompanionChar.transform.position.y-.3f)));
 
                 _ambush = true;
             }

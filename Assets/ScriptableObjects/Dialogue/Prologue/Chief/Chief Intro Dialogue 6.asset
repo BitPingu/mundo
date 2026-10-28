@@ -14,19 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Chief
-    line: Excellent. Weakening an enemy's defence can create an opening for a stronger
-      attack.
-    reaction: 
-    choices: []
-    redirectDialogueIndex: -1
-  - charName: Chief
-    line: Remember, Combat Arts consume AP. Use them wisely, and don't waste them
-      on every opponent.
+    line: Reina, let's start with you. Use Slit Edge to weaken the target's defence.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
   - charName: Reina
-    line: Understood!
+    line: On it!
     reaction: 
     choices: []
     redirectDialogueIndex: -1

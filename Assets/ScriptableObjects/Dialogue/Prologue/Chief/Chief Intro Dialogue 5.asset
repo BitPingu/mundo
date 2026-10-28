@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Chief
-    line: Good. Now, Ely, follow up with Wrath Strike while its defence is weakened.
+    line: Both of you, try attacking this dummy.
     reaction: 
     choices: []
     redirectDialogueIndex: -1

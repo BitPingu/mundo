@@ -310,6 +310,9 @@ public class PartyBase : FighterBase
         _currentExp = 0;
         _maxExp = Level * 100;
 
+        // reset ap
+        _currentAP = _maxAP;
+
         yield return new WaitForSeconds(.3f);
 
         // glow up effect
@@ -322,6 +325,7 @@ public class PartyBase : FighterBase
 
         StartCoroutine(HBar.UpdateBar(MaxHealth, CurrentHealth));
         StartCoroutine(EBar.UpdateBar(_maxExp, _currentExp));
+        StartCoroutine(ABar.UpdateBar(_maxAP, _currentAP));
 
         string text = charName + " grew to level " + Level + "!";
         DialogueController.Instance.BattleDialogue(this, text, "");

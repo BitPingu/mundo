@@ -14,12 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lines:
   - charName: Chief
-    line: Reina, let's start with you. Use Slit Edge to weaken the target's defence.
-    reaction: 
-    choices: []
-    redirectDialogueIndex: -1
-  - charName: Reina
-    line: On it!
+    line: Both of you, try attacking this dummy.
     reaction: 
     choices: []
     redirectDialogueIndex: -1
