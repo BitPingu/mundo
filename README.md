@@ -11,3 +11,7 @@ Building on my previous project, [Isekai,](https://github.com/BitPingu/isekai) t
 - [Pixel Pete](https://www.youtube.com/channel/UC7OO80qJzGTLOj_6-0dmOiA) for pixel art guides
 - [Sasquatch B Studios](https://youtube.com/@sasquatchbgames?si=Kys3EAym0sygOjpw) for OOP and state machine guides
 
+Copyright © 2026 Gavin Eugenio. All rights reserved.
+
+All original source code, artwork, music, and other content in this project are protected by copyright. No permission is granted to copy, modify, redistribute, or use these materials without prior written consent.
+
